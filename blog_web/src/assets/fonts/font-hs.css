@@ -1,0 +1,18 @@
+/** 导入外部字体 */
+
+@font-face {
+  font-family: SourceHanSans-Medium;
+  src: url('./SourceHanSansSC-Medium.otf');
+}
+@font-face {
+  font-family: SourceHanSans-Regular;
+  src: url('./SourceHanSansSC-Regular.otf');
+}
+@font-face {
+  font-family: SourceHanSans-Light;
+  src: url('./SourceHanSansSC-Light.otf');
+}
+@font-face {
+  font-family: SourceHanSans-Bold;
+  src: url('./SourceHanSansSC-Bold.otf');
+}

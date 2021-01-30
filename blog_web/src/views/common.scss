@@ -1,0 +1,12 @@
+@mixin common {
+  .container {
+    width: 1130px;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+  }
+  .highlight {
+    color: $c-highlight;
+  }
+
+}

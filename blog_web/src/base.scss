@@ -1,0 +1,214 @@
+/** 字体 */
+@mixin font-hs-bold {
+  font-family: SourceHanSans-Bold, SourceHanSans;
+}
+
+@mixin font-hs-regular {
+  font-family: SourceHanSans-Regular, SourceHanSans;
+}
+
+@mixin font-hs-medium {
+  font-family: SourceHanSans-Medium, SourceHanSans;
+}
+
+@mixin font-hs-light {
+  font-family: SourceHanSans-Light, SourceHanSans;
+}
+
+/** 颜色 */
+
+$c-dark: #1a1a22;
+$c-white: #fcfcfc;
+$c-medium: #5e5e64;
+$c-light: #8c8c90;
+$c-disabled: #bababc;
+$c-error: #e4655f;
+$c-warning: #e4655f;
+$c-brand: #1AD48E;
+$c-highlight: #23CCD1;
+$c-link: #23CCD1;
+$c-pending: #f3b550;
+$c-info: #38c0c4;
+$c-cancelled: #ededee;
+$c-main:#3b2f8c;
+
+/** 字体颜色 */
+
+@mixin font-color-dark {
+  color: $c-dark;
+}
+@mixin font-color-medium {
+  color: $c-medium;
+}
+@mixin font-color-light {
+  color: $c-light;
+}
+@mixin font-color-disabled {
+  color: $c-disabled;
+}
+@mixin font-color-error {
+  color: $c-error;
+}
+@mixin bg-color-brand {
+  background-color: $c-brand;
+}
+@mixin bg-color-info {
+  background-color: $c-info;
+}
+@mixin bg-color-warning {
+  background-color: $c-warning;
+}
+@mixin bg-color-error {
+  background-color: $c-error;
+}
+@mixin bg-color-pending {
+  background-color: $c-pending;
+}
+@mixin bg-color-cancelled {
+  background-color: $c-cancelled;
+}
+@mixin bg-color-disabled {
+  background-color: $c-cancelled;
+}
+@mixin bg-color-main {
+  background-color: $c-main;
+}
+
+/** 通用 */
+
+@mixin font-base($lineHeight, $size, $weight, $space) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+  letter-spacing: $space;
+}
+@mixin font-main-title {
+  @include font-color-dark();
+  @include font-hs-regular();
+  @include font-base($lineHeight: 36px, $size: 24px, $weight: 400, $space: 2px);
+}
+@mixin font-card-title {
+  @include font-base($lineHeight: 24px, $size: 16px, $weight: 400, $space: 1px);
+  @include font-hs-regular();
+  color: #0b2a2a;
+}
+@mixin font-section-title {
+  @include font-color-dark();
+  @include font-hs-medium();
+  @include font-base($lineHeight: 24px, $size: 16px, $weight: 500, $space: 1px);
+}
+@mixin font-subsection-label {
+  @include font-color-dark();
+  @include font-hs-medium();
+  @include font-base($lineHeight: 20px, $size: 14px, $weight: 500, $space: 1px);
+}
+@mixin font-body-text {
+  @include font-color-dark();
+  @include font-hs-regular();
+  @include font-base($lineHeight: 20px, $size: 14px, $weight: 400, $space: 1px);
+}
+@mixin font-label-text {
+  @include font-color-light();
+  @include font-hs-medium();
+  @include font-base($lineHeight: 20px, $size: 14px, $weight: 500, $space: 1px);
+}
+.font-main-title {
+  @include font-main-title;
+}
+.font-section-title {
+  @include font-section-title;
+}
+.font-subsection-label {
+  @include font-subsection-label;
+}
+.font-body-text {
+  @include font-body-text;
+}
+.font-label-text {
+  @include font-label-text;
+}
+
+/** 通知 */
+@mixin notification-common {
+  @include font-base($lineHeight: "", $size: 14px, $weight: 400, $space: 1px);
+  @include font-hs-regular();
+  box-shadow: 0px 4px 4px 0px #1a1a221a;
+  border-radius: 4px;
+  border: none;
+}
+@mixin notification-success {
+  @include notification-common();
+  background: rgb(211, 245, 246);
+  .el-message__icon,
+  .el-message__content {
+    color: #23ccd1;
+  }
+}
+@mixin notification-error {
+  @include notification-common();
+  background: rgb(252, 239, 239);
+  .el-message__icon,
+  .el-message__content {
+    color: $c-error;
+  }
+}
+@mixin notification-warning {
+  @include notification-common();
+  background: rgb(253, 247, 237);
+  .el-message__icon,
+  .el-message__content {
+    color: $c-pending;
+  }
+}
+.notification-success {
+  @include notification-success();
+}
+.notification-error {
+  @include notification-error();
+}
+.notification-warning {
+  @include notification-warning();
+}
+
+/** 其他 */
+
+@mixin clear {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin qbit-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px 0px rgba(26, 26, 34, 0.1);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.qbit-card {
+  @include qbit-card;
+  padding: 20px;
+  .qbit-card-title {
+    @include font-base($lineHeight: 24px, $size: 16px, $weight: 400, $space: 1px);
+    @include font-hs-regular();
+    color: #0b2a2a;
+    margin-bottom: 24px;
+  }
+  .qbit-card-subtitle {
+    @include font-base($lineHeight: 20px, $size: 14px, $weight: 400, $space: 1px);
+    @include font-hs-regular();
+    color: #0b2a2a;
+    margin-bottom: 24px;
+  }
+}
+
+/** 背景的变化 */
+@mixin state-bg($normal, $hover, $active) {
+  background-color: $normal;
+  &:hover {
+    background-color: $hover;
+  }
+  &:active {
+    background-color: $active;
+  }
+}
