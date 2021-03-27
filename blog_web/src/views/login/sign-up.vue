@@ -1,5 +1,6 @@
 <template>
   <div class="view-register">
+    <view-homepage/>
     <div class="link-login">
       <div class="login-card">
         <div class="title">已经注册，快来找我玩叭~</div>

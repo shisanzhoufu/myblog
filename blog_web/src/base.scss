@@ -178,30 +178,6 @@ $c-main:#3b2f8c;
   margin: 0;
 }
 
-@mixin qbit-card {
-  background: #ffffff;
-  box-shadow: 0px 4px 4px 0px rgba(26, 26, 34, 0.1);
-  box-sizing: border-box;
-  border-radius: 2px;
-}
-
-.qbit-card {
-  @include qbit-card;
-  padding: 20px;
-  .qbit-card-title {
-    @include font-base($lineHeight: 24px, $size: 16px, $weight: 400, $space: 1px);
-    @include font-hs-regular();
-    color: #0b2a2a;
-    margin-bottom: 24px;
-  }
-  .qbit-card-subtitle {
-    @include font-base($lineHeight: 20px, $size: 14px, $weight: 400, $space: 1px);
-    @include font-hs-regular();
-    color: #0b2a2a;
-    margin-bottom: 24px;
-  }
-}
-
 /** 背景的变化 */
 @mixin state-bg($normal, $hover, $active) {
   background-color: $normal;

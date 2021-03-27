@@ -12,6 +12,7 @@
         <div class="name">十三州府</div>
         <div class="brief">理想主义青年永不被现实招安</div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -20,9 +21,10 @@
 @import "../../common.scss";
 .index-top {
   @include common;
+  margin-bottom: 100px;
   .avatar {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 120px;
   }
   .title {
     margin-top: 50px;
@@ -48,6 +50,20 @@
       color: #000000;
       text-align: center;
       margin-top: 30px;
+    }
+  }
+  .own-card{
+    .intrest{
+      display:flex;
+      justify-content: center;
+      .intrest-img{
+        width: 30%;
+        height: 30%;
+        img{
+          width:100%;
+          height:100%
+        }
+      }
     }
   }
 }

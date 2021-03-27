@@ -2,6 +2,8 @@
 <div class="view-index ">
   <view-homepage/>
   <PageTop/>
+  <PageArticle/>
+  <!-- <PageIntrest/> -->
 </div>
 </template>
 <style lang="scss">
@@ -17,9 +19,13 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import PageTop from "./components/page-top.vue";
+import PageIntrest from "./components/page-intrest.vue";
+import PageArticle from "./components/page-article.vue";
 @Component({
   components: {
-PageTop
+    PageTop,
+    PageIntrest,
+    PageArticle
   }
 })
 export default class extends Vue {

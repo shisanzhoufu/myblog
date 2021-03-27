@@ -1,6 +1,6 @@
 <template>
   <div class="view-homepage" @click="stop">
-    <div class="view-homepage__header">
+    <div class="view-homepage__header" :class="{ 'with-bg': withBg }">
       <div class="view-homepage__container">
         <div class="header">
           <div class="row">
@@ -155,19 +155,24 @@ export default class extends Vue {
 .view-homepage {
   .view-homepage__container {
     width: 1130px;
+    // width:100%;
     margin-right: auto;
     margin-left: auto;
   }
+  .view-homepage__header.with-bg {
+    background: #ffffff;
+  }
   .view-homepage__header {
-    // height:60px;
-    width: 100%;
+    
+    width:100%;
+    // width: 1130px;
     position: fixed;
     top: 0;
     z-index: 9999;
     transition: all 0.7s;
     background: #ffffff00;
     .header {
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
       border-bottom: 1px solid #eef3f3;
       .row {
         // padding: 0 68px;
