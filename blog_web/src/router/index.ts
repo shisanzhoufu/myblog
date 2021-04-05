@@ -22,6 +22,18 @@ const routes: Array<RouteConfig> = [
     name: "register",
     component: () =>
     import( "../views/login/sign-up.vue")
+  },
+  {
+    path: "/cardList",
+    name: "cardList",
+    component: () =>
+    import( "../views/article/index.vue")
+  },
+  {
+    path: "/addArticle",
+    name: "addArticle",
+    component: () =>
+    import( "../views/addArticle/index.vue")
   }
 ];
 

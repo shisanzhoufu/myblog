@@ -23,8 +23,9 @@
           v-model="password"
           show-password
           class="password-input"
-        ></el-input>
-        <el-button class="login-btn">登录</el-button>
+        >
+        </el-input>
+        <el-button class="login-btn" @click="submit">登录</el-button>
       </div>
     </div>
   </div>
@@ -34,15 +35,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import {axiosFun,Message} from "../../api/axiosApi"
 @Component({
   components: {},
 })
 export default class extends Vue {
   private username = "";
   private password = "";
-  //   private register(){
-
-  //   }
+  private submit(){
+    if(this.username && this.password){
+      const data = {
+        userName:this.username,
+        password: this.password
+      }
+      axiosFun('/api/sign-in',data,function(res: any){
+          console.log(res)
+        })
+    }
+  }
 }
 </script>
 
@@ -126,11 +136,11 @@ export default class extends Vue {
         border-radius: 0px;
         height: 50px;
         font-size: 20px;
-        border-bottom: 4px solid #7066b1;
+        border-bottom: 2px solid rgb(167, 157, 226);
         margin-bottom: 30px;
         color: $c-main;
         &:hover {
-          border-bottom: 4px solid $c-main;
+          border-bottom: 2px solid $c-main;
         }
       }
       .el-input__clear {
