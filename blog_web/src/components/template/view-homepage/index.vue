@@ -27,11 +27,11 @@
                   >
                     <i class="iconfont icon icon-wenzhang-copy"></i>文章
                     <div class="card-sub">
-                      <router-link to="/blog_interest" class="pro-list"
+                      <router-link to="/cardList" class="pro-list"
                         >兴趣</router-link
                       >
-                      <router-link to="#" class="pro-list">技术</router-link>
-                      <router-link to="/blog_life" class="pro-list"
+                      <router-link to="/cardList" class="pro-list">技术</router-link>
+                      <router-link to="/cardList" class="pro-list"
                         >生活</router-link
                       >
                     </div>
@@ -46,6 +46,11 @@
                 <div class="icon-worlds about">
                   <router-link to="/about" class="card-list"
                     ><i class="iconfont icon icon-xiaoren"></i>关于</router-link
+                  >
+                </div>
+                <div class="icon-worlds about">
+                  <router-link to="/addArticle" class="card-list"
+                    ><i class="iconfont icon icon-xiaoren"></i>发布文章</router-link
                   >
                 </div>
               </div>
@@ -72,11 +77,9 @@
                 <i class="iconfont login-icon icon-zhuce"></i>
                 <div class="login-card">
                   <router-link to="/sign-in" class="pro-list sign-in"
-                    >登录</router-link
-                  >
+                    >登录</router-link>
                   <router-link to="/sign-up" class="pro-list sign-up"
-                    >注册</router-link
-                  >
+                    >注册</router-link>
                 </div>
               </div>
 
@@ -89,7 +92,7 @@
       </div>
     </div>
     <slot></slot>
-    <div class="view-homepage__footer">
+    <!-- <div class="view-homepage__footer">
       <div class="view-homepage__container">
         <div class="copyright">
           <a href="mailto:1223945508@qq.com" target="_blank" title="小王的博客"
@@ -97,7 +100,7 @@
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script lang="ts">
