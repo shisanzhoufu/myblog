@@ -35,7 +35,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import {axiosFun,Message} from "../../api/axiosApi"
+import {axiosPost,Message} from "../../api/axiosApi"
 @Component({
   components: {},
 })
@@ -48,7 +48,7 @@ export default class extends Vue {
         userName:this.username,
         password: this.password
       }
-      axiosFun('/api/sign-in',data,function(res: any){
+      axiosPost('/api/sign-in',data,function(res: any){
           console.log(res)
         })
     }

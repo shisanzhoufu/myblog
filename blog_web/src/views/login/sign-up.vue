@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import {axiosFun,Message} from "../../api/axiosApi"
+import {axiosGet,Message} from "../../api/axiosApi"
 
 @Component({
   components: {},
@@ -101,7 +101,7 @@ export default class extends Vue {
        email:this.email
        }
        try {
-        axiosFun('/api/sign-up',data,function(res: any){
+        axiosGet('/api/sign-up',data,function(res: any){
           console.log(res)
         })
        } finally {
