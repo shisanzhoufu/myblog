@@ -16,13 +16,20 @@
   // }
 
   //axios请求
-  export const axiosFun = async (api:any,dataObj:any,callback:any) => {
+  export const axiosGet = async (api:any,dataObj:any,callback:any) => {
+
     
     await axios.get(api,{params:dataObj}).then(res=>{
       callback && callback(res.data);
     })
   }
-  
+
+  export const axiosPost = async (api:any,dataObj:any,callback:any) => {
+    
+    await axios.post(api,{params:dataObj}).then(res=>{
+      callback && callback(res.data);
+    })
+  }
 
   export const Message = ((that:any,message:any,type:any)=>{
     that.$message({
