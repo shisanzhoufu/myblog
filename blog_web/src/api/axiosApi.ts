@@ -17,11 +17,13 @@
 
   //axios请求
   export const axiosGet = async (api:any,dataObj:any,callback:any) => {
+
     
     await axios.get(api,{params:dataObj}).then(res=>{
       callback && callback(res.data);
     })
   }
+
   export const axiosPost = async (api:any,dataObj:any,callback:any) => {
     
     await axios.post(api,{params:dataObj}).then(res=>{
