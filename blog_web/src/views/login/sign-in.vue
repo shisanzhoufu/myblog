@@ -1,6 +1,6 @@
 <template>
   <div class="view-login">
-    <view-homepage/>
+    <!-- <view-homepage/> -->
     <div class="link-register">
       <div class="register-card">
         <div class="title">还没有注册？快来和我成为朋友叭~</div>
@@ -25,7 +25,7 @@
           class="password-input"
         >
         </el-input>
-        <el-button class="login-btn" @click="submit">登录</el-button>
+        <el-button class="login-btn" @click="submit" :loading='loading'>登录</el-button>
       </div>
     </div>
   </div>
@@ -34,27 +34,42 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-
-import {axiosPost,Message} from "../../api/axiosApi"
+import { Component,Watch } from "vue-property-decorator";
+import {Warning,Message} from "../../api/message"
+import {axiosPost} from "../../api/axiosApi"
 
 @Component({
   components: {},
 })
 export default class extends Vue {
-  private username = "";
-  private password = "";
+  private username = ""
+  private password = ""
+  private loading = false
   private submit(){
+    this.loading = true
     if(this.username && this.password){
       const data = {
         userName:this.username,
         password: this.password
       }
-
-      axiosPost('/api/sign-in',data,function(res: any){
-
+      try {
+         axiosPost('/api/sign-in',data,(res: any)=>{
+           if(res.statusCode === 200){
+             
+            this.$router.push('/')
+           }else{
+             Message(res.msg);
+           }
           console.log(res)
         })
+      } catch (error) {
+        console.log(error)
+      }finally{
+        this.loading = false
+      }
+     
+    }else{
+      Warning('请检查输入是否错误、遗漏')
     }
   }
 }

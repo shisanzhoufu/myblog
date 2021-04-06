@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import ElementUI from 'element-ui';
+import ElementPlus  from 'element-plus';
 import 'element-ui/lib/theme-chalk/index.css';
 import viewHomepage from "./components/template/view-homepage/index.vue";
 import "../src/assets/iconfont/iconfont.scss";
@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 //导航栏
 Vue.component('view-homepage', viewHomepage);
 //ui框架
-Vue.use(ElementUI);
+Vue.use(ElementPlus );
 
 new Vue({
   router,

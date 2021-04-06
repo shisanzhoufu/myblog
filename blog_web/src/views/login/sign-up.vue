@@ -1,6 +1,6 @@
 <template>
   <div class="view-register">
-    <view-homepage/>
+    <!-- <view-homepage/> -->
     <div class="link-login">
       <div class="login-card">
         <div class="title">已经注册，快来找我玩叭~</div>
@@ -62,9 +62,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-
-import {axiosGet,Message} from "../../api/axiosApi"
+import { Component, Vue } from "vue-property-decorator"
+import {axiosGet} from "../../api/axiosApi"
+import {Warning} from "../../api/message"
 
 
 @Component({
@@ -87,10 +87,7 @@ export default class extends Vue {
   //提交按钮
   private submit() { 
     if(this.username && this.password && this.password2 && this.email){
-      // this.$message({
-      //     message: '警告哦，这是一条警告消息',
-      //     type: 'warning'
-      //   });
+      
       this.disabled = false
       this.confirmName()
       this.confirmEmail()
@@ -110,7 +107,7 @@ export default class extends Vue {
          this.loading = false
        }
     }else{
-      Message(this,'请检查输入是否错误、遗漏','warning')
+      Warning('请检查输入是否错误、遗漏')
     }
   }
 
