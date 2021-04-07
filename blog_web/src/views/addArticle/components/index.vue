@@ -9,7 +9,6 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator"
 
-import {mavonEditor} from "mavon-editor"
 @Component({
   components: {
     mavonEditor

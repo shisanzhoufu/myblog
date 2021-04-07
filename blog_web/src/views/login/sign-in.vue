@@ -34,9 +34,9 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
-import { Component,Watch } from "vue-property-decorator";
-import {Warning,Message} from "../../api/message"
-import {axiosPost} from "../../api/axiosApi"
+import { Component } from "vue-property-decorator";
+import { Warning, Message } from "../../api/message"
+import { axiosPost } from "../../api/axiosApi"
 
 @Component({
   components: {},
@@ -55,10 +55,15 @@ export default class extends Vue {
       try {
          axiosPost('/api/sign-in',data,(res: any)=>{
            if(res.statusCode === 200){
-             
+             console.log(res.userInfo)
+             localStorage.setItem(
+                //储存用户的一些信息到本地
+                  "userInfo",
+                  JSON.stringify(res.userInfo)
+                ); 
             this.$router.push('/')
            }else{
-             Message(res.msg);
+             Message(this,res.msg);
            }
           console.log(res)
         })
@@ -69,7 +74,7 @@ export default class extends Vue {
       }
      
     }else{
-      Warning('请检查输入是否错误、遗漏')
+      Warning(this,'请检查输入是否错误、遗漏')
     }
   }
 }

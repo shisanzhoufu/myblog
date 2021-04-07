@@ -107,7 +107,7 @@ export default class extends Vue {
          this.loading = false
        }
     }else{
-      Warning('请检查输入是否错误、遗漏')
+      Warning(this,'请检查输入是否错误、遗漏')
     }
   }
 

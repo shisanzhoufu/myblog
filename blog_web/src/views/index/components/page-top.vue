@@ -16,6 +16,19 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator"
+@Component({
+  components: {},
+})
+export default class extends Vue {
+  
+  created(){
+    const userInfo = localStorage.getItem('userInfo')
+    console.log(JSON.parse(userInfo))
+  }
+}
+</script>
 <style lang="scss" scoped>
 @import "src/base.scss";
 @import "../../common.scss";

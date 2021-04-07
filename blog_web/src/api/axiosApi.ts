@@ -1,6 +1,6 @@
 
-  import { Loading } from "element-ui";
-  import router from "@/router/index";
+  // import { Loading } from "element-ui";
+  // import router from "@/router/index";
   import { throttle } from "lodash";
   import axios from "axios"
 //   import { QUsers } from "@/graphql/smart-query";
@@ -28,12 +28,12 @@
     })
   }
 
-  export const Message = ((that:any,message:any,type?:any)=>{
-    that.$message({
-        message: message,
-        type: type
-      });
-})
+//   export const Message = ((that:any,message:any,type?:any)=>{
+//     that.$message({
+//         message: message,
+//         type: type
+//       });
+// })
   
   /** 登出 */
   // export const logout = async () => {

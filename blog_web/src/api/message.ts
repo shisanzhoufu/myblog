@@ -1,25 +1,25 @@
 import {ElMessage}  from 'element-plus';
 //成功
-export const Success = ((message:any)=>{
-  ElMessage.success({
-              message: message,
-              type: 'success'
-      });
+export const Success = ((that:any,message:any)=>{
+  that.$message({
+    message: message,
+    type: 'success'
+  });
 })
 //普通
-export const Message = (((message:any)=>{
-  ElMessage(message);
+export const Message = (((that:any,message:any)=>{
+  that.$message(message);
 }))
 
 
 //警告
-export const Warning = (((message:any)=>{
-  ElMessage.warning({
-              message: message,
-              type: 'warning'
-            });
+export const Warning = (((that:any,message:any)=>{
+  that.$message({
+    message: message,
+    type: 'warning'
+  });
 }))
 //错误
-export const Error = (((message:any)=>{
-  ElMessage.error(message);
+export const Error = (((that:any,message:any)=>{
+  that.$message.error(message);
 }))

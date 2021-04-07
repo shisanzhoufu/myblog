@@ -8,11 +8,7 @@
 </template>
 <style lang="scss">
 
-.view-index {
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-}
+
 </style>
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
