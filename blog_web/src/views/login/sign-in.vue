@@ -152,17 +152,21 @@ export default class extends Vue {
     .login-box {
       position: relative;
       padding: 20px;
-
+      .requireModuleExtension{
+        border-color: #409EFF00;
+        outline: 0;
+      }
       .el-input__inner {
         position: relative;
         background: none;
         border: none;
         border-radius: 0px;
-        height: 50px;
+        height: 40px;
         font-size: 20px;
         border-bottom: 2px solid rgb(167, 157, 226);
         margin-bottom: 30px;
         color: $c-main;
+        padding:0px;
         &:hover {
           border-bottom: 2px solid $c-main;
         }

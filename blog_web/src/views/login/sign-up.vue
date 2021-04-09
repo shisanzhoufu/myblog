@@ -202,7 +202,7 @@ export default class extends Vue {
         font-weight: 400;
       }
       .el-button {
-         background: none;
+        background: none;
         position: absolute;
         left: 50%;
         top: 250%;
@@ -248,7 +248,7 @@ export default class extends Vue {
         border-radius: 0px;
         height: 40px;
         font-size: 20px;
-        border-bottom: 2px solid rgb(167, 157, 226);
+        border-bottom: 2px solid $c-light;
         margin-bottom: 30px;
         color: $c-main;
         padding:0px;

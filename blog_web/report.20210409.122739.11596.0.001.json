@@ -1,0 +1,455 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210409.122739.11596.0.001.json",
+    "dumpEventTime": "2021-04-09T12:27:39Z",
+    "dumpEventTimeStamp": "1617942459727",
+    "processId": 11596,
+    "cwd": "c:\\wamp64\\www\\blog\\blog_web",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\\\node.exe",
+      "C:\\Program Files\\nodejs\\\\node_modules\\npm\\bin\\npm-cli.js",
+      "prefix",
+      "-g"
+    ],
+    "nodejsVersion": "v12.16.1",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.1",
+      "v8": "7.8.279.23-node.31",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.1/node-v12.16.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.1/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18363",
+    "osVersion": "Windows 10 Home China",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "AMD E2-9000 RADEON R2, 4 COMPUTE CORES 2C+2G   ",
+        "speed": 1797,
+        "user": 27337734,
+        "nice": 0,
+        "sys": 14704718,
+        "idle": 64772109,
+        "irq": 886000
+      },
+      {
+        "model": "AMD E2-9000 RADEON R2, 4 COMPUTE CORES 2C+2G   ",
+        "speed": 1797,
+        "user": 26849421,
+        "nice": 0,
+        "sys": 12980093,
+        "idle": 66984453,
+        "irq": 466406
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "00:e1:8c:97:fa:ea",
+        "address": "fe80::dc6b:3e84:e3ac:6a3f",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 6
+      },
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "00:e1:8c:97:fa:ea",
+        "address": "192.168.43.99",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "DESKTOP-2O4BIS2"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7b5d719f9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5d75e1c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5d74dd8",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e734cb",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6689f4e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6672021",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b653e57c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6546521",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b653bb13",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b653a184",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b655b36d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b62c0c51",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6ad4ddd",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a9af77",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a59d8c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a572c1",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6a56eac",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6597c33",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b65975b6",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b666862d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e9a73e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e9a977",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e998ba",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e3ac92",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5e9a3d3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b5d467ac",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7b6b8be08",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ffc279f7c24",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ffc28b0d721",
+      "symbol": "RtlUserThreadStart+33"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 3203072,
+    "totalCommittedMemory": 3203072,
+    "usedMemory": 2425400,
+    "availableMemory": 1902061056,
+    "memoryLimit": 1904214016,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047456,
+        "used": 1047392,
+        "available": 64
+      },
+      "old_space": {
+        "memorySize": 1196032,
+        "committedMemory": 1196032,
+        "capacity": 957040,
+        "used": 954448,
+        "available": 2592
+      },
+      "code_space": {
+        "memorySize": 430080,
+        "committedMemory": 430080,
+        "capacity": 153152,
+        "used": 153152,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 266240,
+        "committedMemory": 266240,
+        "capacity": 237600,
+        "used": 237600,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047456,
+        "used": 0,
+        "available": 1047456
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 0.125,
+    "kernelCpuSeconds": 0.171,
+    "cpuConsumptionPercent": 7.4,
+    "maxRss": 23842816,
+    "pageFaults": {
+      "IORequired": 5987,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 0,
+      "writes": 97
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "c:\\wamp64\\www\\blog\\blog_web",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\王春梅\\AppData\\Roaming",
+    "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+    "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_10972_HNHMMHGEVTQRQMQG",
+    "CLASSPATH": ".;C:\\Program Files\\Java\\jdk1.8.0_211\\lib;C:\\Program Files\\Java\\jdk1.8.0_211\\lib\\tools.jar",
+    "CM2014DIR": "C:\\Program Files (x86)\\Common Files\\Autodesk Shared\\Materials\\",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-2O4BIS2",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "ELECTRON_RUN_AS_NODE": "1",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\王春梅",
+    "ILBDIR": "C:\\Program Files (x86)\\Common Files\\Autodesk Shared\\Materials\\",
+    "include": "C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\atl\\include;C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\mfc\\include;C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\include",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_211",
+    "lib": "C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\mfc\\lib;C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\lib",
+    "LOCALAPPDATA": "C:\\Users\\王春梅\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-2O4BIS2",
+    "MAVEN_HOME": "D:\\mymaven\\maven-3.5.3",
+    "MAVEN_OPTS": "-Xms128m -Xmx512m -Duser.language=zh -Dfile.encoding=UTF-8",
+    "MSDevDir": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\MSDev98",
+    "NLS_LANG": "AMERICAN_AMERICA.AL32UTF8",
+    "NODE_EXE": "C:\\Program Files\\nodejs\\\\node.exe",
+    "NPM_CLI_JS": "C:\\Program Files\\nodejs\\\\node_modules\\npm\\bin\\npm-cli.js",
+    "NUMBER_OF_PROCESSORS": "2",
+    "OneDrive": "C:\\Users\\王春梅\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\王春梅\\OneDrive",
+    "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+    "OS": "Windows_NT",
+    "Path": "C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\app\\product\\11.2.0\\dbhome_1\\bin;C:\\app\\王春梅\\product\\11.2.0\\dbhome_2\\bin;C:;app\\王春梅\\product\\11.2.0\\dbhome_1\\bin;%S;stemRoot%\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\Microsoft SQL Server\\110\\DTS\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\110\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\110\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\110\\Tools\\Binn\\ManagementStudio\\;C:\\Program Files (x86)\\Microsoft Visual Studio 10.0\\Common7\\IDE\\PrivateAssemblies\\;C:\\Program Files (x86)\\Microsoft SQL Server\\110\\DTS\\Binn\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;D:\\mymaven\\maven-3.5.3\\bin;C:\\Users\\王春梅\\AppData\\Local\\Yarn;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files\\Redis\\;C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\Tools\\WinNT;C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\MSDev98\\Bin;C:\\Program Files (x86)\\Microsoft Visual Studio\\Common\\Tools;C:\\Program Files (x86)\\Microsoft Visual Studio\\VC98\\VC98\\bin;C:\\Users\\王春梅\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\王春梅\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\王春梅\\AppData\\Roaming\\npm;C:\\Program Files\\MongoDB\\Server\\4.2\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS\\system32;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;C:\\Program Files\\Java\\jdk1.8.0_211\\jre\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "AMD64 Family 21 Model 112 Stepping 0, AuthenticAMD",
+    "PROCESSOR_LEVEL": "21",
+    "PROCESSOR_REVISION": "7000",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\110\\Tools\\PowerShell\\Modules\\",
+    "PT7HOME": "C:\\Program Files\\Cisco Packet Tracer 7.0",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\王春梅\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\王春梅\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-2O4BIS2",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-2O4BIS2",
+    "USERNAME": "王春梅",
+    "USERPROFILE": "C:\\Users\\王春梅",
+    "VS120COMNTOOLS": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\Tools\\",
+    "VSCODE_AMD_ENTRYPOINT": "vs/workbench/services/extensions/node/extensionHostProcess",
+    "VSCODE_CWD": "C:\\Users\\王春梅\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "VSCODE_HANDLES_UNCAUGHT_ERRORS": "true",
+    "VSCODE_IPC_HOOK": "\\\\.\\pipe\\d9419ed4f844d7845c0512267e10d76a-1.55.0-main-sock",
+    "VSCODE_IPC_HOOK_EXTHOST": "\\\\.\\pipe\\vscode-ipc-38f11e6e-c477-418d-88b4-7941be2eaff9-sock",
+    "VSCODE_LOG_NATIVE": "false",
+    "VSCODE_LOG_STACK": "false",
+    "VSCODE_NLS_CONFIG": "{\"locale\":\"zh-cn\",\"availableLanguages\":{\"*\":\"zh-cn\"},\"_languagePackId\":\"b475c8051e44470192b4d0d6d26919c5.zh-cn\",\"_translationsConfigFile\":\"C:\\\\Users\\\\王春梅\\\\AppData\\\\Roaming\\\\Code\\\\clp\\\\b475c8051e44470192b4d0d6d26919c5.zh-cn\\\\tcf.json\",\"_cacheRoot\":\"C:\\\\Users\\\\王春梅\\\\AppData\\\\Roaming\\\\Code\\\\clp\\\\b475c8051e44470192b4d0d6d26919c5.zh-cn\",\"_resolvedLanguagePackCoreLocation\":\"C:\\\\Users\\\\王春梅\\\\AppData\\\\Roaming\\\\Code\\\\clp\\\\b475c8051e44470192b4d0d6d26919c5.zh-cn\\\\c185983a683d14c396952dd432459097bc7f757f\",\"_corruptedFile\":\"C:\\\\Users\\\\王春梅\\\\AppData\\\\Roaming\\\\Code\\\\clp\\\\b475c8051e44470192b4d0d6d26919c5.zh-cn\\\\corrupted.info\",\"_languagePackSupport\":true}",
+    "VSCODE_NODE_CACHED_DATA_DIR": "C:\\Users\\王春梅\\AppData\\Roaming\\Code\\CachedData\\c185983a683d14c396952dd432459097bc7f757f",
+    "VSCODE_PID": "10972",
+    "VSCODE_PIPE_LOGGING": "true",
+    "VSCODE_VERBOSE_LOGGING": "true",
+    "windir": "C:\\WINDOWS",
+    "WXDRIVE_START_ARGS": "--wxdrive-setting=0 --disable-gpu --disable-software-rasterizer --enable-features=NetworkServiceInProcess"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\System32\\UMPDC.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll"
+  ]
+}

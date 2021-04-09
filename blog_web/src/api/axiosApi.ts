@@ -21,13 +21,27 @@
       callback && callback(res.data);
     })
   }
-
-  export const axiosPost = async (api:any,dataObj:any,callback:any) => {
-    await axios.post(api,dataObj).then(res=>{
+  /**post请求 */
+  export const axiosPost = async (api:any,dataObj:any,callback:any,header?:any) => {
+    await axios.post(api,dataObj,header).then(res=>{
       callback && callback(res.data);
     })
   }
 
+  /**
+ * 上传图片
+ */
+ export const uploadPlans = ((that:any,file:any)=>{
+  if (!file) {
+    that.$message.error("请粘贴图片后上传")
+    return
+  }
+  that.loading = true
+  let form = new FormData()
+  form.append("file", file)
+  form.append("type", that.type)
+  
+})
 //   export const Message = ((that:any,message:any,type?:any)=>{
 //     that.$message({
 //         message: message,
