@@ -60,7 +60,7 @@ export default class extends Vue {
                 //储存用户的一些信息到本地
                   "userInfo",
                   JSON.stringify(res.userInfo)
-                ); 
+                )
             this.$router.push('/')
            }else{
              Message(this,res.msg);
@@ -72,7 +72,6 @@ export default class extends Vue {
       }finally{
         this.loading = false
       }
-     
     }else{
       Warning(this,'请检查输入是否错误、遗漏')
     }

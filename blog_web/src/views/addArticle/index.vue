@@ -56,7 +56,7 @@
       <v-md-editor
         v-model="text"
         class="md"
-        v-on:paste="handlePaste"
+        
         :disabled-menus="[]"
         @upload-image="handleUploadImage"
         height="600px"
@@ -68,7 +68,7 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator"
 import {Warning} from "../../api/message"
-import {axiosGet} from "../../api/axiosApi"
+import {axiosPost} from "../../api/axiosApi"
 import {handlePaste} from "../../plugins/image-handle-paste/image-handle-paste"
 @Component({
   components: {
@@ -89,6 +89,7 @@ export default class extends Vue {
   private isChecked = false
   private text = ''
   private title =''
+  private insertImage:any
   private selectTypeIndex = -1 //控制按钮点亮状态，-1为默认不点亮
   private showCard() {
     this.isShow = true
@@ -135,22 +136,16 @@ export default class extends Vue {
         this.inputVisible = false
         this.inputValue = ''
       }
-  //md 上传图片
-  private handleUploadImage(event: any, files: any) {
-      // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
-      console.log(event,files);
-      let file = handlePaste(event)
-      console.log(file)
-      if (!file) {
-         Warning(this,"请粘贴图片后上传")
-        return
-  }
-      let form = new FormData()
-      form.append("file", file)
-      axiosGet('/api/upload',form,function(res: any){
-          console.log(res)
-        })
 
+      mounted(){
+        // document.addEventListener('paste', handlePaste)
+        // handlePaste
+      }
+  //md 上传图片
+  private handleUploadImage(event: any,insertImage:any, files: any) {
+    // console.log(event)
+    handlePaste(event,insertImage)
+      
     }
     
 }
@@ -291,3 +286,11 @@ export default class extends Vue {
   
 }
 </style>
+
+function insertImage(arg0: { url: any; desc: string; }) {
+  throw new Error("Function not implemented.");
+}
+
+function insertImage(arg0: { url: any; desc: string; }) {
+  throw new Error("Function not implemented.");
+}

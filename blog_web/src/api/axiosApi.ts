@@ -37,18 +37,24 @@
     return
   }
   that.loading = true
-  let form = new FormData()
+  const form = new FormData()
   form.append("file", file)
   form.append("type", that.type)
   
 })
-//   export const Message = ((that:any,message:any,type?:any)=>{
-//     that.$message({
-//         message: message,
-//         type: type
-//       });
-// })
+
+/**
+ * 用户信息查询
+ */
+ export const checkUserInfo = (()=>{
+   
+  // const userInfo:string|null = JSON.parse(localStorage.getItem('userInfo'))
   
+})
+  
+
+
+
   /** 登出 */
   // export const logout = async () => {
   //   const loading = Loading.service({ fullscreen: true });

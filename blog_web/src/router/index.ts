@@ -34,6 +34,12 @@ const routes: Array<RouteConfig> = [
     name: "addArticle",
     component: () =>
     import( "../views/addArticle/index.vue")
+  },
+  {
+    path: "/comment",
+    name: "comment",
+    component: () =>
+    import( "../views/comment/index.vue")
   }
 ];
 

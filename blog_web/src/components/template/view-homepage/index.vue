@@ -171,7 +171,7 @@ export default class extends Vue {
     // width: 1130px;
     position: fixed;
     top: 0;
-    z-index: 9999;
+    z-index: 1;
     transition: all 0.7s;
     background: #ffffff00;
     .header {
@@ -202,7 +202,7 @@ export default class extends Vue {
               width: 128px;
               height: 4px;
               top: 40px;
-              left: 12px;
+              left: 0px;
               z-index: 0;
               background: $c-main;
             }
