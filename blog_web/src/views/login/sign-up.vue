@@ -4,68 +4,91 @@
     <div class="link-login">
       <div class="login-card">
         <div class="title">已经注册，快来找我玩叭~</div>
-        <el-button class="login-btn" @click.stop='$router.push("/sign-in")'>登录</el-button>
+        <el-button class="login-btn" @click.stop="$router.push('/sign-in')"
+          >登录</el-button
+        >
       </div>
       <img src="../../assets/index/login-img.png" alt="" />
     </div>
     <div class="card">
       <div class="title">Register</div>
       <div class="login-box">
+        <el-upload
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
         <div class="username">
           <el-input
-          placeholder="请输入用户名"
-          v-model="username"
-          clearable
-          class="user-input"
-          @change="confirmName"
-        >
-        </el-input>
-        <div :class="nameTip === true ? 'nameTips' : 'noNameTips'">用户名请大于三字</div>
+            placeholder="请输入用户名"
+            v-model="username"
+            clearable
+            class="user-input"
+            @change="confirmName"
+          >
+          </el-input>
+          <div :class="nameTip === true ? 'nameTips' : 'noNameTips'">
+            用户名请大于三字
+          </div>
         </div>
         <div class="pwd">
           <el-input
-          placeholder="请输入密码"
-          v-model="password"
-          show-password
-          @change="showPwd1"
-          class="password-input"
-        >
-        </el-input>
-        <i :class="isPwd1 === true ? 'el-icon-success' : ''"></i>
-        <div :class="tip === true ? 'tips' : 'noTips'">密码请使用英文和数字且大于6位数</div>
+            placeholder="请输入密码"
+            v-model="password"
+            show-password
+            @change="showPwd1"
+            class="password-input"
+          >
+          </el-input>
+          <i :class="isPwd1 === true ? 'el-icon-success' : ''"></i>
+          <div :class="tip === true ? 'tips' : 'noTips'">
+            密码请使用英文和数字且大于6位数
+          </div>
         </div>
         <div class="pwd2">
           <el-input
-          placeholder="请确认密码"
-          v-model="password2"
-          show-password
-          @change="showPwd2"
-          class="password-input"
-        >
-        </el-input>
-        <i :class="icon"></i>
+            placeholder="请确认密码"
+            v-model="password2"
+            show-password
+            @change="showPwd2"
+            class="password-input"
+          >
+          </el-input>
+          <i :class="icon"></i>
         </div>
         <div class="email">
           <el-input
-          placeholder="请输入邮箱"
-          v-model="email"
-          class="password-input"
-          @change="confirmEmail"
-        >
-        </el-input>
-        <div :class="emailTip === true ? 'emailTips' : 'noEmailTips'">邮箱格式不正确</div>
+            placeholder="请输入邮箱"
+            v-model="email"
+            class="password-input"
+            @change="confirmEmail"
+          >
+          </el-input>
+          <div :class="emailTip === true ? 'emailTips' : 'noEmailTips'">
+            邮箱格式不正确
+          </div>
         </div>
-        <el-button class="login-btn" @click="submit"  :loading='loading' :disabled="disabled">注册</el-button>
+        <el-button
+          class="login-btn"
+          @click="submit"
+          :loading="loading"
+          :disabled="disabled"
+          >注册</el-button
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import {axiosGet} from "../../api/axiosApi"
-import {Warning} from "../../api/message"
-
+import { Component, Vue } from "vue-property-decorator";
+import { axiosGet } from "../../api/axiosApi";
+import { Warning,Error } from "../../api/message";
 
 @Component({
   components: {},
@@ -73,98 +96,109 @@ import {Warning} from "../../api/message"
 export default class extends Vue {
   private username = "";
   private password = "";
-  private password2 = ""
-  private email = ""
-  private isPwd1 = false
-  private isPwd2 = false
-  private icon = ''
-  private tip = false
-  private emailTip = false
-  private loading = false
-  private nameTip  = false
-  private disabled = false
-
+  private password2 = "";
+  private email = "";
+  private isPwd1 = false;
+  private isPwd2 = false;
+  private icon = "";
+  private tip = false;
+  private emailTip = false;
+  private loading = false;
+  private nameTip = false;
+  private disabled = false;
+  private imageUrl = "";
   //提交按钮
-  private submit() { 
-    if(this.username && this.password && this.password2 && this.email){
-      
-      this.disabled = false
-      this.confirmName()
-      this.confirmEmail()
-      this.showPwd2()
-      this.showPwd1()
-      
+  private submit() {
+    if (this.username && this.password && this.password2 && this.email) {
+      this.disabled = false;
+      this.confirmName();
+      this.confirmEmail();
+      this.showPwd2();
+      this.showPwd1();
+
       const data = {
-       userName: this.username,
-       userPassword: this.password,
-       email:this.email
-       }
-       try {
-        axiosGet('/api/sign-up',data,function(res: any){
-          console.log(res)
-        })
-       } finally {
-         this.loading = false
-       }
-    }else{
-      Warning(this,'请检查输入是否错误、遗漏')
+        userName: this.username,
+        userPassword: this.password,
+        email: this.email,
+      };
+      try {
+        axiosGet("/api/sign-up", data, function (res: any) {
+          console.log(res);
+        });
+      } finally {
+        this.loading = false;
+      }
+    } else {
+      Warning(this, "请检查输入是否错误、遗漏");
     }
   }
 
   private confirmEmail() {
-    const reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-     const resPwd = reg.test(this.email)
+    const reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    const resPwd = reg.test(this.email);
     //  console.log(resPwd)
-     if(!resPwd){
-       this.emailTip = true
-       this.disabled = true
-     }else{
-       this.emailTip = false
-       this.disabled = false
-       console.log(this.disabled,'emal')
-     }
-  }
-  private confirmName(){
-    if(this.username.length<4){
-      this.nameTip = true
-      this.disabled = true
-    }else{
-      this.disabled = false
-      this.nameTip = false
+    if (!resPwd) {
+      this.emailTip = true;
+      this.disabled = true;
+    } else {
+      this.emailTip = false;
+      this.disabled = false;
+      console.log(this.disabled, "emal");
     }
   }
-  private showPwd1(){
-  const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{7,20}$/
-  const resPwd = reg.test(this.password)
-    if(this.password.length > 6 && this.password){
-      this.isPwd1=true
-      this.disabled = true
-    }else{
-      this.disabled = false
-      this.isPwd1=false
+  private confirmName() {
+    if (this.username.length < 4) {
+      this.nameTip = true;
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+      this.nameTip = false;
     }
-    if(this.password.length < 7 && !resPwd){
-      this.tip = true
-      this.disabled = true
-    } else{
-      this.disabled = false
-      this.tip = false
-      
+  }
+  private showPwd1() {
+    const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{7,20}$/;
+    const resPwd = reg.test(this.password);
+    if (this.password.length > 6 && this.password) {
+      this.isPwd1 = true;
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+      this.isPwd1 = false;
+    }
+    if (this.password.length < 7 && !resPwd) {
+      this.tip = true;
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+      this.tip = false;
     }
   }
 
   private showPwd2() {
-    this.showPwd1()
-    if(this.password2 && this.password2 === this.password){
-      this.icon="el-icon-success"
-      this.disabled = false
-    }else{
-      this.disabled = true
-      this.icon="el-icon-error"
+    this.showPwd1();
+    if (this.password2 && this.password2 === this.password) {
+      this.icon = "el-icon-success";
+      this.disabled = false;
+    } else {
+      this.disabled = true;
+      this.icon = "el-icon-error";
     }
   }
+  private handleAvatarSuccess(res:any, file:any) {
+    this.imageUrl = URL.createObjectURL(file.raw);
+  }
+  private beforeAvatarUpload(file:any) {
+    const isJPG = file.type === "image/jpeg";
+    const isLt2M = file.size / 1024 / 1024 < 2;
 
-  
+    if (!isJPG) {
+      Error(this,"上传头像图片只能是 JPG 格式!");
+    }
+    if (!isLt2M) {
+      Error(this,"上传头像图片大小不能超过 2MB!");
+    }
+    return isJPG && isLt2M;
+  }
 }
 </script>
 
@@ -181,9 +215,9 @@ export default class extends Vue {
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
-    &:hover{
-        background-image: linear-gradient(135deg, #764ba2 30%, #667eea 100%);
-        transition: 0.8s;
+    &:hover {
+      background-image: linear-gradient(135deg, #764ba2 30%, #667eea 100%);
+      transition: 0.8s;
     }
     img {
       width: 20%;
@@ -224,18 +258,31 @@ export default class extends Vue {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 570px;
+    height: 620px;
     border: 2px;
     border-radius: 20px;
     color: $c-main;
     box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.2);
     background: $c-white;
+    .avatar-uploader{
+    
+      margin:auto;
+      margin-top:20px;
+      margin-bottom: 10px;
+      border:1px solid $c-light;
+      width: 70px;
+      height:70px;
+      border-radius: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .title {
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 42px;
-      padding-top: 80px;
+      padding-top: 50px;
     }
     .login-box {
       position: relative;
@@ -251,7 +298,7 @@ export default class extends Vue {
         border-bottom: 2px solid $c-light;
         margin-bottom: 30px;
         color: $c-main;
-        padding:0px;
+        padding: 0px;
         &:hover {
           border-bottom: 2px solid $c-main;
         }
@@ -289,58 +336,56 @@ export default class extends Vue {
         font-weight: bold;
       }
     }
-    .pwd{
+    .pwd {
       display: flex;
       position: relative;
-      
     }
-    .pwd2{
+    .pwd2 {
       display: flex;
-      
     }
-    .el-icon-error{
+    .el-icon-error {
       display: block;
       margin-top: 15px;
     }
-    .el-icon-success{
+    .el-icon-success {
       margin-top: 15px;
     }
-    
-    .noTips{
+
+    .noTips {
       display: none;
     }
-    .tips{
+    .tips {
       display: block;
       position: absolute;
       font-size: 12px;
       color: #c9506a;
-      top:43px;
+      top: 43px;
     }
-    .username{
+    .username {
       display: flex;
       position: relative;
-      .nameTips{
+      .nameTips {
         display: block;
-      position: absolute;
-      font-size: 12px;
-      color: #c9506a;
-      top:43px;
+        position: absolute;
+        font-size: 12px;
+        color: #c9506a;
+        top: 43px;
       }
-      .noNameTips{
+      .noNameTips {
         display: none;
       }
     }
-    .email{
+    .email {
       position: relative;
-      .noEmailTips{
+      .noEmailTips {
         display: none;
       }
-      .emailTips{
+      .emailTips {
         display: block;
-      position: absolute;
-      font-size: 12px;
-      color: #c9506a;
-      top:43px;
+        position: absolute;
+        font-size: 12px;
+        color: #c9506a;
+        top: 43px;
       }
     }
   }
