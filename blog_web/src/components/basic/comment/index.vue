@@ -33,7 +33,8 @@
         </span>
       </div>
       <div class="reply">
-        <div class="item" v-for="reply in replys" :key="reply.id">
+        <div v-if="replys">
+          <div class="item" v-for="reply in replys" :key="reply.id">
           <div class="reply-content">
             <span class="from-name">{{ reply.fromName }}</span
             ><span>: </span>
@@ -42,22 +43,24 @@
           </div>
           <div class="reply-bottom">
             <span>{{ reply.time }}</span>
-            <span class="reply-text" @click="showCommentInput(comments, reply)">
+            <span class="reply-text" @click="showCommentInput(comments,reply)">
               <i class="iconfont icon-icon-test"></i>
               <span>回复</span>
             </span>
           </div>
         </div>
-        <div
+        </div>
+        
+        <!-- <div
           class="write-reply"
           v-if="replys.length > 0"
           @click="showCommentInput(comments)"
         >
           <i class="el-icon-edit"></i>
           <span class="add-comment">添加新评论</span>
-        </div>
+        </div> -->
         <transition name="fade">
-          <div class="input-wrapper" v-if="showItemId === comments.id">
+          <div class="input-wrapper" v-if="showItemId === comments.comment_id">
             <el-input
               class="gray-bg-input"
               v-model="inputComment"
@@ -83,7 +86,7 @@
 <script>
 /* eslint-disable */
 import Vue from "vue";
-
+import {formatDateTime,axiosGet} from '../../../api/axiosApi'
 export default {
   props: {
     comments: {
@@ -97,6 +100,8 @@ export default {
       inputComment: "",
       showItemId: "",
       replys: [],
+      userInfo:{},
+      commentInfo:{}
     };
   },
   computed: {},
@@ -129,26 +134,63 @@ export default {
      * 提交评论
      */
     commitComment() {
-      console.log(this.inputComment);
+      const date = formatDateTime()
+      let data
+      if(this.commentInfo.comment_review){
+        //回复父评论
+        data = {
+          commentId: this.comments.comment_id, //主键id
+          fromId: this.userInfo.user_id, //评论者id
+          fromName: this.userInfo.user_name, //评论者昵称
+          fromAvatar: this.userInfo.user_avater, //评论者头像
+          toId: this.comments.user_id, //被评论者id
+          toName: this.comments.user_name, //被评论者昵称
+          toAvatar: this.comments.user_avater, //被评论者头像
+          content: this.inputComment, //评论内容
+          time:date, //评论时间
+        }
+      }else {
+      //回复子评论
+        data = {
+          commentId: this.comments.comment_id, //主键id
+          fromId: this.userInfo.user_id, //评论者id
+          fromName: this.userInfo.user_name, //评论者昵称
+          fromAvatar: this.userInfo.user_avater, //评论者头像
+          toId: this.commentInfo.fromId, //被评论者id
+          toName: this.commentInfo.fromName, //被评论者昵称
+          toAvatar: this.commentInfo.fromAvatar, //被评论者头像
+          content: this.inputComment, //评论内容
+          time:date, //评论时间
+        }
+      }
+      console.log(data)
+      
+        // console.log('全局版',data)
+      
+        axiosGet('/api/replyComment',data, (res)=>{
+          console.log(res)
+        })
     },
-
     /**
-     * 点击评论按钮显示输入框
+     * 点击按钮显示输入框
      * item: 当前大评论
      * reply: 当前回复的评论
      */
-    showCommentInput(item, reply) {
+    showCommentInput(item,reply) {
       if (reply) {
-        this.inputComment = "@" + reply.fromName + " ";
+        this.commentInfo  = reply
+        
       } else {
+        this.commentInfo = item
         this.inputComment = "";
       }
-      this.showItemId = item.id;
+      this.showItemId = item.comment_id;
     },
   },
   created() {
     this.replys = eval(this.comments.comment_review);
-    console.log(this.replys);
+    //登录用户的信息
+    this.userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
   },
 };
 </script>
