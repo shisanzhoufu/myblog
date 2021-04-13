@@ -15,9 +15,12 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component,Watch } from "vue-property-decorator";
 import { Warning,Success } from "../../../api/message";
-import { axiosGet } from "../../../api/axiosApi";
+import {formatDateTime, axiosGet } from "../../../api/axiosApi";
+import { pubComment,getCommentList } from "../../../api/commentApi";
+
+    import { mapState, mapMutations } from 'vuex';
 @Component({
   components: {},
 })
@@ -29,20 +32,21 @@ export default class extends Vue {
   }
   private publish() {
     if (this.userInfo) {
-      console.log(this.userInfo);
+      const time = formatDateTime()
       const data = {
         userId: this.userInfo.user_id,
         userName: this.userInfo.user_name,
         userAvater: this.userInfo.user_avater,
         comment: this.comment,
+        time:time
       };
-      axiosGet("/api/comment", data, (res: any) => {
-        console.log(res);
-        if(res.statusCode===200){
-            Success(this,res.msg)
+      pubComment(data,((res:any)=>{
+          Success(this,res.msg)
             this.comment = ''
-        }
-      });
+            const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
+            this.$router.push(NewPage);
+            this.$router.go(-1);
+      }))
     } else {
       Warning(this, "请先登陆哦");
     }
@@ -71,7 +75,7 @@ export default class extends Vue {
         font-size: 25px;
         line-height: 30px;
         resize: none;
-        height: 150px;
+        height:40px;
       }
       .el-button:focus,
       .el-button:hover {

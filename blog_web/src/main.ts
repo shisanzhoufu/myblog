@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
+import Vuex from 'vuex'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import viewHomepage from "./components/template/view-homepage/index.vue";
@@ -14,6 +14,8 @@ import VueMarkdownEditor from '@kangc/v-md-editor';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
+// 直接按需引入 prism 的语言包即可，此处以 json 为例
+import 'prismjs/components/prism-json';
 // axios.defaults.headers.get["Content-type"] = "application/json"
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = '/api'
@@ -22,9 +24,9 @@ Vue.config.productionTip = false
 Vue.component('view-homepage', viewHomepage);
 //ui框架
 Vue.use(ElementUI);
-
-Vue.use(VueMarkdownEditor);
+Vue.use(Vuex)
 VueMarkdownEditor.use(vuepressTheme);
+Vue.use(VueMarkdownEditor);
 new Vue({
   router,
   store,

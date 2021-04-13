@@ -10,47 +10,65 @@
           width="60"
           height="60"
         />
+        <!-- 父评论时间名字 -->
         <div class="right">
           <div class="name">{{ comments.user_name }}</div>
-          <div class="date">{{ comments.comment_time }}</div>
-        </div>
-      </div>
-      <div class="content">{{ comments.comment_info }}</div>
-      <div class="control">
-        <span
+          <div class="comment_header">
+            <div class="date">{{ comments.comment_time }}</div>
+
+            <div class="control">
+              <!-- <span
           class="like"
           :class="{ active: comments.isLike }"
           @click="likeClick(comments)"
         >
           <i class="iconfont icon-dianzan"></i>
           <span class="like-num">{{
-            comments.likeNum > 0 ? comments.likeNum + "人赞" : "赞"
+            comments.comment_like > 0 ? comments.comment_like + "人赞" : "赞"
           }}</span>
-        </span>
-        <span class="comment-reply" @click="showCommentInput(comments)">
-          <i class="iconfont icon-icon-test"></i>
-          <span>回复</span>
-        </span>
+        </span> -->
+              <span class="comment-reply" @click="showCommentInput(comments)">
+                <i class="iconfont icon-icon-test"></i>
+                <span>回复</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- 父评论内容 -->
+      <div class="content">{{ comments.comment_info }}</div>
+      <!-- 子评论区 -->
       <div class="reply">
         <div v-if="replys">
-          <div class="item" v-for="reply in replys" :key="reply.id">
-          <div class="reply-content">
-            <span class="from-name">{{ reply.fromName }}</span
-            ><span>: </span>
-            <span class="to-name">@{{ reply.toName }}</span>
-            <span>{{ reply.content }}</span>
-          </div>
-          <div class="reply-bottom">
-            <span>{{ reply.time }}</span>
-            <span class="reply-text" @click="showCommentInput(comments,reply)">
-              <i class="iconfont icon-icon-test"></i>
-              <span>回复</span>
-            </span>
+          <div class="item" v-for="reply in replys" :key="reply.reply_id">
+            <div class="reply-content">
+              <img
+                class="reply_avatar"
+                :src="reply.fromAvatar"
+                width="50"
+                height="50"
+              />
+              <div class="reply_header">
+                <span class="from-name">{{ reply.fromName }}</span>
+                <div class="reply-bottom">
+                  <span>{{ reply.time }}</span>
+                  <span
+                    class="reply-text"
+                    @click="showCommentInput(comments, reply)"
+                  >
+                    <i class="iconfont icon-icon-test"></i>
+                    <span>回复</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="reply_main">
+              <span class="to-name">@{{ reply.toName }}</span>
+              <span>{{ reply.content }}</span>
+            </div>
           </div>
         </div>
-        </div>
-        
+
         <!-- <div
           class="write-reply"
           v-if="replys.length > 0"
@@ -67,14 +85,12 @@
               type="textarea"
               :rows="3"
               autofocus
-              placeholder="写下你的评论"
+              :placeholder="placRelyName"
             >
             </el-input>
             <div class="btn-control">
               <span class="cancel" @click="cancel">取消</span>
-              <el-button class="btn" @click="commitComment"
-                >确定</el-button
-              >
+              <el-button class="btn" @click="commitComment">确定</el-button>
             </div>
           </div>
         </transition>
@@ -86,7 +102,9 @@
 <script>
 /* eslint-disable */
 import Vue from "vue";
-import {formatDateTime,axiosGet} from '../../../api/axiosApi'
+import { formatDateTime, axiosGet } from "../../../api/axiosApi";
+import { Warning, Success } from "../../../api/message";
+import {pubReply} from "../../../api/commentApi"
 export default {
   props: {
     comments: {
@@ -99,9 +117,10 @@ export default {
     return {
       inputComment: "",
       showItemId: "",
+      placRelyName: "",
       replys: [],
-      userInfo:{},
-      commentInfo:{}
+      userInfo: {},
+      commentInfo: {},
     };
   },
   computed: {},
@@ -134,63 +153,90 @@ export default {
      * 提交评论
      */
     commitComment() {
-      const date = formatDateTime()
-      let data
-      if(this.commentInfo.comment_review){
-        //回复父评论
-        data = {
-          commentId: this.comments.comment_id, //主键id
-          fromId: this.userInfo.user_id, //评论者id
-          fromName: this.userInfo.user_name, //评论者昵称
-          fromAvatar: this.userInfo.user_avater, //评论者头像
-          toId: this.comments.user_id, //被评论者id
-          toName: this.comments.user_name, //被评论者昵称
-          toAvatar: this.comments.user_avater, //被评论者头像
-          content: this.inputComment, //评论内容
-          time:date, //评论时间
+      const date = formatDateTime();
+      let data;
+      if (this.inputComment.length > 0) {
+        if (this.replys.length === 0) {
+          //回复父评论
+          data = {
+            commentId: this.comments.comment_id, //主键id
+            fromId: this.userInfo.user_id, //评论者id
+            fromName: this.userInfo.user_name, //评论者昵称
+            fromAvatar: this.userInfo.user_avater, //评论者头像
+            toId: this.comments.user_id, //被评论者id
+            toName: this.comments.user_name, //被评论者昵称
+            toAvatar: this.comments.user_avater, //被评论者头像
+            content: this.inputComment, //评论内容
+            time: date, //评论时间
+          };
+        } else {
+          //回复子评论
+          data = {
+            commentId: this.comments.comment_id, //主键id
+            fromId: this.userInfo.user_id, //评论者id
+            fromName: this.userInfo.user_name, //评论者昵称
+            fromAvatar: this.userInfo.user_avater, //评论者头像
+            toId: this.commentInfo.fromId, //被评论者id
+            toName: this.commentInfo.fromName, //被评论者昵称
+            toAvatar: this.commentInfo.fromAvatar, //被评论者头像
+            content: this.inputComment, //评论内容
+            time: date, //评论时间
+          };
         }
-      }else {
-      //回复子评论
-        data = {
-          commentId: this.comments.comment_id, //主键id
-          fromId: this.userInfo.user_id, //评论者id
-          fromName: this.userInfo.user_name, //评论者昵称
-          fromAvatar: this.userInfo.user_avater, //评论者头像
-          toId: this.commentInfo.fromId, //被评论者id
-          toName: this.commentInfo.fromName, //被评论者昵称
-          toAvatar: this.commentInfo.fromAvatar, //被评论者头像
-          content: this.inputComment, //评论内容
-          time:date, //评论时间
-        }
-      }
-      console.log(data)
-      
-        // console.log('全局版',data)
-      
-        axiosGet('/api/replyComment',data, (res)=>{
-          console.log(res)
+        
+        pubReply(data,(res)=>{
+          if (res.statusCode === 200) {
+            Success(this, res.msg);
+            this.getReply();
+            this.inputComment = "";
+            this.cancel();
+          }
         })
+        // axiosGet("/api/replyComment", data, (res) => {
+        //   
+        // });
+      } else {
+        Warning(this, "评论不能为空哦");
+        return;
+      }
     },
     /**
      * 点击按钮显示输入框
      * item: 当前大评论
      * reply: 当前回复的评论
      */
-    showCommentInput(item,reply) {
+    showCommentInput(item, reply) {
+      // this.placRelyName = ''
+      this.inputComment = "";
       if (reply) {
-        this.commentInfo  = reply
-        
+        this.commentInfo = reply;
+        this.placRelyName = "@ " + reply.fromName;
       } else {
-        this.commentInfo = item
+        this.commentInfo = item;
         this.inputComment = "";
+        this.placRelyName = "@ " + item.user_name;
       }
       this.showItemId = item.comment_id;
     },
+
+    //获取子评论的方法
+    getReply() {
+      const data = {
+        commentId: this.comments.comment_id,
+      };
+      axiosGet("/api/getReplyList", data, ((res) => {
+        if (res.commentList.length > 0) {
+          this.replys = res.commentList;
+        } else {
+          this.replys = [];
+        }
+      }));
+    },
   },
   created() {
-    this.replys = eval(this.comments.comment_review);
-    //登录用户的信息
+    //获取当前用户信息
     this.userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+    this.getReply();
   },
 };
 </script>
@@ -198,50 +244,61 @@ export default {
 <style lang="scss">
 @import "src/base.scss";
 .container {
-  padding: 0 10px;
+  padding: 30px 0px;
   box-sizing: border-box;
   .comment {
+    position: relative;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    border-bottom: 1px solid $c-disabled;
+    // padding: 10px;
+    // border-bottom: 1px solid $c-disabled;
     .info {
       display: flex;
       align-items: center;
       .avatar {
         border-radius: 50%;
+        margin-bottom: 10px;
       }
       .right {
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
+        margin-left: 20px;
         .name {
           cursor: pointer;
-          font-size: 23px;
+          font-size: 22px;
           line-height: 20px;
-          font-weight: 500;
-          // color: $c-info;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: $c-link;
           // &:hover {
           //   color: $c-brand;
           // }
         }
+      }
+      .comment_header {
+        display: flex;
+        margin-top: 10px;
         .date {
           color: $c-medium;
-          margin-top: 10px;
+          margin-right: 5px;
+          font-size: 20px;
         }
       }
     }
     .content {
-      font-size: 20px;
-      line-height: 25px;
+      font-size: 22px;
+      line-height: 30px;
       font-weight: 500;
-      padding: 10px 0;
-      line-height: 24px;
+      padding: 20px 0;
+      margin-left: 80px;
     }
     .control {
+      // top:10px;
+      // right:10px;
+      // position: absolute;
       display: flex;
       align-items: center;
-      font-size: 16px;
+      font-size: 20px;
       color: $c-medium;
       .like {
         display: flex;
@@ -253,7 +310,7 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 16px;
+          font-size: 20px;
           margin-right: 5px;
         }
       }
@@ -265,39 +322,59 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 16px;
+          font-size: 20px;
           margin-right: 5px;
         }
       }
     }
     .reply {
-      margin: 10px 0;
-      border-left: 2px solid $c-disabled;
+      margin: 15px 0;
+      margin-left: 50px;
+      border-left: 2px dashed #ebebee;
+      border-bottom: 2px dashed #ebebee;
       .item {
-        margin: 0 10px;
+        margin: 15px 10px;
         padding: 10px 0;
-        border-bottom: 1px dashed $c-disabled;
+        // border-bottom: 1px dashed $c-disabled;
         .reply-content {
           display: flex;
           align-items: center;
           font-size: 20px;
-
-          .from-name {
-            color: $c-main;
-            cursor: pointer;
+          .reply_avatar {
+            border-radius: 25px;
+            margin-bottom: 10px;
           }
+          .reply_header {
+            margin-left: 10px;
+          }
+          .from-name {
+            color: $c-link;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 520;
+          }
+        }
+        .reply_main {
+          margin: 10px 0;
+          margin-left: 50px;
+
           .to-name {
-            color: $c-main;
+            color: $c-link;
             cursor: pointer;
             margin-left: 5px;
             margin-right: 5px;
+            font-size: 20px;
+            font-weight: 520;
+          }
+          span {
+            font-size: 20px;
           }
         }
         .reply-bottom {
           display: flex;
           align-items: center;
           margin-top: 6px;
-          font-size: 16px;
+          font-size: 20px;
           color: $c-medium;
           .reply-text {
             display: flex;
@@ -316,7 +393,7 @@ export default {
       .write-reply {
         display: flex;
         align-items: center;
-        font-size: 20px;
+        font-size: 25px;
         color: $c-medium;
         padding: 10px;
         cursor: pointer;
@@ -336,14 +413,16 @@ export default {
         opacity: 0;
       }
       .input-wrapper {
+        border: 1px solid #ebebee;
         padding: 10px;
+        margin: 5px;
         .gray-bg-input,
         .el-input__inner {
           /*background-color: #67C23A;*/
         }
         .el-textarea__inner {
           border: 0;
-          font-size: 20px;
+          font-size: 25px;
           line-height: 30px;
           resize: none;
         }

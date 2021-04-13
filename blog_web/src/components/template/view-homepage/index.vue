@@ -30,7 +30,9 @@
                       <router-link to="/cardList" class="pro-list"
                         >兴趣</router-link
                       >
-                      <router-link to="/cardList" class="pro-list">技术</router-link>
+                      <router-link to="/cardList" class="pro-list"
+                        >技术</router-link
+                      >
                       <router-link to="/cardList" class="pro-list"
                         >生活</router-link
                       >
@@ -50,13 +52,12 @@
                 </div>
                 <div class="icon-worlds about">
                   <router-link to="/addArticle" class="card-list"
-                    ><i class="iconfont icon icon-xiaoren"></i>发布文章</router-link
+                    ><i class="iconfont icon icon-xiaoren"></i
+                    >发布文章</router-link
                   >
                 </div>
               </div>
-              <div
-                class="search"
-              >
+              <div class="search">
                 <div class="search-input">
                   <input
                     type="text"
@@ -77,9 +78,11 @@
                 <i class="iconfont login-icon icon-zhuce"></i>
                 <div class="login-card">
                   <router-link to="/sign-in" class="pro-list sign-in"
-                    >登录</router-link>
+                    >登录</router-link
+                  >
                   <router-link to="/sign-up" class="pro-list sign-up"
-                    >注册</router-link>
+                    >注册</router-link
+                  >
                 </div>
               </div>
 
@@ -166,8 +169,7 @@ export default class extends Vue {
     background: #ffffff;
   }
   .view-homepage__header {
-    
-    width:100%;
+    width: 100%;
     // width: 1130px;
     position: fixed;
     top: 0;
@@ -305,7 +307,7 @@ export default class extends Vue {
           }
           .search {
             position: absolute;
-            right:100px;
+            right: 100px;
             cursor: pointer;
             width: 43px;
             height: 43px;
@@ -316,13 +318,14 @@ export default class extends Vue {
             background: $c-main;
             opacity: 0.7;
             transition: 0.6s;
-            &:hover{
+            &:hover {
               width: 240px;
               transition: 0.6s;
-            .search-input {
-              display: block;
+              .search-input {
+                display: block;
+              }
             }
-            }
+            
             .search-input {
               display: none;
               border: 0px;
@@ -338,17 +341,20 @@ export default class extends Vue {
                 color: $c-white;
                 font-size: 18px;
                 line-height: 20;
-                width:100%;
+                width: 100%;
 
                 &:focus {
                   border: none;
                   outline: none;
                 }
-                &:-ms-input-placeholder {
-                  //提示字样式
-                  color: $c-white;
-                }
+                // &:-ms-input-placeholder {
+                //   //提示字样式
+                //   color: $c-white;
+                // }
               }
+            }
+            input::-webkit-input-placeholder {
+              color: white;
             }
             .search-icon {
               flex: 0;
@@ -359,7 +365,7 @@ export default class extends Vue {
               margin-left: 20px;
 
               i {
-                margin:0px;
+                margin: 0px;
                 margin-top: 10px;
                 margin-right: 2px;
                 border-radius: 100%;
@@ -404,8 +410,8 @@ export default class extends Vue {
             }
           }
           .login {
-            position:absolute;
-            right:50px;
+            position: absolute;
+            right: 50px;
             cursor: pointer;
           }
           .login-card {

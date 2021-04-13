@@ -1,5 +1,6 @@
 <template>
     <div class="view-add" @click="cancelPop($event)">
+      <!-- <view-homepage/> -->
       <div class="add_title">
         <el-input v-model="title" placeholder="请输入标题"></el-input>
         <el-button type="primary" plain >草稿箱</el-button>
@@ -56,7 +57,7 @@
       <v-md-editor
         v-model="text"
         class="md"
-        
+        left-toolbar="undo redo | tip"
         :disabled-menus="[]"
         @upload-image="handleUploadImage"
         height="600px"
@@ -75,7 +76,30 @@ import {handlePaste} from "../../plugins/image-handle-paste/image-handle-paste"
     // mavonEditor
   }
 })
+const text = `::: tip
+  你可以点击 toolbar 中的 tip 来快速插入
+:::
 
+::: warning
+  这是一段警告
+:::
+
+::: danger
+  这是一个危险警告
+:::
+
+::: details
+  这是一个详情块，在 IE / Edge 中不生效
+:::
+
+::: tip 自定义标题
+  你也可以自定义块中的标题
+:::
+
+::: danger STOP
+  危险区域，禁止通行
+:::
+`;
 export default class extends Vue {
   private items= [
       { type: 'interest', label: '兴趣' },
@@ -87,10 +111,11 @@ export default class extends Vue {
   private inputValue = ''
   private isShow = false
   private isChecked = false
-  private text = ''
+  private text:any
   private title =''
   private insertImage:any
   private selectTypeIndex = -1 //控制按钮点亮状态，-1为默认不点亮
+  
   private showCard() {
     this.isShow = true
   }
@@ -227,8 +252,8 @@ export default class extends Vue {
     }
     .ischecked{
       color: #ffffff!important;
-      background-color:rgb(121, 109, 194)!important;
-      border-color: rgb(121, 109, 194)!important;
+      background-color:$c-main!important;
+      border-color: $c-main!important;
     }
     
   }

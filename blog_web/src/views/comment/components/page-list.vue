@@ -29,66 +29,32 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component,Watch } from "vue-property-decorator";
 import { Warning } from "../../../api/message";
 import { axiosGet } from "../../../api/axiosApi";
+import { getCommentList } from "../../../api/commentApi";
 import Comment from "../../../components/basic/comment/index";
 @Component({
   components: { Comment },
 })
 export default class extends Vue {
+  [x: string]: any;
   private replay = "";
   private commentList: any = [];
-  private replayList = [
-    {
-      id: "comment0001", //主键id
-      time: "2018-07-05 08:30", //评论时间
-      ownerId: "talents100020", //文章的id
-      fromId: "errhefe232213", //评论者id
-      fromName: "犀利的评论家", //评论者昵称
-      fromAvatar:
-        "http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg", //评论者头像
-      likeNum: 3, //点赞人数
-      content: "非常靠谱的程序员", //评论内容
-      reply: [
-        //回复，或子评论
-        {
-          id: "34523244545", //主键id
-          commentId: "comment0001", //父评论id，即父亲的id
-          fromId: "observer223432", //评论者id
-          fromName: "夕阳红", //评论者昵称
-          fromAvatar:
-            "https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg", //评论者头像
-          toId: "errhefe232213", //被评论者id
-          toName: "犀利的评论家", //被评论者昵称
-          toAvatar:
-            "http://ww4.sinaimg.cn/bmiddle/006DLFVFgy1ft0j2pddjuj30v90uvagf.jpg", //被评论者头像
-          content: "赞同，很靠谱，水平很高", //评论内容
-          time: "2018-07-05 08:35", //评论时间
-        },
-        {
-          id: "34523244545",
-          commentId: "comment0001",
-          fromId: "observer567422",
-          fromName: "清晨一缕阳光",
-          fromAvatar:
-            "http://imgsrc.baidu.com/imgad/pic/item/c2fdfc039245d688fcba1b80aec27d1ed21b245d.jpg",
-          toId: "observer223432",
-          toName: "夕阳红",
-          toAvatar:
-            "https://wx4.sinaimg.cn/mw690/69e273f8gy1ft1541dmb7j215o0qv7wh.jpg",
-          content: "大神一个！",
-          time: "2018-07-05 08:50",
-        },
-      ],
-    },
-  ];
+//   $store: any;
   mounted() {
-    axiosGet("/api/commentList", {}, (res: any) => {
-      this.commentList = res.commentList;
-      console.log(this.commentList);
-    });
+    getCommentList(((res:any)=>{
+        this.commentList = res.commentList
+        this.commentList = this.commentList.reverse()
+        this.$store.commit('setCommentList',{
+            commentList:this.commentList
+        })
+    }))
   }
+  private get commentLists() {
+          return this.$store.state.commentList
+      }
+      
 }
 </script>
 <style lang="scss">
