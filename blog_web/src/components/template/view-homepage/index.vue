@@ -26,14 +26,14 @@
                     @click.stop="showCard"
                   >
                     <i class="iconfont icon icon-wenzhang-copy"></i>文章
-                    <div class="card-sub">
-                      <router-link to="/cardList" class="pro-list"
+                    <div class="card-sub" >
+                      <router-link to="/interest" class="pro-list"
                         >兴趣</router-link
                       >
-                      <router-link to="/cardList" class="pro-list"
+                      <router-link to="/technology" class="pro-list"
                         >技术</router-link
                       >
-                      <router-link to="/cardList" class="pro-list"
+                      <router-link to="/life" class="pro-list"
                         >生活</router-link
                       >
                     </div>

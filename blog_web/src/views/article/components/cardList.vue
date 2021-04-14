@@ -1,14 +1,13 @@
 <template>
     <div class="view-article">
         <div class="container">
-            
-            <div class="card">
+            <div class="card" v-for="blog in blogList" :key="blog.blog_id">
             <div class="art_title">
-                个人博客的搭建
+                {{blog.blog_title}}
             </div>
             <div class="art_info">
                 <!-- <i class="iconfont icon-biaoqian"></i> -->
-            <div>2021-02-19</div>
+            <div>{{blog.blog_create_date}}</div>
             </div>
             <div class="art_img">
                 <img src="../../../assets/index/intrest1.jpg" alt="">
@@ -17,6 +16,32 @@
             </div>    
     </div>
 </template>
+<script lang="ts">
+import Vue from "vue";
+import { Component,Prop } from "vue-property-decorator";
+import { Warning,Success,Error } from "../../../api/message";
+import { axiosPost,axiosGet,formatDateTime } from "../../../api/axiosApi";
+@Component({
+  components: {
+    // mavonEditor
+  },
+})
+export default class extends Vue {
+    @Prop(String) types!: string;
+    private blogList:any
+    created(){
+        const data = {
+            class:this.types
+        }
+        axiosGet('/api/getBlogList',data,(res:any)=>{
+            console.log(res,'res')
+            if(res.statusCode===200){
+                this.blogList = res.commentList
+            }
+        })
+    }
+}
+</script>
 <style lang="scss" scoped>
 @import "src/base.scss";
 @import "../../common.scss";

@@ -1,7 +1,9 @@
 <template>
 <div class="view-index ">
   <view-homepage/>
-  <CardList/>
+  <!-- <PageTop :types="types"/> -->
+  <!-- <CardList :types="types"/> -->
+
   <!-- <PageArticle/> -->
   <!-- <PageIntrest/> -->
 </div>
@@ -9,24 +11,22 @@
 <style lang="scss">
 
 .view-index {
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
 }
 </style>
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component,Prop, Watch } from "vue-property-decorator";
 import CardList from "./components/cardList.vue";
-// import PageIntrest from "./components/page-intrest.vue";
+import PageTop from "./components/page-top.vue";
 // import PageArticle from "./components/page-article.vue";
 @Component({
-  components: {CardList}
+  components: {CardList,PageTop}
 })
 export default class extends Vue {
   underStyle: any = {};
-  mounted() {
+  private types:any
+  created() {
     const under = document.getElementsByClassName("view-index__under")[0];
     if (under) {
       this.underStyle = {
@@ -35,6 +35,10 @@ export default class extends Vue {
         position: "sticky"
       };
     }
+    this.types = this.$route.query.types
+    console.log(this.$route.query.types,'types_art')
   }
+  
 }
 </script>
+

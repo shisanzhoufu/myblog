@@ -27,7 +27,7 @@ const routes: Array<RouteConfig> = [
     path: "/cardList",
     name: "cardList",
     component: () =>
-    import( "../views/article/index.vue")
+        import( "../views/article/index.vue")
   },
   {
     path: "/addArticle",
@@ -40,6 +40,24 @@ const routes: Array<RouteConfig> = [
     name: "comment",
     component: () =>
     import( "../views/comment/index.vue")
+  },
+  {
+    path: "/interest",
+    name: "interest",
+    component: () =>
+      import( "../views/article/interest.vue")
+  },
+  {
+    path: "/technology",
+    name: "technology",
+    component: () =>
+    import( "../views/article/technology.vue")
+  },
+  {
+    path: "/life",
+    name: "life",
+    component: () =>
+    import( "../views/article/life.vue")
   }
 ];
 
