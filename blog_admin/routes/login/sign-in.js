@@ -9,7 +9,7 @@ router.post('/', function(req, response, next) {
     let user_name = req.body.userName
     let user_password = req.body.password
     let sql = "SELECT * FROM  user WHERE user_name = '"+user_name+"' AND user_password = '"+user_password+"'"
-    selectData(sql,function(result){
+    operateData(sql,function(result){
         delete result[0].user_password
         if(result.length>0){
             response.send({statusCode:200, msg:'登录成功~',userInfo:result[0]}) 

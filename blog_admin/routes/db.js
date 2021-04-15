@@ -20,13 +20,12 @@ let mysql = require("./mysql.config.js");
 }
 
 /**
- * 查询数据
+ * 通用操作
  * @field  表名  String
  * @condition  查询的字段名  String
  */
 
- module.exports = selectData = (sql,callback)=>{
-     console.log(sql)
+ module.exports = operateData = (sql,callback)=>{
     //  "SELECT * FROM  user_info WHERE user = '"+name+"'"
     mysql.query(sql,function(err,res){
         if(err){
@@ -34,8 +33,7 @@ let mysql = require("./mysql.config.js");
             throw err;
         }
         callback && callback(res);
-    })
-    
+    })   
 }
 
 /**

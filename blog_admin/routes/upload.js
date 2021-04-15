@@ -25,14 +25,15 @@ router.post('/', upload.single('file'), function(req, response) {
     //1.图片的绝对路径
     //2.写入的内容
     //3.回调函数
-    fs.writeFile(path.join(__dirname,'../static/img/'+keepname),data,(err)=>{
+    fs.writeFile(path.join(__dirname,'../../../static/img/'+keepname),data,(err)=>{
         if(err){
             throw err
             return res.send('写入失败')
         }else{
-            const ava = 'C:/wamp64/www/blog/blog_admin/static/img/'+keepname
-            // ava = "require(\'"+ava+"\')"
-            return response.send(ava)
+            // let ava = '../../static/img/'+keepname
+            let ava = 'C:/wamp64/www/blog/blog_admin/static/img/'+keepname
+            ava = "require(\'"+ava+"\')"
+            return response.send({statusCode:200,url:ava})
         }   
     })
  })

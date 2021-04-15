@@ -12,7 +12,7 @@ router.get('/', function(req, response, next) {
     let user_password = req.query.userPassword
     let email = req.query.email
     let sql = "SELECT * FROM  user WHERE user_name = '"+user_name+"'"
-    selectData(sql,function(result){
+    operateData(sql,function(result){
         if(result.length>0){
            return response.send({statusCode:400,msg:'用户名已存在，换一个叭~'}) 
         }else{

@@ -3,12 +3,17 @@ const express = require('express')
 const session = require('express-session')
 const bodyParser=require('body-parser')
 const path = require('path')
-
+const app = express();
 const upRouter = require('./routes/login/sign-up')
 const inRouter = require('./routes/login/sign-in')
-let uploadRouter = require('./routes/upload')
-const app = express();
-
+const uploadRouter = require('./routes/upload')
+const commentRouter = require('./routes/comment/comment')
+const getcommentRouter = require('./routes/comment/getCommentList')
+const replyCommentRouter = require('./routes/comment/replyComment')
+const replyListRouter = require('./routes/comment/getReplyList')
+const pubBlogRouter = require('./routes/article/pubBlog')
+const getBlogRouter = require('./routes/article/getBlogList')
+const getSearchRouter = require('./routes/article/getSearchList')
 //session配置
 app.use(session({
     secret: 'billy',
@@ -36,6 +41,20 @@ app.use('/api/sign-up', upRouter)
 app.use('/api/sign-in', inRouter)
 //图片上传
 app.use('/api/upload',uploadRouter)
+//添加留言
+app.use('/api/comment',commentRouter)
+//获取留言
+app.use('/api/commentList',getcommentRouter)
+//回复留言
+app.use('/api/replyComment',replyCommentRouter)
+//留言回复列表
+app.use('/api/getReplyList',replyListRouter)
+//发布文章
+app.use('/api/pubBlog',pubBlogRouter)
+//留言文章列表
+app.use('/api/getBlogList',getBlogRouter)
+//搜索结果
+app.use('/api/getSearchList',getSearchRouter)
 
 app.listen(3001,function(){
   console.log('app is runing at port 3001')
