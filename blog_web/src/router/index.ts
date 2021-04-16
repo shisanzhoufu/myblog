@@ -1,7 +1,11 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
+const originalPush = VueRouter.prototype.push
 
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -58,6 +62,19 @@ const routes: Array<RouteConfig> = [
     name: "life",
     component: () =>
     import( "../views/article/life.vue")
+  },
+  {
+    path: "/blog",
+    name: "blog",
+    component: () =>
+    import( "../views/article/blog.vue")
+  },
+  {
+    path: "/search",
+    name: "search",
+    // redirect:"/search",
+    component: () =>
+    import( "../views/article/search.vue")
   }
 ];
 

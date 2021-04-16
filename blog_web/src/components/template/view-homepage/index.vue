@@ -58,15 +58,18 @@
                 </div>
               </div>
               <div class="search">
-                <div class="search-input">
+                <div class="search-input" >
                   <input
                     type="text"
                     placeholder="输入关键词搜索"
                     class="search-input"
+                    v-model="searchInfo"
+                    @keyup.enter="search()"
                   />
                 </div>
-                <div class="search-icon">
-                  <i class="iconfont search-icons icon-tubiao11"></i>
+                <div class="search-icons">
+                  <i class="iconfont search-icon icon-tubiao11"></i>
+                  <i class="el-icon-close icon-close"></i>
                 </div>
               </div>
 
@@ -112,11 +115,13 @@ import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 @Component
 export default class extends Vue {
+
   withBg = false;
   private isShow = false;
   private isSub = false;
   private isHover = false;
   private isLogin = false;
+  private searchInfo:any
   $route: any;
   created() {
     window.addEventListener("scroll", () => {
@@ -153,6 +158,11 @@ export default class extends Vue {
   }
   private See(e: any) {
     window.location.href = e;
+  }
+  private search(){
+    
+    this.$router.push({ name: "search", params: { searchInfo: this.searchInfo } });
+    this.searchInfo = ''
   }
 }
 </script>
@@ -313,17 +323,28 @@ export default class extends Vue {
             height: 43px;
             border-radius: 100px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
             background: $c-main;
             opacity: 0.7;
             transition: 0.6s;
+            .icon-close{
+              display: none;
+            }
+            &:focus,
             &:hover {
-              width: 240px;
+              width: 250px;
               transition: 0.6s;
+              padding-right: 20px;
               .search-input {
                 display: block;
               }
+              .search-icon{
+                display: none;
+              }
+              .icon-close{
+              display: block;
+            }
             }
             
             .search-input {
@@ -356,18 +377,16 @@ export default class extends Vue {
             input::-webkit-input-placeholder {
               color: white;
             }
-            .search-icon {
+            .search-icons {
               flex: 0;
               display: flex;
               justify-content: center;
               align-items: center;
               border-radius: 100%;
-              margin-left: 20px;
+              // margin-left: 20px;
 
               i {
                 margin: 0px;
-                margin-top: 10px;
-                margin-right: 2px;
                 border-radius: 100%;
                 // background: $c-pending;
                 text-decoration: none;

@@ -121,7 +121,6 @@ export default class extends Vue {
       md:this.value,
       time:time
     }
-    console.log(data)
     axiosGet("/api/pubBlog",data,(res: any) => {
         if(res.statusCode === 200){
           Success(this,res.msg)
@@ -330,10 +329,3 @@ export default class extends Vue {
 }
 </style>
 
-function insertImage(arg0: { url: any; desc: string; }) {
-  throw new Error("Function not implemented.");
-}
-
-function insertImage(arg0: { url: any; desc: string; }) {
-  throw new Error("Function not implemented.");
-}

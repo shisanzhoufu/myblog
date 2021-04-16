@@ -18,27 +18,7 @@ import { axiosPost,axiosGet,formatDateTime } from "../../../api/axiosApi";
   },
 })
 export default class extends Vue {
-    @Prop(Object) topInfo!: object;
-    // private topList = [
-    //     {
-    //         type:'interest',
-    //         label:'兴趣',
-    //         url:require('../../../assets/index/行李箱 (1).png'),
-    //         brief:'永远理想主义，永远浪漫主义'
-    //     },
-    //     {
-    //         type:'technology',
-    //         label:'技术',
-    //         url:require('../../../assets/index/笔记本电脑.png'),
-    //         brief:'种一棵树，最好的时间是十年前，其次是现在'
-    //     },
-    //     {
-    //         type:'life',
-    //         label:'生活',
-    //         url:require('../../../assets/index/蛋糕.png'),
-    //         brief:'人间烟火气，最抚凡人心'
-    //     }
-    // ]
+    @Prop(Object) topInfo!: object;   
     
     created(){
         // console.log(this.types)
