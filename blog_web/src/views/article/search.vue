@@ -15,7 +15,7 @@
           <!-- <i class="el-icon-close icon-close"></i> -->
         </div>
       </div>
-      <BlogList :blogList="blogList" v-if="flag" />
+      <BlogList :blogList="searchList" />
     </div>
   </div>
 </template>
@@ -24,40 +24,52 @@ import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import { getSearchList } from "../../api/commentApi";
 import BlogList from "./components/cardList.vue";
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
 @Component({
   components: { BlogList },
 })
 export default class extends Vue {
-  private searchInfo: any;
+  private searchInfo='';
   private blogList: any;
   private tagList: any;
   private flag = false;
-  @Watch('searchInfo',{ immediate: true })
-  function (val:any) {
-    console.log(val,'val')
-    // this.blogList = val
-  }
-  created() {
-    
-    this.getList();
-  }
-  private getList() {
-    if (!this.searchInfo) {
-      this.searchInfo = this.$route.params.searchInfo;
-    }
-    const data = {
-      searchInfo: this.searchInfo,
-    };
-    getSearchList(data, (res: any) => {
-      if (res.statusCode === 200) {
-        this.blogList = res.commentList;
-        this.flag = true;
-        this.searchInfo = "";
-      }
 
-      console.log(res, "搜索页");
-    });
-  }
+ 
+  @Mutation getSearchList:any
+  @State searchList:any
+  // private get mapState(){
+  //     return this.$store.getters.getSearchList
+  //   }
+//   private get getList() {
+//    return  mapState([
+//   // 映射 this.count 为 store.state.count
+//   'searchLIst'
+// ])
+// created(){
+// }
+    // if (!this.searchInfo) {
+    //   this.searchInfo = this.$route.params.searchInfo;
+    // }
+    // this.blogList = this.$route.params.blogList;
+    // console.log(this.blogList,'searchrouter params')
+    // const data = {
+    //   searchInfo: this.searchInfo,
+    // };
+
+    
+//     getSearchList(data, (res: any) => {
+//       if (res.statusCode === 200) {
+//         this.blogList = res.commentList;
+//         this.flag = true;
+//         // this.searchInfo = "";
+//       }
+// //存入vuex
+    
+//     });
+//     this.$store.commit('setSearchLIst',{
+//             searchLIst:this.blogList
+//         })
+  // }
 }
 </script>
 <style lang="scss" scoped>

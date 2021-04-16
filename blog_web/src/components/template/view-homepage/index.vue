@@ -26,7 +26,7 @@
                     @click.stop="showCard"
                   >
                     <i class="iconfont icon icon-wenzhang-copy"></i>文章
-                    <div class="card-sub" >
+                    <div class="card-sub">
                       <router-link to="/interest" class="pro-list"
                         >兴趣</router-link
                       >
@@ -58,7 +58,7 @@
                 </div>
               </div>
               <div class="search">
-                <div class="search-input" >
+                <div class="search-input">
                   <input
                     type="text"
                     placeholder="输入关键词搜索"
@@ -113,16 +113,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-@Component
+import { getSearchList } from "../../../api/commentApi";
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
+@Component({
+  components: {},
+})
 export default class extends Vue {
-
   withBg = false;
   private isShow = false;
   private isSub = false;
   private isHover = false;
   private isLogin = false;
-  private searchInfo:any
-  $route: any;
+  private searchInfo = "";
+  
   created() {
     window.addEventListener("scroll", () => {
       this.withBg = window.scrollY !== 0;
@@ -132,9 +135,9 @@ export default class extends Vue {
   @Watch("$route")
   private showHover() {
     // eslint-disable-next-line no-constant-condition
-    if (this.$route.path === "/blog_life") {
+    if (this.$route.path === "/life") {
       this.isHover = true;
-    } else if (this.$route.path === "/blog_interest") {
+    } else if (this.$route.path === "/interest") {
       this.isHover = true;
     } else {
       this.isHover = false;
@@ -159,10 +162,47 @@ export default class extends Vue {
   private See(e: any) {
     window.location.href = e;
   }
-  private search(){
-    
-    this.$router.push({ name: "search", params: { searchInfo: this.searchInfo } });
-    this.searchInfo = ''
+  @Mutation setSearchList:any
+  private search() {
+    // if (this.$route.path === "/search"){
+    //   console.log('search跳search')
+    //   const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
+    //         this.$router.push(NewPage);
+    //         this.$router.go(-1);
+    //         // this.$router.push({ name: "search", params: { searchInfo: this.searchInfo } });
+    // }
+    if (this.searchInfo) {
+      const data = {
+        searchInfo: this.searchInfo,
+      };
+      let blogList;
+      getSearchList(data, (res: any) => {
+        if (res.statusCode === 200) {
+          blogList = res.commentList;
+          // this.searchInfo = "";
+        }
+        //存入vuex
+        console.log(blogList, "indexres");
+        this.setSearchList(blogList)
+        // this.$store.commit("setSearchList", {
+        //   searchList: blogList,
+        // });
+        if (blogList) {
+          if (this.$route.path === "/search") {
+            console.log('当前页面跳转')
+            // this.$router.go(0);
+          } else {
+            console.log('跳转到新页面')
+            this.$router.push({
+              name: "search",
+              params: { blogList: blogList },
+            });
+          }
+        }
+      });
+    }
+
+    this.searchInfo = "";
   }
 }
 </script>
@@ -328,7 +368,7 @@ export default class extends Vue {
             background: $c-main;
             opacity: 0.7;
             transition: 0.6s;
-            .icon-close{
+            .icon-close {
               display: none;
             }
             &:focus,
@@ -339,14 +379,14 @@ export default class extends Vue {
               .search-input {
                 display: block;
               }
-              .search-icon{
+              .search-icon {
                 display: none;
               }
-              .icon-close{
-              display: block;
+              .icon-close {
+                display: block;
+              }
             }
-            }
-            
+
             .search-input {
               display: none;
               border: 0px;

@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuex from 'vuex'
+import vuexClass from 'vuex-class'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import viewHomepage from "./components/template/view-homepage/index.vue";

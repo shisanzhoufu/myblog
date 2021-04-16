@@ -3,7 +3,7 @@
     <div class="container">
       <div
         class="card"
-        v-for="blog in startTime"
+        v-for="blog in blogList"
         :key="blog.blog_id"
         @click="toBlog(blog)"
       >
@@ -43,10 +43,11 @@ export default class extends Vue {
   @Prop(Array) blogList!: any;
   private List: any;
   private tagList: [];
-  @Watch("blogList", { immediate: true })
+  @Watch("blogList", { deep: true, immediate: true })
   function(val: any) {
-    this.List = val;
-    this.getTag(this.List);
+    console.log(val,'val000099')
+    this.blogList = val
+    this.getTag(this.blogList);
   }
   private getTag(list: any) {
     list.forEach((item: any) => {
@@ -55,9 +56,10 @@ export default class extends Vue {
       }
     });
   }
-  get startTime(){
-    return this.List
-  }
+  // get startTime(){
+  //   console.log(this.List,"get")
+  //   return this.List
+  // }
   private toBlog(blog: any) {
     this.$router.push({ name: "blog", params: { blog: blog } });
   }
