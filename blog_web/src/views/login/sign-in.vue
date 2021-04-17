@@ -4,9 +4,11 @@
     <div class="link-register">
       <div class="register-card">
         <div class="title">还没有注册？快来和我成为朋友叭~</div>
-        <el-button class="register-btn" @click.stop='$router.push("/sign-up")'>注册</el-button>
+        <el-button class="register-btn" @click.stop="$router.push('/sign-up')"
+          >注册</el-button
+        >
       </div>
-      <img src="../../assets/index/login-img.png" alt="" />
+      <img src="../../assets/index/坐着1.svg" alt="" />
     </div>
     <div class="card">
       <div class="title">Login</div>
@@ -25,7 +27,9 @@
           class="password-input"
         >
         </el-input>
-        <el-button class="login-btn" @click="submit" :loading='loading'>登录</el-button>
+        <el-button class="login-btn" @click="submit" :loading="loading"
+          >登录</el-button
+        >
       </div>
     </div>
   </div>
@@ -35,45 +39,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message } from "../../api/message"
-import { axiosPost } from "../../api/axiosApi"
-
+import { Warning, Message } from "../../api/message";
+import { axiosPost,logout } from "../../api/axiosApi";
+import {loginInfo} from "../../api/commentApi"
 @Component({
   components: {},
 })
 export default class extends Vue {
-  private username = ""
-  private password = ""
-  private loading = false
-  private submit(){
-    this.loading = true
-    if(this.username && this.password){
+  private username = "";
+  private password = "";
+  private loading = false;
+  private submit() {
+    this.loading = true;
+    if (this.username && this.password) {
       const data = {
-        userName:this.username,
-        password: this.password
-      }
+        userName: this.username,
+        password: this.password,
+      };
       try {
-         axiosPost('/api/sign-in',data,(res: any)=>{
-           if(res.statusCode === 200){
-             console.log(res.userInfo)
-             localStorage.setItem(
-                //储存用户的一些信息到本地
-                  "userInfo",
-                  JSON.stringify(res.userInfo)
-                )
-            this.$router.push('/')
-           }else{
-             Message(this,res.msg);
-           }
-          console.log(res)
-        })
+        loginInfo(data,((res:any)=>{
+          if (res.statusCode === 200) {
+            //把登录信息存入localstorage
+            localStorage.setItem(
+              //储存用户的一些信息到本地
+              "userInfo",
+              JSON.stringify(res.userInfo)
+            );
+            this.$router.push("/");
+          } else {
+            Message(this, res.msg);
+          }
+        }))
       } catch (error) {
-        console.log(error)
-      }finally{
-        this.loading = false
+        console.log(error);
+      } finally {
+        this.loading = false;
       }
-    }else{
-      Warning(this,'请检查输入是否错误、遗漏')
+    } else {
+      Warning(this, "请检查输入是否错误、遗漏");
     }
   }
 }
@@ -85,20 +88,20 @@ export default class extends Vue {
 .view-login {
   .link-register {
     position: absolute;
-    width: 2000px;
-    height: 1800px;
+    width: 1700px;
+    height: 1300px;
     border-radius: 50%;
-    background-image: linear-gradient(135deg, #667eea 30%, #764ba2 100%);
+    background-image: linear-gradient(135deg, #667eea 30%, #9ec1e2 100%);
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
-    &:hover{
-        background-image: linear-gradient(135deg, #764ba2 30%, #667eea 100%);
-        transition: 0.8s;
+    &:hover {
+      background-image: linear-gradient(135deg, #9ec1e2 30%, #667eea 100%);
+      transition: 0.8s;
     }
     img {
-      width: 20%;
-      height: 20%;
+      width: 18%;
+      height: 18%;
       position: absolute;
       top: 80%;
       left: 70%;
@@ -109,7 +112,7 @@ export default class extends Vue {
       left: 62%;
       .title {
         color: $c-white;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 400;
       }
       .el-button {
@@ -118,8 +121,8 @@ export default class extends Vue {
         left: 50%;
         top: 250%;
         transform: translate(-50%, -50%);
-        width: 200px;
-        height: 50px;
+        width: 160px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -134,8 +137,8 @@ export default class extends Vue {
     left: 70%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 500px;
+    width: 300px;
+    height: 400px;
     border: 2px;
     border-radius: 20px;
     color: $c-main;
@@ -145,14 +148,15 @@ export default class extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 42px;
-      padding-top: 80px;
+      font-size: 35px;
+      padding-top: 50px;
+      padding-bottom: 30px;
     }
     .login-box {
       position: relative;
       padding: 20px;
-      .requireModuleExtension{
-        border-color: #409EFF00;
+      .requireModuleExtension {
+        border-color: #409eff00;
         outline: 0;
       }
       .el-input__inner {
@@ -161,11 +165,11 @@ export default class extends Vue {
         border: none;
         border-radius: 0px;
         height: 40px;
-        font-size: 20px;
-        border-bottom: 2px solid rgb(167, 157, 226);
+        font-size: 16px;
+        border-bottom: 2px solid $c-light;
         margin-bottom: 30px;
         color: $c-main;
-        padding:0px;
+        padding: 0px;
         &:hover {
           border-bottom: 2px solid $c-main;
         }
@@ -183,10 +187,10 @@ export default class extends Vue {
         background: $c-main;
         position: absolute;
         left: 50%;
-        top: 130%;
+        top: 110%;
         transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;

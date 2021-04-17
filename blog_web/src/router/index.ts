@@ -75,6 +75,13 @@ const routes: Array<RouteConfig> = [
     // redirect:"/search",
     component: () =>
     import( "../views/article/search.vue")
+  },
+  {
+    path: "/userInfo",
+    name: "userInfo",
+    // redirect:"/search",
+    component: () =>
+    import( "../views/user/userInfo.vue")
   }
 ];
 

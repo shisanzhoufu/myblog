@@ -30,14 +30,18 @@ export default class extends Vue {
 @import "src/base.scss";
 @import "../common.scss";
 .view-blog {
-  *{
-    font-size: 20px;
-    line-height: 30px;
+  * {
+    font-size: 16px;
+    line-height: 25px;
     color: rgb(58, 58, 58);
+    background-color: $c-white;
   }
   @include common;
+
   .card {
-    padding-top: 100px;
+    min-height: 600px;
+    padding: 10px;
+    padding-top: 60px;
     .blog_title {
       display: flex;
       justify-content: center;
@@ -47,10 +51,10 @@ export default class extends Vue {
         height: 100px;
       }
       span {
-        font-size: 43px;
+        font-size: 38px;
         color: $c-medium;
         font-weight: 300;
-        letter-spacing: 10px;
+        letter-spacing: 8px;
       }
     }
   }

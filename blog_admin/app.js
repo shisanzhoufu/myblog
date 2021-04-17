@@ -4,6 +4,11 @@ const session = require('express-session')
 const bodyParser=require('body-parser')
 const path = require('path')
 const app = express();
+// const vertoken=require('./token/token')
+// const expressJwt=require('express-jwt')
+/**
+ * 路由引入
+ */
 const upRouter = require('./routes/login/sign-up')
 const inRouter = require('./routes/login/sign-in')
 const uploadRouter = require('./routes/upload')
@@ -14,6 +19,7 @@ const replyListRouter = require('./routes/comment/getReplyList')
 const pubBlogRouter = require('./routes/article/pubBlog')
 const getBlogRouter = require('./routes/article/getBlogList')
 const getSearchRouter = require('./routes/article/getSearchList')
+const changeUserInfoRouter = require('./routes/user/changeUserInfo')
 //session配置
 app.use(session({
     secret: 'billy',
@@ -55,6 +61,8 @@ app.use('/api/pubBlog',pubBlogRouter)
 app.use('/api/getBlogList',getBlogRouter)
 //搜索结果
 app.use('/api/getSearchList',getSearchRouter)
+//修改用户信息
+app.use('/api/changeUserInfo',changeUserInfoRouter)
 
 app.listen(3001,function(){
   console.log('app is runing at port 3001')

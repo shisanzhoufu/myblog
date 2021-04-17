@@ -11,20 +11,18 @@
         <div class="name">十三州府</div>
         <div class="brief">理想主义青年永不被现实招安</div>
       </div>
-      
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: {},
 })
 export default class extends Vue {
-  
-  created(){
-    const userInfo = localStorage.getItem('userInfo')
-    console.log(JSON.parse(userInfo))
+  created() {
+    const userInfo = localStorage.getItem("userInfo");
+    console.log(JSON.parse(userInfo));
   }
 }
 </script>
@@ -64,16 +62,16 @@ export default class extends Vue {
       margin-top: 30px;
     }
   }
-  .own-card{
-    .intrest{
-      display:flex;
+  .own-card {
+    .intrest {
+      display: flex;
       justify-content: center;
-      .intrest-img{
+      .intrest-img {
         width: 30%;
         height: 30%;
-        img{
-          width:100%;
-          height:100%
+        img {
+          width: 100%;
+          height: 100%;
         }
       }
     }

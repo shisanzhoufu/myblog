@@ -8,12 +8,12 @@
           >登录</el-button
         >
       </div>
-      <img src="../../assets/index/login-img.png" alt="" />
+      <img src="../../assets/index/接着.svg" alt="" />
     </div>
     <div class="card">
       <div class="title">Register</div>
       <div class="login-box">
-        <el-upload
+        <!-- <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
@@ -22,7 +22,7 @@
         >
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+        </el-upload> -->
         <div class="username">
           <el-input
             placeholder="请输入用户名"
@@ -33,7 +33,7 @@
           >
           </el-input>
           <div :class="nameTip === true ? 'nameTips' : 'noNameTips'">
-            用户名请大于三字
+            用户名请大于两字
           </div>
         </div>
         <div class="pwd">
@@ -88,7 +88,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { axiosGet } from "../../api/axiosApi";
-import { Warning,Error } from "../../api/message";
+import { Warning,Success,Error } from "../../api/message";
 
 @Component({
   components: {},
@@ -122,9 +122,15 @@ export default class extends Vue {
         email: this.email,
       };
       try {
-        axiosGet("/api/sign-up", data, function (res: any) {
-          console.log(res);
-        });
+        axiosGet("/api/sign-up", data, ((res: any)=>{
+          if(res.statusCode===200){
+             Success(this,res.msg)
+            this.$router.push('/sign-in')
+          }else if(res.statusCode === 400){
+            Warning(this,res.msg)
+            return
+          }
+        }));
       } finally {
         this.loading = false;
       }
@@ -143,11 +149,10 @@ export default class extends Vue {
     } else {
       this.emailTip = false;
       this.disabled = false;
-      console.log(this.disabled, "emal");
     }
   }
   private confirmName() {
-    if (this.username.length < 4) {
+    if (this.username.length < 3) {
       this.nameTip = true;
       this.disabled = true;
     } else {
@@ -208,15 +213,15 @@ export default class extends Vue {
 .view-register {
   .link-login {
     position: absolute;
-    width: 2000px;
-    height: 1800px;
+    width: 1700px;
+    height: 1300px;
     border-radius: 50%;
-    background-image: linear-gradient(135deg, #667eea 30%, #764ba2 100%);
+    background-image: linear-gradient(135deg, #667eea 30%, #9ec1e2 100%);
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
     &:hover {
-      background-image: linear-gradient(135deg, #764ba2 30%, #667eea 100%);
+      background-image: linear-gradient(135deg, #9ec1e2 30%, #667eea 100%);
       transition: 0.8s;
     }
     img {
@@ -232,7 +237,7 @@ export default class extends Vue {
       left: 62%;
       .title {
         color: $c-white;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 400;
       }
       .el-button {
@@ -241,8 +246,8 @@ export default class extends Vue {
         left: 50%;
         top: 250%;
         transform: translate(-50%, -50%);
-        width: 200px;
-        height: 50px;
+        width: 160px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -257,32 +262,20 @@ export default class extends Vue {
     left: 70%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 620px;
+    width: 300px;
+    height: 440px;
     border: 2px;
     border-radius: 20px;
     color: $c-main;
     box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.2);
     background: $c-white;
-    .avatar-uploader{
-    
-      margin:auto;
-      margin-top:20px;
-      margin-bottom: 10px;
-      border:1px solid $c-light;
-      width: 70px;
-      height:70px;
-      border-radius: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
     .title {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 42px;
-      padding-top: 50px;
+      font-size: 35px;
+      padding-top: 40px;
+      padding-bottom:20px;
     }
     .login-box {
       position: relative;
@@ -294,9 +287,9 @@ export default class extends Vue {
         border: none;
         border-radius: 0px;
         height: 40px;
-        font-size: 20px;
+        font-size: 16px;
         border-bottom: 2px solid $c-light;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         color: $c-main;
         padding: 0px;
         &:hover {
@@ -316,10 +309,10 @@ export default class extends Vue {
         background: $c-main;
         position: absolute;
         left: 50%;
-        top: 110%;
+        top: 105%;
         transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;

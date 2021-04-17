@@ -1,5 +1,5 @@
 import {Success, Warning } from "./message";
-import { axiosGet } from "./axiosApi";
+import { axiosGet,axiosPost } from "./axiosApi";
 
 /**
  * 获取留言列表
@@ -53,6 +53,28 @@ export const getBlogList = async (data:any,callback?:any) => {
  */
 export const getSearchList = async (data:any,callback?:any) => {
     axiosGet('/api/getSearchList',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  /**
+   * 登录且保存信息
+   * @param that 
+   * @param data 
+   * @param callback 
+   */
+  export const loginInfo = async (data:any,callback?:any) => {
+    axiosPost("/api/sign-in", data, (res: any) => {
+      callback && callback(res);
+    });
+  }
+  
+/**
+ * 更新用户信息
+ * @param data 
+ * @param callback 
+ */
+  export const changeUserInfo = async (data:any,callback?:any) => {
+    axiosGet('/api/changeUserInfo',data,(res:any)=>{
         callback && callback(res);
     })
   }

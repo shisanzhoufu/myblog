@@ -59,20 +59,25 @@ export default class extends Vue {
 .page-pub {
   @include common;
   .main_card {
-    margin-top: 150px;
+    margin-top: 60px;
     .iconfont {
       font-size: 25px;
     }
     .comment {
       width: 100%;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-      height: 200px;
-      border-radius: 10px;
+      
+      height: 160px;
+      background-color: $c-white;
+      // border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
       position: relative;
       padding: 10px;
+      &:hover{
+        box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.275);
+      }
       .el-textarea__inner {
         border: 0;
-        font-size: 25px;
+        font-size: 20px;
         line-height: 30px;
         resize: none;
         height:40px;

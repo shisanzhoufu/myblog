@@ -65,13 +65,14 @@ export default class extends Vue {
   .card {
     width: 100%;
     margin-top: 30px;
+    background-color: $c-white;
     .card_header {
       display: flex;
       .header_info {
         margin: 20px;
         .name {
           cursor: pointer;
-          font-size: 23px;
+          font-size: 16px;
           line-height: 20px;
           font-weight: 500;
           color: $c-info;

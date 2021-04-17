@@ -22,15 +22,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     //评论列表
-    commentList:[],
+    commentList: [],
     //搜索结果
-    searchList:[]
+    searchList: [],
+    //搜索结果
+    userInfo: [],
   },
   mutations: {
-    setCommentList(state:any,list:any){
+    setCommentList(state: any, list: any) {
       state.commentList = list
     },
-    setSearchList(state:any,list:any){
+    setSearchList(state: any, list: any) {
       state.searchList = list
     },
     getSearchList: function (state) {
@@ -38,12 +40,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    
+
   },
-  // getters:{
-  //   getSearchList: function (state) {
-  //     return state.searchLIst;  //返回目前的城市名称
-  //   }
-  // },
   modules: {}
 });

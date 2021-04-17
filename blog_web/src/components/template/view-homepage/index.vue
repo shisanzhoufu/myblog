@@ -80,12 +80,22 @@
               >
                 <i class="iconfont login-icon icon-zhuce"></i>
                 <div class="login-card">
-                  <router-link to="/sign-in" class="pro-list sign-in"
+                  <div class="login" v-if="login">
+                    <router-link to="/sign-in" class="pro-list sign-in"
                     >登录</router-link
                   >
                   <router-link to="/sign-up" class="pro-list sign-up"
                     >注册</router-link
                   >
+                  </div>
+                  <div class="logout" v-if="logout">
+                    <router-link to="/userInfo" class="pro-list sign-in"
+                    >个人信息</router-link
+                  >
+                  <div  @click="logoutLocal"  class="pro-list sign-up"
+                    >登出</div
+                  >
+                  </div>
                 </div>
               </div>
 
@@ -97,7 +107,7 @@
         </div>
       </div>
     </div>
-    <slot></slot>
+    <slot @click="stop"></slot>
     <!-- <div class="view-homepage__footer">
       <div class="view-homepage__container">
         <div class="copyright">
@@ -114,7 +124,7 @@
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 import { getSearchList } from "../../../api/commentApi";
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
+import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 @Component({
   components: {},
 })
@@ -125,12 +135,18 @@ export default class extends Vue {
   private isHover = false;
   private isLogin = false;
   private searchInfo = "";
-  
+  private login = true;
+  private logout = false
   created() {
     window.addEventListener("scroll", () => {
       this.withBg = window.scrollY !== 0;
     });
     this.showHover();
+    const userInfo = localStorage.getItem("userInfo");
+    if(userInfo){
+      this.logout = true
+      this.login = false
+    }
   }
   @Watch("$route")
   private showHover() {
@@ -143,6 +159,12 @@ export default class extends Vue {
       this.isHover = false;
     }
   }
+  private logoutLocal(){
+    localStorage.clear()
+    this.$router.push('/')
+    this.logout = false
+      this.login = true
+  }
   private showCard() {
     this.isShow = !this.isShow;
   }
@@ -153,6 +175,7 @@ export default class extends Vue {
     this.isSub = !this.isSub;
   }
   private stop() {
+    console.log(111111)
     if (this.isShow || this.isLogin) {
       this.isShow = false;
       this.isSub = false;
@@ -162,15 +185,8 @@ export default class extends Vue {
   private See(e: any) {
     window.location.href = e;
   }
-  @Mutation setSearchList:any
+  @Mutation setSearchList: any;
   private search() {
-    // if (this.$route.path === "/search"){
-    //   console.log('search跳search')
-    //   const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
-    //         this.$router.push(NewPage);
-    //         this.$router.go(-1);
-    //         // this.$router.push({ name: "search", params: { searchInfo: this.searchInfo } });
-    // }
     if (this.searchInfo) {
       const data = {
         searchInfo: this.searchInfo,
@@ -183,16 +199,13 @@ export default class extends Vue {
         }
         //存入vuex
         console.log(blogList, "indexres");
-        this.setSearchList(blogList)
-        // this.$store.commit("setSearchList", {
-        //   searchList: blogList,
-        // });
+        this.setSearchList(blogList);
         if (blogList) {
           if (this.$route.path === "/search") {
-            console.log('当前页面跳转')
+            console.log("当前页面跳转");
             // this.$router.go(0);
           } else {
-            console.log('跳转到新页面')
+            console.log("跳转到新页面");
             this.$router.push({
               name: "search",
               params: { blogList: blogList },
@@ -210,7 +223,7 @@ export default class extends Vue {
 @import "src/base.scss";
 .view-homepage {
   .view-homepage__container {
-    width: 1130px;
+    width: 900px;
     // width:100%;
     margin-right: auto;
     margin-left: auto;
@@ -251,7 +264,7 @@ export default class extends Vue {
               content: "";
               display: block;
               position: absolute;
-              width: 128px;
+              width: 100px;
               height: 4px;
               top: 40px;
               left: 0px;
@@ -285,10 +298,10 @@ export default class extends Vue {
                 text-decoration: none;
                 cursor: pointer;
                 position: relative;
-                font-size: 20px;
+                font-size: 16px;
                 font-family: SourceHanSans-Regular, SourceHanSans;
                 color: $c-main;
-                line-height: 24px;
+                line-height: 20px;
                 letter-spacing: 1px;
                 font-weight: 400;
                 // padding: 0px 30px;
@@ -296,7 +309,7 @@ export default class extends Vue {
                   margin-top: 30px;
                 }
                 .card-sub {
-                  width: 150px;
+                  width: 110px;
                   height: 148px;
                   background: #ffffff;
                   box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
@@ -310,7 +323,7 @@ export default class extends Vue {
                     cursor: pointer;
                     display: block;
                     padding: 13px 10px;
-                    font-size: 20px;
+                    font-size: 16px;
                     font-family: SourceHanSans-Normal, SourceHanSans;
                     font-weight: 400;
                     color: $c-main;
@@ -333,7 +346,7 @@ export default class extends Vue {
                     padding-top: 0px !important;
                     padding: 14px !important;
                     span {
-                      font-size: 14px;
+                      font-size: 12px;
                       font-family: SourceHanSans-Bold, SourceHanSans;
                       font-weight: bold;
                       color: $c-main;
@@ -359,8 +372,8 @@ export default class extends Vue {
             position: absolute;
             right: 100px;
             cursor: pointer;
-            width: 43px;
-            height: 43px;
+            width: 35px;
+            height: 35px;
             border-radius: 100px;
             display: flex;
             justify-content: center;
@@ -373,7 +386,7 @@ export default class extends Vue {
             }
             &:focus,
             &:hover {
-              width: 250px;
+              width: 180px;
               transition: 0.6s;
               padding-right: 20px;
               .search-input {
@@ -400,8 +413,8 @@ export default class extends Vue {
                 border: none;
                 outline: none;
                 color: $c-white;
-                font-size: 18px;
-                line-height: 20;
+                font-size: 15px;
+                line-height: 18;
                 width: 100%;
 
                 &:focus {
@@ -436,7 +449,7 @@ export default class extends Vue {
           }
 
           .login-card {
-            width: 150px;
+            width: 110px;
             height: 108px;
             background: #ffffff;
             box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
@@ -449,12 +462,12 @@ export default class extends Vue {
               text-decoration: none;
               cursor: pointer;
               display: block;
-              padding: 0 17px;
               font-size: 16px;
+              text-align: center;
               font-family: SourceHanSans-Normal, SourceHanSans;
               font-weight: 400;
               color: $c-main;
-              line-height: 21px;
+              line-height: 17px;
               &:first-child {
                 padding-top: 16px;
                 padding-bottom: 8px;
@@ -483,7 +496,7 @@ export default class extends Vue {
             }
           }
           .iconfont {
-            font-size: 20px;
+            font-size: 16px;
             margin: 0px 7px;
           }
         }
@@ -492,7 +505,7 @@ export default class extends Vue {
   }
   .view-homepage__footer {
     .view-homepage__container {
-      font-size: 14px;
+      font-size: 12px;
       position: fixed;
       top: auto;
       color: #777;

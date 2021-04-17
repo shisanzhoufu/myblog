@@ -29,47 +29,9 @@ import { State, Getter, Action, Mutation, namespace } from 'vuex-class'
   components: { BlogList },
 })
 export default class extends Vue {
-  private searchInfo='';
-  private blogList: any;
-  private tagList: any;
-  private flag = false;
 
- 
   @Mutation getSearchList:any
   @State searchList:any
-  // private get mapState(){
-  //     return this.$store.getters.getSearchList
-  //   }
-//   private get getList() {
-//    return  mapState([
-//   // 映射 this.count 为 store.state.count
-//   'searchLIst'
-// ])
-// created(){
-// }
-    // if (!this.searchInfo) {
-    //   this.searchInfo = this.$route.params.searchInfo;
-    // }
-    // this.blogList = this.$route.params.blogList;
-    // console.log(this.blogList,'searchrouter params')
-    // const data = {
-    //   searchInfo: this.searchInfo,
-    // };
-
-    
-//     getSearchList(data, (res: any) => {
-//       if (res.statusCode === 200) {
-//         this.blogList = res.commentList;
-//         this.flag = true;
-//         // this.searchInfo = "";
-//       }
-// //存入vuex
-    
-//     });
-//     this.$store.commit('setSearchLIst',{
-//             searchLIst:this.blogList
-//         })
-  // }
 }
 </script>
 <style lang="scss" scoped>

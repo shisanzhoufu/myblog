@@ -36,7 +36,6 @@ export default class extends Vue {
       };
     }
     this.types = this.$route.query.types
-    console.log(this.$route.query.types,'types_art')
   }
   
 }

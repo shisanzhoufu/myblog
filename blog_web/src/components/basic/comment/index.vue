@@ -244,28 +244,34 @@ export default {
 <style lang="scss">
 @import "src/base.scss";
 .container {
-  padding: 30px 0px;
+  margin: 20px 0px;
   box-sizing: border-box;
   .comment {
     position: relative;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
     // padding: 10px;
     // border-bottom: 1px solid $c-disabled;
     .info {
+      padding:20px;
       display: flex;
       align-items: center;
       .avatar {
         border-radius: 50%;
         margin-bottom: 10px;
+        box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+      border-radius: 50%;
+      padding: 3px;
+        // margin-left: 20px;
       }
       .right {
         display: flex;
         flex-direction: column;
-        margin-left: 20px;
+        margin-left: 40px;
         .name {
           cursor: pointer;
-          font-size: 22px;
+          font-size: 18px;
           line-height: 20px;
           font-weight: bold;
           margin-bottom: 10px;
@@ -281,13 +287,13 @@ export default {
         .date {
           color: $c-medium;
           margin-right: 5px;
-          font-size: 20px;
+          font-size: 16px;
         }
       }
     }
     .content {
-      font-size: 22px;
-      line-height: 30px;
+      font-size: 18px;
+      line-height: 20px;
       font-weight: 500;
       padding: 20px 0;
       margin-left: 80px;
@@ -298,7 +304,7 @@ export default {
       // position: absolute;
       display: flex;
       align-items: center;
-      font-size: 20px;
+      font-size: 16px;
       color: $c-medium;
       .like {
         display: flex;
@@ -310,7 +316,7 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 20px;
+          font-size: 16px;
           margin-right: 5px;
         }
       }
@@ -322,7 +328,7 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 20px;
+          font-size: 16px;
           margin-right: 5px;
         }
       }
@@ -339,7 +345,7 @@ export default {
         .reply-content {
           display: flex;
           align-items: center;
-          font-size: 20px;
+          font-size: 16px;
           .reply_avatar {
             border-radius: 25px;
             margin-bottom: 10px;
@@ -350,7 +356,7 @@ export default {
           .from-name {
             color: $c-link;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 520;
           }
         }
@@ -363,18 +369,18 @@ export default {
             cursor: pointer;
             margin-left: 5px;
             margin-right: 5px;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 520;
           }
           span {
-            font-size: 20px;
+            font-size: 16px;
           }
         }
         .reply-bottom {
           display: flex;
           align-items: center;
           margin-top: 6px;
-          font-size: 20px;
+          font-size: 16px;
           color: $c-medium;
           .reply-text {
             display: flex;
@@ -393,7 +399,7 @@ export default {
       .write-reply {
         display: flex;
         align-items: center;
-        font-size: 25px;
+        font-size: 21px;
         color: $c-medium;
         padding: 10px;
         cursor: pointer;
@@ -422,7 +428,7 @@ export default {
         }
         .el-textarea__inner {
           border: 0;
-          font-size: 25px;
+          font-size: 21px;
           line-height: 30px;
           resize: none;
         }
@@ -432,7 +438,7 @@ export default {
           align-items: center;
           padding-top: 10px;
           .cancel {
-            font-size: 14px;
+            font-size: 12px;
             color: $c-medium;
             margin-right: 20px;
             cursor: pointer;

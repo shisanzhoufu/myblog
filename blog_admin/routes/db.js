@@ -18,6 +18,15 @@ let mysql = require("./mysql.config.js");
         callback && callback(res);
     })
 }
+module.exports = updateData = (sql,data,callback)=>{
+    mysql.query(sql,data,function(err,res){
+        if(err){
+            console.log('数据插入失败');
+            throw err;
+        }
+        callback && callback(res);
+    })
+}
 
 /**
  * 通用操作

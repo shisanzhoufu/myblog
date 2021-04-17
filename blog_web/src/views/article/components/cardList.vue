@@ -45,8 +45,8 @@ export default class extends Vue {
   private tagList: [];
   @Watch("blogList", { deep: true, immediate: true })
   function(val: any) {
-    console.log(val,'val000099')
-    this.blogList = val
+    console.log(val, "val000099");
+    this.blogList = val;
     this.getTag(this.blogList);
   }
   private getTag(list: any) {
@@ -56,10 +56,6 @@ export default class extends Vue {
       }
     });
   }
-  // get startTime(){
-  //   console.log(this.List,"get")
-  //   return this.List
-  // }
   private toBlog(blog: any) {
     this.$router.push({ name: "blog", params: { blog: blog } });
   }
@@ -70,21 +66,21 @@ export default class extends Vue {
 @import "../../common.scss";
 .view-article {
   @include common;
+  margin-top: 20px;
   .card {
     cursor: pointer;
-    margin-top: 50px;
-    width: 100%;
     height: 100px;
-    // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: $c-white;
+    padding: 15px;
     // border-radius: 10px;
     margin-bottom: 50px;
-    border: 1px solid $c-light;
+    // border: 1px solid $c-light;
     &:hover {
       // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     }
     .art_title {
-      font-size: 30px;
+      font-size: 25px;
       //   color: $c-medium;
       font-weight: 400;
       letter-spacing: 4px;
@@ -92,14 +88,10 @@ export default class extends Vue {
     .art_info {
       display: flex;
       margin: 10px 0px;
-      font-size: 18px;
+      font-size: 14px;
       color: $c-medium;
-
-      .iconfont {
-        margin-top: 4px;
-      }
       .icon_info {
-        line-height: 20px;
+        line-height: 18px;
         margin-left: 30px;
         display: flex;
         justify-content: center;
@@ -108,7 +100,7 @@ export default class extends Vue {
           padding: 0 8px;
         }
         .icon-liulan1 {
-          font-size: 21px;
+          font-size: 20px;
         }
         i {
           margin-left: 16px;
