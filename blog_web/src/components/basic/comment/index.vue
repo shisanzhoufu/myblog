@@ -7,8 +7,8 @@
         <img
           class="avatar"
           :src="comments.user_avater"
-          width="60"
-          height="60"
+          width="50"
+          height="50"
         />
         <!-- 父评论时间名字 -->
         <div class="right">
@@ -45,8 +45,8 @@
               <img
                 class="reply_avatar"
                 :src="reply.fromAvatar"
-                width="50"
-                height="50"
+                width="35"
+                height="35"
               />
               <div class="reply_header">
                 <span class="from-name">{{ reply.fromName }}</span>
@@ -104,7 +104,7 @@
 import Vue from "vue";
 import { formatDateTime, axiosGet } from "../../../api/axiosApi";
 import { Warning, Success } from "../../../api/message";
-import {pubReply} from "../../../api/commentApi"
+import { pubReply } from "../../../api/commentApi";
 export default {
   props: {
     comments: {
@@ -183,17 +183,17 @@ export default {
             time: date, //评论时间
           };
         }
-        
-        pubReply(data,(res)=>{
+
+        pubReply(data, (res) => {
           if (res.statusCode === 200) {
             Success(this, res.msg);
             this.getReply();
             this.inputComment = "";
             this.cancel();
           }
-        })
+        });
         // axiosGet("/api/replyComment", data, (res) => {
-        //   
+        //
         // });
       } else {
         Warning(this, "评论不能为空哦");
@@ -224,13 +224,13 @@ export default {
       const data = {
         commentId: this.comments.comment_id,
       };
-      axiosGet("/api/getReplyList", data, ((res) => {
+      axiosGet("/api/getReplyList", data, (res) => {
         if (res.commentList.length > 0) {
           this.replys = res.commentList;
         } else {
           this.replys = [];
         }
-      }));
+      });
     },
   },
   created() {
@@ -251,30 +251,30 @@ export default {
     display: flex;
     flex-direction: column;
     box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
-    // padding: 10px;
-    // border-bottom: 1px solid $c-disabled;
     .info {
-      padding:20px;
+      padding: 20px;
       display: flex;
       align-items: center;
       .avatar {
         border-radius: 50%;
         margin-bottom: 10px;
         box-shadow: 0 0 10px rgb(0 0 0 / 20%);
-      border-radius: 50%;
-      padding: 3px;
-        // margin-left: 20px;
+        border-radius: 50%;
+        padding: 3px;
+        &:hover {
+          box-shadow: 0 0 30px rgb(0 120 231 / 20%);
+        }
       }
       .right {
         display: flex;
         flex-direction: column;
-        margin-left: 40px;
+        margin-left: 30px;
         .name {
           cursor: pointer;
-          font-size: 18px;
+          font-size: 16px;
           line-height: 20px;
           font-weight: bold;
-          margin-bottom: 10px;
+          // margin-bottom: 10px;
           color: $c-link;
           // &:hover {
           //   color: $c-brand;
@@ -286,17 +286,18 @@ export default {
         margin-top: 10px;
         .date {
           color: $c-medium;
-          margin-right: 5px;
-          font-size: 16px;
+          margin-right: 10px;
+          font-size: 14px;
         }
       }
     }
     .content {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 20px;
       font-weight: 500;
-      padding: 20px 0;
-      margin-left: 80px;
+      // padding: 20px 0;
+
+      margin-left: 100px;
     }
     .control {
       // top:10px;
@@ -304,7 +305,7 @@ export default {
       // position: absolute;
       display: flex;
       align-items: center;
-      font-size: 16px;
+      font-size: 14px;
       color: $c-medium;
       .like {
         display: flex;
@@ -316,7 +317,7 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 16px;
+          font-size: 14px;
           margin-right: 5px;
         }
       }
@@ -328,35 +329,45 @@ export default {
           color: $c-light;
         }
         .iconfont {
-          font-size: 16px;
-          margin-right: 5px;
+          // margin-top: 3px;
+          margin-right: 3px;
+        }
+        span{
+          margin-bottom: 2px;
         }
       }
     }
     .reply {
       margin: 15px 0;
-      margin-left: 50px;
-      border-left: 2px dashed #ebebee;
-      border-bottom: 2px dashed #ebebee;
+      margin-left: 80px;
+      border-left: 1px dashed #ebebee;
+      border-bottom: 1px dashed #ebebee;
       .item {
-        margin: 15px 10px;
+        margin: 0 10px;
         padding: 10px 0;
         // border-bottom: 1px dashed $c-disabled;
         .reply-content {
           display: flex;
           align-items: center;
-          font-size: 16px;
+          font-size: 14px;
           .reply_avatar {
-            border-radius: 25px;
+            border-radius: 50%;
             margin-bottom: 10px;
+            box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+            border-radius: 50%;
+            padding: 3px;
+            // &:hover {
+            //   box-shadow: 0 0 20px rgb(0 120 231 / 20%);
+            // }
           }
           .reply_header {
             margin-left: 10px;
+            margin-bottom: 10px;
           }
           .from-name {
             color: $c-link;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 520;
           }
         }
@@ -369,18 +380,18 @@ export default {
             cursor: pointer;
             margin-left: 5px;
             margin-right: 5px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 520;
           }
           span {
-            font-size: 16px;
+            font-size: 14px;
           }
         }
         .reply-bottom {
           display: flex;
           align-items: center;
-          margin-top: 6px;
-          font-size: 16px;
+          // margin-top: 6px;
+          font-size: 12px;
           color: $c-medium;
           .reply-text {
             display: flex;
@@ -389,6 +400,11 @@ export default {
             cursor: pointer;
             &:hover {
               color: $c-light;
+            }
+            .iconfont {
+              margin-top: 3px;
+              margin-right: 3px;
+              font-size: 14px;
             }
             .icon-comment {
               margin-right: 5px;
@@ -399,7 +415,7 @@ export default {
       .write-reply {
         display: flex;
         align-items: center;
-        font-size: 21px;
+        font-size: 19px;
         color: $c-medium;
         padding: 10px;
         cursor: pointer;
@@ -428,7 +444,7 @@ export default {
         }
         .el-textarea__inner {
           border: 0;
-          font-size: 21px;
+          font-size: 19px;
           line-height: 30px;
           resize: none;
         }
@@ -438,7 +454,7 @@ export default {
           align-items: center;
           padding-top: 10px;
           .cancel {
-            font-size: 12px;
+            font-size: 11px;
             color: $c-medium;
             margin-right: 20px;
             cursor: pointer;
@@ -446,14 +462,23 @@ export default {
               color: $c-light;
             }
           }
+          button{
+width: 50px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+          }
           .el-button:focus,
           .el-button:hover {
             color: $c-light;
             border-color: $c-light;
             background-color: #f5ecff;
+            font-size: 11px;
           }
           .confirm {
             // font-size: 20px;
+            
           }
         }
       }

@@ -70,14 +70,14 @@ export default class extends Vue {
   .card {
     cursor: pointer;
     height: 100px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
     background-color: $c-white;
     padding: 15px;
     // border-radius: 10px;
     margin-bottom: 50px;
     // border: 1px solid $c-light;
     &:hover {
-      // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
     }
     .art_title {
       font-size: 25px;

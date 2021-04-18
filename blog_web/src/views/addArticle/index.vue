@@ -61,7 +61,7 @@
     <template>
       <mavon-editor
         ref="md"
-        @imgAdd="$imgAdd"
+        @imgAdd="imgAdd"
         v-model="value"
         :ishljs="true"
         @change="handle"
@@ -121,7 +121,7 @@ export default class extends Vue {
       md:this.value,
       time:time
     }
-    axiosGet("/api/pubBlog",data,(res: any) => {
+    axiosPost("/api/pubBlog",data,(res: any) => {
         if(res.statusCode === 200){
           Success(this,res.msg)
         }else{
@@ -174,16 +174,17 @@ export default class extends Vue {
   /**
    * md上传图片
    */
-  private $imgAdd(pos: any, $file: any) {
+  private imgAdd(pos: any, file: any) {
+    console.log(file,'md')
     // 第一步.将图片上传到服务器.
     const form = new FormData();
-    form.append("file", $file);
+    form.append("file", file);
     axiosPost(
       "/api/upload",
       form,
       (res: any) => {
-        console.log(this);
-        // this.$refs.md.$img2Url(pos, res);
+        console.log(res);
+        this.$refs.md.$img2Url(pos, res);
       },
       { headers: { "content-type": "multipart/form-data" } }
     );

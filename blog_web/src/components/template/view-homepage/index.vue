@@ -450,7 +450,7 @@ export default class extends Vue {
 
           .login-card {
             width: 110px;
-            height: 108px;
+            height: 98px;
             background: #ffffff;
             box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
             border-radius: 8px;

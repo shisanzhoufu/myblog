@@ -3,7 +3,7 @@
   <view-homepage/>
   <PageTop/>
   <PageArticle/>
-  <!-- <PageIntrest/> -->
+  <PageIntrest/>
 </div>
 </template>
 <style lang="scss">
@@ -15,8 +15,8 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import PageTop from "./components/page-top.vue";
-import PageIntrest from "./components/page-intrest.vue";
-import PageArticle from "./components/page-article.vue";
+import PageIntrest from "./components/page-me.vue";
+import PageArticle from "./components/page-star.vue";
 @Component({
   components: {
     PageTop,

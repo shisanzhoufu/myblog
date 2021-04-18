@@ -8,10 +8,16 @@
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
             :show-file-list="false"
+            :on-change="onchange"
+            :auto-upload="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <el-avatar :src="avater" :size="100"></el-avatar>
+            <template>
+              <el-avatar :src="avater" :size="80"></el-avatar>
+              <!-- <img :src="scope.row.headUrl" alt="" width="60px" height="60px"> -->
+            </template>
+
             <!-- <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
           </el-upload>
           <!-- <el-avatar :src="avater" :size="100"></el-avatar> -->
@@ -103,8 +109,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message, Success } from "../../api/message";
-import { axiosPost, logout, timestampToTime } from "../../api/axiosApi";
+import { Warning, Message, Success,Error } from "../../api/message";
+import {
+  axiosPost,
+  logout,
+  timestampToTime,
+  uploadPlans,
+} from "../../api/axiosApi";
 import { changeUserInfo } from "../../api/commentApi";
 
 @Component({
@@ -164,6 +175,55 @@ export default class extends Vue {
       }
     });
   }
+  /**头像上传 */
+  // 上传变化监听   ------ 这里是重点 图片转base
+  private onchange(file: any, fileList: any) {
+    const form = new FormData();
+    form.append("file", file.raw);
+    axiosPost(
+      "/api/upload",
+      form,
+      (res: any) => {
+        this.avater = res;
+        const data = {
+           userid: this.userInfo.user_id,
+        username: this.username,
+        email: this.email,
+        usergender: this.usergender,
+        userbrief: this.userbrief,
+        useravater: this.avater,
+        };
+        changeUserInfo(data, (res: any) => {
+          if (res.statusCode === 200) {
+            Success(this, '上传成功~');
+            localStorage.setItem(
+              //储存用户的一些信息到本地
+              "userInfo",
+              JSON.stringify(res.userInfo)
+            );
+          }else{
+            Error(this,'上传失败，稍后再试')
+          }
+        });
+      },
+      { headers: { "content-type": "multipart/form-data" } }
+    );
+  }
+  private handleAvatarSuccess(res: any, file: any) {
+    // this.avater = URL.createObjectURL(file.raw);
+  }
+  private beforeAvatarUpload(file: any) {
+    const isJPG = file.raw.type === "image/jpeg";
+    const isLt2M = file.size / 1024 / 1024 < 2;
+
+    if (!isJPG) {
+      Warning(this, "上传头像图片只能是 JPG 格式!");
+    }
+    if (!isLt2M) {
+      Warning(this, "上传头像图片大小不能超过 2MB!");
+    }
+    return isJPG && isLt2M;
+  }
 }
 </script>
 
@@ -176,29 +236,24 @@ export default class extends Vue {
   .card1 {
     background-color: $c-white;
     width: 100%;
-    height: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: 150px;
+    box-shadow: 0px 2px 5px rgba(104, 104, 104, 0.076);
     // border-radius: 10px;
     margin-bottom: 50px;
     display: flex;
     align-items: center;
 
     .avater {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       box-shadow: 0 0 10px rgb(0 0 0 / 20%);
       border-radius: 50%;
       margin: 20px;
-      padding: 5px;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
+      padding: 4px;
       .avatar-uploader {
         width: 100px;
         height: 100px;
         display: flex;
-        // justify-content: center;
-        // align-items: center;
       }
       &:hover {
         box-shadow: 0 0 30px rgb(0 120 231 / 20%);
@@ -206,20 +261,21 @@ export default class extends Vue {
     }
     .title {
       .name {
-        font-size: 30px;
+        font-size: 25px;
         color: $c-main;
         padding-bottom: 10px;
       }
       .time {
         color: $c-medium;
+        font-size: 14px;
       }
     }
   }
   .card2 {
     background-color: $c-white;
     width: 100%;
-    height: 490px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    height: 430px;
+    box-shadow: 0px 2px 5px rgba(104, 104, 104, 0.076);
     .header {
       border-bottom: 1px solid $c-disabled;
       display: flex;
@@ -227,7 +283,7 @@ export default class extends Vue {
       align-items: center;
       padding: 20px 20px;
       .title {
-        font-size: 30px;
+        font-size: 25px;
         line-height: 30px;
 
         color: $c-main;
@@ -235,7 +291,6 @@ export default class extends Vue {
 
       .oparation {
         display: flex;
-        
       }
       .change {
         padding-left: 20px;
@@ -248,18 +303,16 @@ export default class extends Vue {
       .item {
         display: flex;
         align-items: center;
-        padding: 10px;
+        padding: 0 10px;
         pre {
           width: 100px;
-          font-size: 25px;
+          font-size: 20px;
           line-height: 30px;
         }
         .info {
           margin-left: 30px;
           color: $c-medium;
         }
-        // justify-content: space-between;
-        // border-bottom: 1px solid $c-disabled;
       }
     }
     .input {
@@ -272,15 +325,13 @@ export default class extends Vue {
       border-radius: 0px;
       height: 40px;
       font-size: 20px;
-      border-bottom: 2px solid $c-medium;
-      // margin-bottom: 30px;
+      border-bottom: 1px solid $c-medium;
       color: $c-medium;
       padding: 0px;
       // &:hover {
       //   border-bottom: 2px solid $c-main;
       // }
     }
-    // border-radius: 10px;
   }
 }
 </style>

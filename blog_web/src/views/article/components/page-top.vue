@@ -57,7 +57,7 @@ export default class extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
+    // margin: 10px 0;
     font-size: 16px;
     color: $c-medium;
     font-weight: 400;

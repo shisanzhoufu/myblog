@@ -4,7 +4,13 @@
       <div class="main_card">
         <!-- <i class="iconfont icon-pinglun">    留言</i> -->
         <div class="comment">
-          <el-input type="textarea" autosize maxlength="300" v-model="comment" placeholder="给我留言叭~"></el-input>
+          <el-input
+            type="textarea"
+            autosize
+            maxlength="300"
+            v-model="comment"
+            placeholder="给我留言叭~"
+          ></el-input>
           <el-button class="comment_publish" @click="publish" :plain="true"
             >发布</el-button
           >
@@ -15,12 +21,12 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component,Watch } from "vue-property-decorator";
-import { Warning,Success } from "../../../api/message";
-import {formatDateTime, axiosGet } from "../../../api/axiosApi";
-import { pubComment,getCommentList } from "../../../api/commentApi";
+import { Component, Watch } from "vue-property-decorator";
+import { Warning, Success } from "../../../api/message";
+import { formatDateTime, axiosGet } from "../../../api/axiosApi";
+import { pubComment, getCommentList } from "../../../api/commentApi";
 
-    import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations } from "vuex";
 @Component({
   components: {},
 })
@@ -32,21 +38,21 @@ export default class extends Vue {
   }
   private publish() {
     if (this.userInfo) {
-      const time = formatDateTime()
+      const time = formatDateTime();
       const data = {
         userId: this.userInfo.user_id,
         userName: this.userInfo.user_name,
         userAvater: this.userInfo.user_avater,
         comment: this.comment,
-        time:time
+        time: time,
       };
-      pubComment(data,((res:any)=>{
-          Success(this,res.msg)
-            this.comment = ''
-            const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
-            this.$router.push(NewPage);
-            this.$router.go(-1);
-      }))
+      pubComment(data, (res: any) => {
+        Success(this, res.msg);
+        this.comment = "";
+        const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
+        this.$router.push(NewPage);
+        this.$router.go(-1);
+      });
     } else {
       Warning(this, "请先登陆哦");
     }
@@ -59,20 +65,20 @@ export default class extends Vue {
 .page-pub {
   @include common;
   .main_card {
-    margin-top: 60px;
+    margin-top: 90px;
     .iconfont {
       font-size: 25px;
     }
     .comment {
       width: 100%;
-      
+
       height: 160px;
       background-color: $c-white;
       // border-radius: 10px;
-      box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
+      box-shadow: 0px 2px 5px rgba(104, 104, 104, 0.076);
       position: relative;
-      padding: 10px;
-      &:hover{
+
+      &:hover {
         box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.275);
       }
       .el-textarea__inner {
@@ -80,10 +86,11 @@ export default class extends Vue {
         font-size: 20px;
         line-height: 30px;
         resize: none;
-        height:40px;
+        height: 40px;
       }
       .el-button:focus,
       .el-button:hover {
+        font-size: 11px;
         color: $c-light;
         border-color: $c-light;
         background-color: #f5ecff;
@@ -92,6 +99,11 @@ export default class extends Vue {
         position: absolute;
         bottom: 10px;
         right: 10px;
+        width: 50px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

@@ -21,15 +21,17 @@ export const axiosPost = async (api: any, dataObj: any, callback: any, header?: 
 /**
 * 上传图片
 */
-export const uploadPlans = ((that: any, file: any) => {
-  if (!file) {
-    that.$message.error("请粘贴图片后上传")
-    return
-  }
-  that.loading = true
-  const form = new FormData()
-  form.append("file", file)
-  form.append("type", that.type)
+export const uploadPlans = ((file: any) => {
+  const form = new FormData();
+    form.append("file", file.raw);
+    axiosPost(
+      "/api/upload",
+      form,
+      (res: any) => {
+        return res
+      },
+      { headers: { "content-type": "multipart/form-data" } }
+    );
 
 })
 
@@ -93,6 +95,28 @@ export const logout = (() => {
     return val.data;
   }
 })
+
+/**
+ * base64转换
+ */
+export const getBase64 = ((file:any) => {
+  return new Promise(function (resolve, reject) {
+    const reader = new FileReader()
+    let imgResult:any
+    reader.readAsDataURL(file)
+    reader.onload = function () {
+      imgResult = reader.result
+    }
+    reader.onerror = function (error) {
+      reject(error)
+    }
+    reader.onloadend = function () {
+      resolve(imgResult)
+    }
+  })
+
+})
+
 
 /** 登出 */
   // export const logout = async () => {
