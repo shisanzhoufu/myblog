@@ -78,3 +78,33 @@ export const getSearchList = async (data:any,callback?:any) => {
         callback && callback(res);
     })
   }
+
+  /**
+   * 更新点赞信息
+   * @param data 
+   * @param callback 
+   */
+  export const setLikeStatus = async (data:any,callback?:any) => {
+    axiosGet('/api/setLikeStatus',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  /**
+   * 获取点赞状态
+   * @param data 
+   * @param callback 
+   */
+  export const getLikeStatus = async (data:any,callback?:any) => {
+    axiosGet('/api/getLikeStatus',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  /**
+   * 浏览量
+   * @param data 
+   */
+  export const setLookStatus = async (data:any) => {
+    axiosGet('/api/setLookStatus',data,(res:any)=>{
+        console.log(res)
+    })
+  }

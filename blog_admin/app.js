@@ -20,6 +20,9 @@ const pubBlogRouter = require('./routes/article/pubBlog')
 const getBlogRouter = require('./routes/article/getBlogList')
 const getSearchRouter = require('./routes/article/getSearchList')
 const changeUserInfoRouter = require('./routes/user/changeUserInfo')
+const setLikeRouter = require('./routes/article/setLikeStatus')
+const getLikeRouter = require('./routes/article/getLikeStatus')
+const getLookRouter = require('./routes/article/setLookStatus')
 //session配置
 app.use(session({
     secret: 'billy',
@@ -63,6 +66,12 @@ app.use('/api/getBlogList',getBlogRouter)
 app.use('/api/getSearchList',getSearchRouter)
 //修改用户信息
 app.use('/api/changeUserInfo',changeUserInfoRouter)
+//设置点赞状态
+app.use('/api/setLikeStatus',setLikeRouter)
+//获取点赞状态
+app.use('/api/getLikeStatus',getLikeRouter)
+//点击量
+app.use('/api/setLookStatus',getLookRouter)
 
 app.listen(3001,function(){
   console.log('app is runing at port 3001')

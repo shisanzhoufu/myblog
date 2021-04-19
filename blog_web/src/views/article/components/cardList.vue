@@ -7,9 +7,13 @@
         :key="blog.blog_id"
         @click="toBlog(blog)"
       >
+        <!-- <div><img :src="topImg" alt=""></div> -->
         <div class="art_title">
           {{ blog.blog_title }}
         </div>
+        <!-- <div class="info" >
+          <div v-html="blog.blog_html"></div>
+        </div> -->
         <div class="art_tag">
           <el-tag class="tabs" v-for="(item, index) in tagList" :key="index">
             {{ item }}
@@ -23,8 +27,8 @@
             <span>{{ blog.blog_look }}</span>
             <i class="iconfont icon-dianzan"></i>
             <span>{{ blog.blog_like }}</span>
-            <i class="iconfont icon-pinglun"></i>
-            <span>{{ blog.blog_like }}</span>
+            <!-- <i class="iconfont icon-pinglun"></i>
+            <span>{{ blog.blog_like }}</span> -->
           </div>
         </div>
       </div>
@@ -42,17 +46,28 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 export default class extends Vue {
   @Prop(Array) blogList!: any;
   private List: any;
+  private topImg = "";
   private tagList: [];
   @Watch("blogList", { deep: true, immediate: true })
   function(val: any) {
-    console.log(val, "val000099");
     this.blogList = val;
     this.getTag(this.blogList);
+    this.getImg(this.blogList);
   }
   private getTag(list: any) {
     list.forEach((item: any) => {
       if (item.blog_tag) {
         this.tagList = item.blog_tag.split(",");
+      }
+    });
+  }
+  private getImg(list: any) {
+    list.forEach((item: any) => {
+      if (item.blog_topImg) {
+        this.topImg = item.blog_topImg;
+      } else {
+        this.topImg =
+          "http://127.0.0.1/blog/blog_admin/static/img/1618720522727.png";
       }
     });
   }
@@ -67,6 +82,7 @@ export default class extends Vue {
 .view-article {
   @include common;
   margin-top: 20px;
+ 
   .card {
     cursor: pointer;
     height: 100px;
@@ -74,11 +90,12 @@ export default class extends Vue {
     background-color: $c-white;
     padding: 15px;
     // border-radius: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     // border: 1px solid $c-light;
     &:hover {
       box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
     }
+
     .art_title {
       font-size: 25px;
       //   color: $c-medium;

@@ -175,7 +175,6 @@ export default class extends Vue {
     this.isSub = !this.isSub;
   }
   private stop() {
-    console.log(111111)
     if (this.isShow || this.isLogin) {
       this.isShow = false;
       this.isSub = false;
