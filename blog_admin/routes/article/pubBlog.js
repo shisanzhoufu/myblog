@@ -2,7 +2,7 @@ let db = require('../db.js')
 let express = require('express');
 let router = express.Router();
 
-router.post('/', function(req, response, next) {
+router.post('/', function (req, response, next) {
     /**
      * 处理数据
      */
@@ -14,9 +14,12 @@ router.post('/', function(req, response, next) {
     let blog_md = req.body.md
     let blog_create_date = req.body.time
     let sql = 'INSERT INTO blog SET  ?'
-    let data = {blog_title:blog_title,blog_tag:blog_tag,blog_class:blog_class,blog_md:blog_md,blog_html:blog_html,blog_create_date:blog_create_date}
-    insertData(sql,data,function(result){
-        response.send({statusCode:200,msg:'发布成功~'}) 
+    let data = { blog_title: blog_title, blog_tag: blog_tag, blog_class: blog_class, blog_md: blog_md, blog_html: blog_html, blog_create_date: blog_create_date }
+    insertData(sql, data, function (result) {
+        let sql = "SELECT * FROM  blog WHERE blog_title = '" + blog_title + "' AND blog_create_date = '" + blog_create_date + "'"
+        operateData(sql, function (result) {
+            response.send({ statusCode: 200, result: result[0] })
+        })
     })
 })
 module.exports = router;

@@ -55,6 +55,8 @@ background-color: rgb(92, 108, 123);
   background-image: url("../../../assets/index/bac.gif");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  padding: 0;
+  margin: 0;
   height: 700px;
   .avatar {
     text-align: center;

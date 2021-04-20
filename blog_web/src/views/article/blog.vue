@@ -52,27 +52,15 @@ export default class extends Vue {
     getLikeStatus(data, (res: any) => {
       if (res.statusCode === 200) {
         if (res.status !== null) {
-          console.log(100);
-          console.log(typeof res.status);
           this.isLike = res.status;
         } else {
           this.isLike = this.blog.isLike;
         }
       } else {
-        console.log(200);
-          console.log(typeof res.status);
         this.isLike = this.blog.isLike;
       }
-      console.log(res, "res");
-
-      console.log(this.isLike, "islikeffffff777666");
     });
   }
-  // mounted(){
-
-  //   // this.isLike = this.blog.isLike;
-
-  // }
   private getComment() {
     this.flag = true;
   }

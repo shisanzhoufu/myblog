@@ -36,12 +36,22 @@ export const pubReply = async (data:any,callback?:any) => {
   }
 
 /**
- * 获取文章列表
+ * 获取不同类型文章列表
  * @param data 
  * @param callback 
  */
-export const getBlogList = async (data:any,callback?:any) => {
+export const getBlogList = async (data,callback?:any) => {
     axiosGet('/api/getBlogList',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  /**
+   * 获取全部文章
+   * @param data 
+   * @param callback 
+   */
+  export const getBlog = async (callback?:any) => {
+    axiosGet('/api/getBlog',{},(res:any)=>{
         callback && callback(res);
     })
   }
@@ -106,5 +116,32 @@ export const getSearchList = async (data:any,callback?:any) => {
   export const setLookStatus = async (data:any) => {
     axiosGet('/api/setLookStatus',data,(res:any)=>{
         console.log(res)
+    })
+  }
+/**
+ * 更新文章
+ * @param data 
+ */
+  export const updateBlog = async (data:any,callback?:any) => {
+    axiosPost('/api/updateBlog',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+/**
+ * 获取用户信息
+ * @param callback 
+ */
+  export const getUserList = async (callback?:any) => {
+    axiosGet('/api/getUserList',{},(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  /**
+   * 删除留言
+   * @param callback 
+   */
+  export const delComment = async (data:any,callback?:any) => {
+    axiosGet('/api/delComment',data,(res:any)=>{
+        callback && callback(res);
     })
   }

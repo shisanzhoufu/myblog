@@ -1,5 +1,5 @@
 <template>
-  <div class="view-add" @click="cancelPop($event)">
+  <div class="view-change" @click="cancelPop($event)">
     <!-- <view-homepage/> -->
     <!-- 标题栏 -->
     <div class="add_title">
@@ -54,7 +54,9 @@
               >+ 添加标签</el-button
             >
           </div>
-           <el-button type="primary" class="pubBtn" @click="publish">确认并发布</el-button>
+          <el-button type="primary" class="pubBtn" @click="publish"
+            >确认并发布</el-button
+          >
         </div>
       </div>
     </div>
@@ -71,10 +73,11 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-import { Warning,Success,Error } from "../../api/message";
-import { axiosPost,axiosGet,formatDateTime } from "../../api/axiosApi";
+import { Component, Prop } from "vue-property-decorator";
+import { Warning, Success, Error } from "../../api/message";
+import { axiosPost, axiosGet, formatDateTime } from "../../api/axiosApi";
 import { handlePaste } from "../../plugins/image-handle-paste/image-handle-paste";
+import { updateBlog } from "../../api/commentApi";
 
 @Component({
   components: {
@@ -82,6 +85,7 @@ import { handlePaste } from "../../plugins/image-handle-paste/image-handle-paste
   },
 })
 export default class extends Vue {
+  private blog: any;
   private items = [
     { type: "interest", label: "兴趣" },
     { type: "technology", label: "技术" },
@@ -92,52 +96,65 @@ export default class extends Vue {
   private inputValue = "";
   private isShow = false;
   private isChecked = false;
-  private value: any;
+  private value = "";
   private title = "";
   private insertImage: any;
   private selectTypeIndex = -1; //控制按钮点亮状态，-1为默认不点亮
   private mdStr: "### demo \n ![image](0)";
   private myhtml: any;
-  private class:any
+  private class: any;
+  created() {
+    this.blog = this.$route.params.blog;
+    this.title = this.blog.blog_title;
+    this.value = this.blog.blog_md;
+    this.dynamicTags = this.blog.blog_tag.split(",");
+    if (this.blog.blog_class === "interest") {
+      this.selectTypeIndex = 0;
+    } else if (this.blog.blog_class === "technology") {
+      this.selectTypeIndex = 1;
+    } else {
+      this.selectTypeIndex = 2;
+    }
+  }
   //保存文章
   private showCard() {
-    if(this.title === ''){
-      Warning(this,'标题不能为空')
-      return
+    if (this.title === "") {
+      Warning(this, "标题不能为空");
+      return;
     }
-    if(this.value === ''){
-      Warning(this,'内容不能为空')
-      return
+    if (this.value === "") {
+      Warning(this, "内容不能为空");
+      return;
     }
     this.isShow = true;
   }
-  private publish(){
+  private publish() {
     const time = formatDateTime();
     const data = {
-      title:this.title,
-      tags:this.dynamicTags,
-      class:this.class,
-      html:this.myhtml,
-      md:this.value,
-      time:time
-    }
-    axiosPost("/api/pubBlog",data,(res: any) => {
-        if(res.statusCode === 200){
-          Success(this,"发布成功~")
-          console.log(res)
-          const blog = res.result
-          this.$router.push({ name: "blog", params: { blog: blog } });
-        }else{
-          Error(this,'发布失败~')
-        }
-      });
+      id: this.blog.blog_id,
+      title: this.title,
+      tags: this.dynamicTags,
+      class: this.class,
+      html: this.myhtml,
+      md: this.value,
+      time: time,
+    };
+    updateBlog(data, (res: any) => {
+      if (res.statusCode === 200) {
+        Success(this, "更新成功~");
+        const blog = res.result
+        this.$router.push({ name: "blog", params: { blog: blog } });
+      } else {
+        Error(this, "更新失败~");
+      }
+    });
   }
   private handle(value: any, render: any) {
     this.myhtml = render;
   }
   private showChecked(index: any) {
     this.selectTypeIndex = index;
-    this.class = this.items[index].type
+    this.class = this.items[index].type;
   }
   private cancelPop(event: any) {
     const tp = document.querySelector(".add_pub");
@@ -178,7 +195,7 @@ export default class extends Vue {
    * md上传图片
    */
   private imgAdd(pos: any, file: any) {
-    console.log(file,'md')
+    console.log(file, "md");
     // 第一步.将图片上传到服务器.
     const form = new FormData();
     form.append("file", file);
@@ -198,7 +215,7 @@ export default class extends Vue {
 <style lang='scss'>
 @import "src/base.scss";
 @import "../common.scss";
-.view-add {
+.view-change {
   .add_title {
     display: flex;
     .el-input__inner {
@@ -243,11 +260,11 @@ export default class extends Vue {
       right: 30px;
       padding: 30px;
     }
-    .pubBtn{
+    .pubBtn {
       position: absolute;
       bottom: 10px;
       text-align: center;
-      right:10px;
+      right: 10px;
       padding: 0px;
     }
     .tabs_title {

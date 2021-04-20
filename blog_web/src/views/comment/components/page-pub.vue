@@ -37,7 +37,8 @@ export default class extends Vue {
     this.userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
   }
   private publish() {
-    if (this.userInfo) {
+    if(this.comment!==''){
+if (this.userInfo) {
       const time = formatDateTime();
       const data = {
         userId: this.userInfo.user_id,
@@ -56,6 +57,10 @@ export default class extends Vue {
     } else {
       Warning(this, "请先登陆哦");
     }
+    }else{
+       Warning(this, "请输入内容~");
+    }
+    
   }
 }
 </script>
@@ -96,12 +101,15 @@ export default class extends Vue {
         background-color: #f5ecff;
       }
       .comment_publish {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         position: absolute;
         bottom: 10px;
         right: 10px;
         width: 50px;
         height: 30px;
         display: flex;
+        font-size: 11px;
         align-items: center;
         justify-content: center;
       }

@@ -19,7 +19,10 @@
                     ><i class="iconfont icon icon-zhuye"></i>首页</router-link
                   >
                 </div>
-                <div class="icon-worlds blog">
+                <div
+                  class="icon-worlds blog"
+                  :class="isHover === true ? 'hoverlink' : ''"
+                >
                   <div
                     class="card-list"
                     :class="isShow === true ? 'has-card' : ''"
@@ -82,19 +85,19 @@
                 <div class="login-card">
                   <div class="login" v-if="login">
                     <router-link to="/sign-in" class="pro-list sign-in"
-                    >登录</router-link
-                  >
-                  <router-link to="/sign-up" class="pro-list sign-up"
-                    >注册</router-link
-                  >
+                      >登录</router-link
+                    >
+                    <router-link to="/sign-up" class="pro-list sign-up"
+                      >注册</router-link
+                    >
                   </div>
                   <div class="logout" v-if="logout">
                     <router-link to="/userInfo" class="pro-list sign-in"
-                    >个人信息</router-link
-                  >
-                  <div  @click="logoutLocal"  class="pro-list sign-up"
-                    >登出</div
-                  >
+                      >个人信息</router-link
+                    >
+                    <div @click.stop="logoutLocal" class="pro-list sign-up">
+                      登出
+                    </div>
                   </div>
                 </div>
               </div>
@@ -136,18 +139,27 @@ export default class extends Vue {
   private isLogin = false;
   private searchInfo = "";
   private login = true;
-  private logout = false
+  private logout = false;
   created() {
     window.addEventListener("scroll", () => {
       this.withBg = window.scrollY !== 0;
     });
     this.showHover();
     const userInfo = localStorage.getItem("userInfo");
-    if(userInfo){
-      this.logout = true
-      this.login = false
+    if (userInfo) {
+      this.logout = true;
+      this.login = false;
     }
   }
+
+mounted(){
+    document.addEventListener('click',e=>{
+        if(!this.$el.contains(e.target)){
+             this.isShow = false;
+    this.isLogin = false; //这句话的意思是点击其他区域关闭（也可以根据自己需求写触发事件）
+        }
+    })
+}
   @Watch("$route")
   private showHover() {
     // eslint-disable-next-line no-constant-condition
@@ -155,15 +167,17 @@ export default class extends Vue {
       this.isHover = true;
     } else if (this.$route.path === "/interest") {
       this.isHover = true;
+    } else if (this.$route.path === "/technology") {
+      this.isHover = true;
     } else {
       this.isHover = false;
     }
   }
-  private logoutLocal(){
-    localStorage.clear()
-    this.$router.push('/')
-    this.logout = false
-      this.login = true
+  private logoutLocal() {
+    localStorage.clear();
+    this.$router.push("/");
+    this.logout = false;
+    this.login = true;
   }
   private showCard() {
     this.isShow = !this.isShow;
@@ -171,19 +185,11 @@ export default class extends Vue {
   private showLogin() {
     this.isLogin = !this.isLogin;
   }
-  private showSub() {
-    this.isSub = !this.isSub;
-  }
   private stop() {
-    if (this.isShow || this.isLogin) {
-      this.isShow = false;
-      this.isSub = false;
-      this.isLogin = false;
-    }
+    this.isShow = false;
+    this.isLogin = false;
   }
-  private See(e: any) {
-    window.location.href = e;
-  }
+
   @Mutation setSearchList: any;
   private search() {
     if (this.searchInfo) {
@@ -257,16 +263,15 @@ export default class extends Vue {
           justify-content: flex-start;
           text-decoration: none;
           margin-right: 99px;
-          .router-link-exact-active {
-            text-decoration: none;
+          .hoverlink {
             &:before {
               content: "";
               display: block;
               position: absolute;
               width: 100px;
               height: 4px;
-              top: 40px;
-              left: 0px;
+              top: 57px;
+              left: 100px;
               z-index: 0;
               background: $c-main;
             }
@@ -274,7 +279,8 @@ export default class extends Vue {
           .nav-list {
             width: 60%;
             height: 100%;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             position: relative;
             display: flex;
             align-items: center;
@@ -283,6 +289,20 @@ export default class extends Vue {
               display: none;
             }
             .icon-worlds {
+              .router-link-exact-active {
+                text-decoration: none;
+                &:before {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  width: 100px;
+                  height: 4px;
+                  top: 37px;
+                  left: 0px;
+                  z-index: 0;
+                  background: $c-main;
+                }
+              }
               width: 25%;
               display: flex;
               justify-content: center;
@@ -295,7 +315,8 @@ export default class extends Vue {
                 text-align: center;
                 flex: 1;
                 text-decoration: none;
-                cursor: pointer;
+                cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+                  auto;
                 position: relative;
                 font-size: 16px;
                 font-family: SourceHanSans-Regular, SourceHanSans;
@@ -314,12 +335,19 @@ export default class extends Vue {
                   box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
                   border-radius: 8px;
                   position: absolute;
-                  top: 60px;
+                  top: 45px;
                   left: 0px;
+                  .router-link-exact-active {
+                    text-decoration: none;
+                    &:before {
+                      display: none;
+                    }
+                  }
                   .pro-list {
                     margin: 2px;
                     text-decoration: none;
-                    cursor: pointer;
+                    cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+                      auto;
                     display: block;
                     padding: 13px 10px;
                     font-size: 16px;
@@ -327,14 +355,6 @@ export default class extends Vue {
                     font-weight: 400;
                     color: $c-main;
                     line-height: 21px;
-                    // &:first-child {
-                    //   padding-top: 16px;
-                    //   padding-bottom: 8px;
-                    // }
-                    // &:last-child {
-                    //   padding-top: 12px;
-                    //   padding-bottom: 16px;
-                    // }
                     &:hover {
                       color: $c-brand;
                     }
@@ -370,7 +390,8 @@ export default class extends Vue {
           .search {
             position: absolute;
             right: 100px;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             width: 35px;
             height: 35px;
             border-radius: 100px;
@@ -454,12 +475,13 @@ export default class extends Vue {
             box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
             border-radius: 8px;
             position: absolute;
-            top: 60px;
+            top: 45px;
             right: -50px;
             .pro-list {
               margin: 2px;
               text-decoration: none;
-              cursor: pointer;
+              cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+                auto;
               display: block;
               font-size: 16px;
               text-align: center;
@@ -483,7 +505,8 @@ export default class extends Vue {
           .login {
             position: absolute;
             right: 50px;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
           }
           .login-card {
             display: none;
