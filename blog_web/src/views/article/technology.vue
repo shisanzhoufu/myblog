@@ -30,6 +30,7 @@ export default class extends Vue {
     getBlogList(data, (res: any) => {
       if (res.statusCode === 200) {
         this.blogList = res.commentList;
+        this.blogList= this.blogList.reverse()
         this.flag = true;
       }
     });

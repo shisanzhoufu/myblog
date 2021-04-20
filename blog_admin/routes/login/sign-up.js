@@ -15,7 +15,7 @@ router.get('/', function(req, response, next) {
     /**
      * sql语句
      */
-    let avater = 'https://www.yunyoujun.cn/images/avatar.jpg'
+    let avater = 'http://127.0.0.1/blog/blog_admin/static/img/1618719343117.png'
     let sql = "SELECT * FROM  user WHERE user_name = '"+user_name+"'"
     operateData(sql,function(result){
         if(result.length>0){

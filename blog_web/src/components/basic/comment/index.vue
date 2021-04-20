@@ -256,6 +256,8 @@ export default {
       display: flex;
       align-items: center;
       .avatar {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         border-radius: 50%;
         margin-bottom: 10px;
         box-shadow: 0 0 10px rgb(0 0 0 / 20%);
@@ -270,7 +272,8 @@ export default {
         flex-direction: column;
         margin-left: 30px;
         .name {
-          cursor: pointer;
+          cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+            auto;
           font-size: 16px;
           line-height: 20px;
           font-weight: bold;
@@ -311,7 +314,8 @@ export default {
         display: flex;
         align-items: center;
         margin-right: 20px;
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         &.active,
         &:hover {
           color: $c-light;
@@ -324,7 +328,8 @@ export default {
       .comment-reply {
         display: flex;
         align-items: center;
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         &:hover {
           color: $c-light;
         }
@@ -332,7 +337,7 @@ export default {
           // margin-top: 3px;
           margin-right: 3px;
         }
-        span{
+        span {
           margin-bottom: 2px;
         }
       }
@@ -351,6 +356,8 @@ export default {
           align-items: center;
           font-size: 14px;
           .reply_avatar {
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             border-radius: 50%;
             margin-bottom: 10px;
             box-shadow: 0 0 10px rgb(0 0 0 / 20%);
@@ -366,7 +373,8 @@ export default {
           }
           .from-name {
             color: $c-link;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             font-size: 14px;
             font-weight: 520;
           }
@@ -377,7 +385,8 @@ export default {
 
           .to-name {
             color: $c-link;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             margin-left: 5px;
             margin-right: 5px;
             font-size: 14px;
@@ -397,7 +406,8 @@ export default {
             display: flex;
             align-items: center;
             margin-left: 10px;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             &:hover {
               color: $c-light;
             }
@@ -418,7 +428,8 @@ export default {
         font-size: 19px;
         color: $c-medium;
         padding: 10px;
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         &:hover {
           color: $c-light;
         }
@@ -457,17 +468,18 @@ export default {
             font-size: 11px;
             color: $c-medium;
             margin-right: 20px;
-            cursor: pointer;
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             &:hover {
               color: $c-light;
             }
           }
-          button{
-width: 50px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+          button {
+            width: 50px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
           .el-button:focus,
           .el-button:hover {
@@ -478,7 +490,6 @@ width: 50px;
           }
           .confirm {
             // font-size: 20px;
-            
           }
         }
       }

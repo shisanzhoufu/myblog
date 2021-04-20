@@ -3,7 +3,7 @@
     <div class="container">
       <div class="card">
         <div class="imgs">
-          <!-- <img src="../../../assets/index/pinkmoon.png" alt=""> -->
+          <img src="../../../assets/index/03725.png" alt="">
         </div>
 
         <div class="infp">
@@ -26,44 +26,49 @@
 @import "../../common.scss";
 .index-article {
   @include common;
-  background-image: url("../../../assets/index/418200608.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-image: url("../../../assets/index/418200608.jpg");
+  // background-repeat: no-repeat;
+  // background-size: 100% 100%;
+  background-color: $c-dark;
   height: 600px;
   .card {
     .imgs {
-      display: flex;
-      justify-content: center;
+      position: relative;
+      // display: flex;
+      // justify-content: center;
       // align-items: center;
       img {
+        position: absolute;
+        top:400px;
+        left:50px;
         width: 200px;
-        height: 200px;
       }
     }
 
     .infp {
+      z-index:4;
       color: $c-white;
       text-align: center;
-      margin-top: 100px;
-      h2{
-@include font-base(
-        $lineHeight: 44px,
-        $size: 36px,
-        $space: 2px,
-        $weight: bold
-      );
-      font-family: SourceHanSans-Medium;
-      text-align: center;
+      padding-top: 100px;
+      h2 {
+        @include font-base(
+          $lineHeight: 44px,
+          $size: 36px,
+          $space: 2px,
+          $weight: bold
+        );
+        font-family: SourceHanSans-Medium;
+        text-align: center;
       }
-      
-      p{
-          @include font-base(
-        $lineHeight: 40px,
-        $size: 20px,
-        $space: 2px,
-        $weight: 500
-      );
-      font-family: SourceHanSans-Medium;
+
+      p {
+        @include font-base(
+          $lineHeight: 40px,
+          $size: 20px,
+          $space: 2px,
+          $weight: 500
+        );
+        font-family: SourceHanSans-Medium;
       }
     }
   }

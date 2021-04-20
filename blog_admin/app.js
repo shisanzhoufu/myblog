@@ -17,12 +17,16 @@ const getcommentRouter = require('./routes/comment/getCommentList')
 const replyCommentRouter = require('./routes/comment/replyComment')
 const replyListRouter = require('./routes/comment/getReplyList')
 const pubBlogRouter = require('./routes/article/pubBlog')
-const getBlogRouter = require('./routes/article/getBlogList')
+const getBlogListRouter = require('./routes/article/getBlogList')
+const getBlogRouter = require('./routes/article/getBlog')
 const getSearchRouter = require('./routes/article/getSearchList')
 const changeUserInfoRouter = require('./routes/user/changeUserInfo')
 const setLikeRouter = require('./routes/article/setLikeStatus')
 const getLikeRouter = require('./routes/article/getLikeStatus')
 const getLookRouter = require('./routes/article/setLookStatus')
+const updateBlogRouter = require('./routes/article/updateBlog')
+const getUserListRouter = require('./routes/user/getUserList')
+const delCommentRouter = require('./routes/comment/delComment')
 //session配置
 app.use(session({
     secret: 'billy',
@@ -60,8 +64,10 @@ app.use('/api/replyComment',replyCommentRouter)
 app.use('/api/getReplyList',replyListRouter)
 //发布文章
 app.use('/api/pubBlog',pubBlogRouter)
-//留言文章列表
-app.use('/api/getBlogList',getBlogRouter)
+//分类文章列表
+app.use('/api/getBlogList',getBlogListRouter)
+//文章列表
+app.use('/api/getBlog',getBlogRouter)
 //搜索结果
 app.use('/api/getSearchList',getSearchRouter)
 //修改用户信息
@@ -72,6 +78,12 @@ app.use('/api/setLikeStatus',setLikeRouter)
 app.use('/api/getLikeStatus',getLikeRouter)
 //点击量
 app.use('/api/setLookStatus',getLookRouter)
+//更新文章信息
+app.use('/api/updateBlog',updateBlogRouter)
+//获取用户信息
+app.use('/api/getUserList',getUserListRouter)
+//删除留言
+app.use('/api/delComment',delCommentRouter)
 
 app.listen(3001,function(){
   console.log('app is runing at port 3001')
