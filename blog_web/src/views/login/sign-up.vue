@@ -241,6 +241,8 @@ export default class extends Vue {
         font-weight: 400;
       }
       .el-button {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         background: none;
         position: absolute;
         left: 50%;
@@ -306,6 +308,8 @@ export default class extends Vue {
         color: $c-main;
       }
       .el-button {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         background: $c-main;
         position: absolute;
         left: 50%;

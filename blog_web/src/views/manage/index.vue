@@ -35,25 +35,35 @@ export default class extends Vue {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "src/base.scss";
 @import "../common.scss";
 .view-manage {
   @include common;
-  .el-tabs__header{
-cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-          auto;
-  }
+  height: 700px;
+  cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/pointer.cur),
+    auto;
   .card {
-    
-    padding-top: 100px;
-    min-height:600px;
+    .el-tabs {
+      // background-color: $c-white;
+      padding-top: 100px;
+    }
     .is-active {
       color: $c-main;
+      cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+        auto;
     }
-    .el-tabs__item{
-      &:hover{
-         color: $c-main;
+    .el-tabs__nav {
+      z-index: 0;
+    }
+    .el-tabs__nav-wrap::after {
+      z-index: -1;
+    }
+    .el-tabs__item {
+      cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+        auto;
+      &:hover {
+        color: $c-main;
       }
     }
     .el-tabs__active-bar {

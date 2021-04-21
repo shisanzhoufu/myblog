@@ -74,8 +74,6 @@ export default class extends Vue {
 .manege-comment {
   position: relative;
   .card {
-    cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-      auto;
     position: relative;
     margin-bottom: 20px;
     background-color: $c-white;
@@ -102,7 +100,8 @@ export default class extends Vue {
         margin-top: 5px;
         margin-left: 30px;
         .name {
-          cursor: pointer;
+          cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
           font-size: 16px;
           line-height: 20px;
           font-weight: bold;

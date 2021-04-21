@@ -48,15 +48,15 @@
                     >留言</router-link
                   >
                 </div>
-                <div class="icon-worlds about">
-                  <router-link to="/about" class="card-list"
-                    ><i class="iconfont icon icon-xiaoren"></i>关于</router-link
+                <div class="icon-worlds about" >
+                  <router-link to="/manage" class="card-list" v-if="flag"
+                    ><i class="iconfont icon icon-xiaoren"></i>管理</router-link
                   >
                 </div>
                 <div class="icon-worlds about">
-                  <router-link to="/addArticle" class="card-list"
-                    ><i class="iconfont icon icon-xiaoren"></i
-                    >发布文章</router-link
+                  <router-link to="/addArticle" class="card-list"  v-if="flag"
+                    ><i class="iconfont icon icon-xiezuo"></i
+                    >写文章</router-link
                   >
                 </div>
               </div>
@@ -140,26 +140,30 @@ export default class extends Vue {
   private searchInfo = "";
   private login = true;
   private logout = false;
+  private flag = false;
   created() {
     window.addEventListener("scroll", () => {
       this.withBg = window.scrollY !== 0;
     });
     this.showHover();
-    const userInfo = localStorage.getItem("userInfo");
+    const userInfo: any = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo) {
       this.logout = true;
       this.login = false;
     }
+    if (userInfo.user_role == 500) {
+      this.flag = true;
+    }
   }
 
-mounted(){
-    document.addEventListener('click',e=>{
-        if(!this.$el.contains(e.target)){
-             this.isShow = false;
-    this.isLogin = false; //这句话的意思是点击其他区域关闭（也可以根据自己需求写触发事件）
-        }
-    })
-}
+  mounted() {
+    document.addEventListener("click", (e) => {
+      if (!this.$el.contains(e.target)) {
+        this.isShow = false;
+        this.isLogin = false; //这句话的意思是点击其他区域关闭（也可以根据自己需求写触发事件）
+      }
+    });
+  }
   @Watch("$route")
   private showHover() {
     // eslint-disable-next-line no-constant-condition
@@ -274,6 +278,7 @@ mounted(){
               left: 100px;
               z-index: 0;
               background: $c-main;
+              transition: transform 0.3s;
             }
           }
           .nav-list {
@@ -284,7 +289,8 @@ mounted(){
             position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
+            // justify-content: center;
+            justify-content: start;
             input {
               display: none;
             }
@@ -297,10 +303,11 @@ mounted(){
                   position: absolute;
                   width: 100px;
                   height: 4px;
-                  top: 37px;
+                  top: 39px;
                   left: 0px;
                   z-index: 0;
                   background: $c-main;
+                  transition: transform 0.3s;
                 }
               }
               width: 25%;
@@ -309,7 +316,7 @@ mounted(){
               z-index: 1;
               .card-list {
                 z-index: -1;
-
+                // width:150px;
                 // z-index: 1;
                 height: 100%;
                 text-align: center;
@@ -337,6 +344,7 @@ mounted(){
                   position: absolute;
                   top: 45px;
                   left: 0px;
+                  z-index: 99 !important;
                   .router-link-exact-active {
                     text-decoration: none;
                     &:before {
@@ -475,8 +483,10 @@ mounted(){
             box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
             border-radius: 8px;
             position: absolute;
+            transition: transform 0.5s;
             top: 45px;
             right: -50px;
+            z-index: 99 !important;
             .pro-list {
               margin: 2px;
               text-decoration: none;
@@ -520,6 +530,10 @@ mounted(){
           .iconfont {
             font-size: 16px;
             margin: 0px 7px;
+          }
+          .icon-xiezuo {
+            font-size: 21px;
+            margin-top: 2px;
           }
         }
       }

@@ -70,8 +70,6 @@ export default class extends Vue {
 
 .manege-blog {
   .card {
-    cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-      auto;
     position: relative;
     height: 100px;
     box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
@@ -129,6 +127,8 @@ export default class extends Vue {
       line-height: 23px;
     }
     .change {
+      cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
       position: absolute;
       bottom: 10px;
       right: 20px;
@@ -137,6 +137,8 @@ export default class extends Vue {
         text-decoration: none;
         margin-left: 5px;
         color: $c-medium;
+        line-height: 23px;
+        font-size: 18px;
       }
     }
   }

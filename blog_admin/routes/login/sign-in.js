@@ -9,9 +9,11 @@ router.post('/', function(req, response, next) {
     let user_name = req.body.userName
     let user_password = req.body.password
     let sql = "SELECT * FROM  user WHERE user_name = '"+user_name+"' AND user_password = '"+user_password+"'"
-    operateData(sql,function(result){
-        delete result[0].user_password
+    operateData(sql,function(result,err){
+        
+        console.log(result)
         if(result.length>0){
+            delete result[0].user_password
             response.send({statusCode:200, msg:'登录成功~',userInfo:result[0]}) 
         }else{
             response.send({statusCode:400, msg:'用户名或密码错误~'}) 

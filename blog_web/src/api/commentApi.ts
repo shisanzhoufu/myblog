@@ -1,6 +1,6 @@
 import {Success, Warning } from "./message";
 import { axiosGet,axiosPost } from "./axiosApi";
-
+import { throttle ,debounced} from "lodash";
 /**
  * 获取留言列表
  * @param that 
@@ -95,6 +95,7 @@ export const getSearchList = async (data:any,callback?:any) => {
    * @param callback 
    */
   export const setLikeStatus = async (data:any,callback?:any) => {
+    
     axiosGet('/api/setLikeStatus',data,(res:any)=>{
         callback && callback(res);
     })

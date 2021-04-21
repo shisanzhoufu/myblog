@@ -39,7 +39,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message } from "../../api/message";
+import { Warning, Message,Error } from "../../api/message";
 import { axiosPost,logout } from "../../api/axiosApi";
 import {loginInfo} from "../../api/commentApi"
 @Component({
@@ -67,7 +67,7 @@ export default class extends Vue {
             );
             this.$router.push("/");
           } else {
-            Message(this, res.msg);
+            Error(this, res.msg);
           }
         }))
       } catch (error) {
@@ -116,6 +116,8 @@ export default class extends Vue {
         font-weight: 400;
       }
       .el-button {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         background: none;
         position: absolute;
         left: 50%;
@@ -184,6 +186,8 @@ export default class extends Vue {
         color: $c-main;
       }
       .el-button {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         background: $c-main;
         position: absolute;
         left: 50%;
