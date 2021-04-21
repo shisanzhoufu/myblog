@@ -3,9 +3,9 @@
     <!-- <view-homepage/> -->
     <!-- 标题栏 -->
     <div class="add_title">
-      <el-input v-model="title" placeholder="请输入标题"></el-input>
+      <el-input v-model="title" maxlength="20" placeholder="请输入标题"></el-input>
       <!-- 两个按钮 -->
-      <el-button type="primary" plain>草稿箱</el-button>
+      <!-- <el-button type="primary" plain>草稿箱</el-button> -->
       <div class="pub" @click.stop="showCard">
         <el-button type="primary">保存文章</el-button>
         <!-- 发布文章的标签卡片 -->
@@ -178,7 +178,6 @@ export default class extends Vue {
    * md上传图片
    */
   private imgAdd(pos: any, file: any) {
-    console.log(file,'md')
     // 第一步.将图片上传到服务器.
     const form = new FormData();
     form.append("file", file);
@@ -186,7 +185,6 @@ export default class extends Vue {
       "/api/upload",
       form,
       (res: any) => {
-        console.log(res);
         this.$refs.md.$img2Url(pos, res);
       },
       { headers: { "content-type": "multipart/form-data" } }
@@ -207,17 +205,19 @@ export default class extends Vue {
       border: none;
       border-radius: 0px;
       height: 60px;
-      font-size: 30px;
+      font-size: 25px;
       // border-bottom: 2px solid $c-medium;
-      margin-bottom: 30px;
+      // margin-bottom: 15px;
       color: $c-main;
       padding: 20px;
     }
     .el-button {
-      height: 50px;
-      width: 100px;
+      height: 40px;
+      width: 80px;
       margin-top: 10px;
       margin-right: 20px;
+      display: flex;
+      justify-content: center;
     }
     .el-button--primary {
       color: #ffffff;
@@ -230,6 +230,9 @@ export default class extends Vue {
       border-color: $c-main;
     }
   }
+  .v-note-panel{
+    min-height:500px;
+  }
   .pub {
     .add_pub {
       z-index: 1600;
@@ -239,14 +242,16 @@ export default class extends Vue {
       box-shadow: 0px 0px 10px 0px rgba(0, 50, 53, 0.08);
       border-radius: 8px;
       position: absolute;
-      top: 91px;
+      top: 81px;
       right: 30px;
       padding: 30px;
     }
     .pubBtn{
       position: absolute;
       bottom: 10px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       right:10px;
       padding: 0px;
     }
@@ -271,7 +276,8 @@ export default class extends Vue {
       width: 300px;
       .el-tag {
         margin-right: 10px;
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
       }
       .ischecked {
         color: #ffffff !important;
@@ -293,7 +299,8 @@ export default class extends Vue {
     }
     .add_tabs {
       .el-tag {
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         margin: 30px 0px;
         background-color: $c-white;
         border-color: $c-light;

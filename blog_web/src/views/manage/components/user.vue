@@ -49,17 +49,16 @@ export default class extends Vue {
 
 .manege-user {
   .card1 {
-    cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-          auto;
     width: 100%;
-    height: 100px;
+    height: 130px;
     box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
     background-color: $c-white;
-    padding: 15px;
+    
     display: flex;
     margin-bottom: 20px;
 
     .avater {
+      margin: 15px;
       width: 60px;
       height: 60px;
       box-shadow: 0 0 10px rgb(0 0 0 / 20%);
@@ -72,7 +71,10 @@ export default class extends Vue {
     }
     .title {
       .name {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
         margin-left: 30px;
+        margin-top: 15px;
         font-size: 23px;
         color: $c-main;
         // padding-bottom: 10px;

@@ -153,7 +153,8 @@ export default {
      * 提交评论
      */
     commitComment() {
-      const date = formatDateTime();
+      if(this.userInfo){
+        const date = formatDateTime();
       let data;
       if (this.inputComment.length > 0) {
         if (this.replys.length === 0) {
@@ -199,6 +200,11 @@ export default {
         Warning(this, "评论不能为空哦");
         return;
       }
+      }else{
+        Warning(this, "登录后才能评论哦~");
+        return
+      }
+      
     },
     /**
      * 点击按钮显示输入框
@@ -397,6 +403,8 @@ export default {
           }
         }
         .reply-bottom {
+          cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
           display: flex;
           align-items: center;
           // margin-top: 6px;
@@ -475,6 +483,8 @@ export default {
             }
           }
           button {
+            cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
             width: 50px;
             height: 30px;
             display: flex;

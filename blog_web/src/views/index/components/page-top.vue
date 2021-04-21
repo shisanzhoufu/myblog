@@ -34,10 +34,10 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class extends Vue {
-  created() {
-    const userInfo = localStorage.getItem("userInfo");
-    console.log(JSON.parse(userInfo));
-  }
+  // created() {
+  //   const userInfo = localStorage.getItem("userInfo");
+  //   console.log(JSON.parse(localStorage.getItem("userInfo");));
+  // }
   // private goAnchor(selector: any) {
   //   const anchor = this.$el.querySelector(selector); // 参数为要跳转到的元素id
   //   document.body.scrollTop = anchor.offsetTop; // chrome

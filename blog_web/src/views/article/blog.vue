@@ -26,7 +26,12 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 import { Warning } from "../../api/message";
 import { axiosPost, axiosGet, formatDateTime } from "../../api/axiosApi";
 import { State, Getter, Action, Mutation, namespace } from "vuex-class";
-import { setLikeStatus, getLikeStatus ,setLookStatus} from "../../api/commentApi";
+import {
+  setLikeStatus,
+  getLikeStatus,
+  setLookStatus,
+} from "../../api/commentApi";
+import lodash from "lodash";
 @Component({
   components: {},
 })
@@ -40,10 +45,10 @@ export default class extends Vue {
     this.blog = this.$route.params.blog;
     // this.isLike='';
     this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    
+
     const data1 = {
-      blogid:this.blog.blog_id,
-    }
+      blogid: this.blog.blog_id,
+    };
     setLookStatus(data1);
     const data = {
       userid: this.userInfo.user_id,
@@ -64,30 +69,36 @@ export default class extends Vue {
   private getComment() {
     this.flag = true;
   }
+  private likeClick = lodash.debounce(this.like, 1000);
 
-  private likeClick() {
-    if (this.blog.isLike === null) {
-      Vue.$set(this.blog, "isLike", true);
-      this.isLike = true;
-      this.blog.blog_like++;
-    } else {
-      if (this.isLike) {
-        this.blog.blog_like--;
-      } else {
+  private like() {
+    if (this.userInfo) {
+      if (this.blog.isLike === null) {
+        Vue.$set(this.blog, "isLike", true);
+        this.isLike = true;
         this.blog.blog_like++;
+      } else {
+        if (this.isLike) {
+          this.blog.blog_like--;
+        } else {
+          this.blog.blog_like++;
+        }
+        this.isLike = !this.isLike;
       }
-      this.isLike = !this.isLike;
+      this.$forceUpdate();
+      const data = {
+        userid: this.userInfo.user_id,
+        blogid: this.blog.blog_id,
+        status: this.isLike,
+        bloglike: this.blog.blog_like,
+      };
+      setLikeStatus(data, (res: any) => {
+        console.log(res);
+      });
+    } else {
+      Warning(this, "登录后就可以点赞哦~");
+      return;
     }
-    this.$forceUpdate();
-    const data = {
-      userid: this.userInfo.user_id,
-      blogid: this.blog.blog_id,
-      status: this.isLike,
-      bloglike:this.blog.blog_like
-    };
-    setLikeStatus(data, (res: any) => {
-      console.log(res)
-    });
   }
 }
 </script>
@@ -101,7 +112,7 @@ export default class extends Vue {
     color: rgb(102, 102, 102);
     background-color: $c-white;
   }
-  margin:  0px;
+  margin: 0px;
   @include common;
   .blog_info {
     p {
@@ -134,10 +145,11 @@ export default class extends Vue {
         height: auto;
       }
       span {
-        font-size: 38px;
+        font-size: 35px;
         color: $c-medium;
         font-weight: 300;
         letter-spacing: 8px;
+        line-height: 43px;
       }
     }
   }
