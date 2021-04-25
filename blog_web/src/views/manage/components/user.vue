@@ -1,11 +1,10 @@
 <template>
   <div class="manege-user" id="me">
     <div class="container">
-      <div class="card1" v-for="user in userList" :key="user.user_id">
+      <div class="card1" v-for="user in userList" :key="user.user_id" @click="manageInfo(user)">
         <div class="avater">
           <el-avatar :src="user.user_avater" :size="60"></el-avatar>
         </div>
-
         <div class="title">
           <div class="name">{{ user.user_name }}</div>
           <div class="brief">简介：{{user.user_brief}}</div>
@@ -38,8 +37,11 @@ export default class extends Vue {
         this.userList = res.commentList
         this.userList = this.userList.reverse()
       }
-      console.log(res)
     })
+  }
+  private manageInfo(user:any){
+    console.log(user)
+    this.$router.push({ name: "manageInfo", params: { userInfo: user } });
   }
 }
 </script>

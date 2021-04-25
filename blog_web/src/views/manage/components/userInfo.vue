@@ -1,5 +1,5 @@
 <template>
-  <div class="view-userinfo">
+  <div class="manage-userinfo">
     <view-homepage />
     <div class="container">
       <div class="card1">
@@ -117,14 +117,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message, Success,Error } from "../../api/message";
+import { Warning, Message, Success,Error } from "../../../api/message";
 import {
   axiosPost,
   logout,
   timestampToTime,
   uploadPlans,
-} from "../../api/axiosApi";
-import { changeUserInfo } from "../../api/commentApi";
+} from "../../../api/axiosApi";
+import { changeUserInfo } from "../../../api/commentApi";
 
 @Component({
   components: {},
@@ -150,7 +150,9 @@ export default class extends Vue {
     1: "男",
   };
   created() {
-    this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    // this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    this.userInfo = this.$route.params.userInfo;
+    console.log(this.userInfo,'lksfguihghj' )
     this.username = this.userInfo.user_name;
     this.email = this.userInfo.email;
     this.usergender = this.genderMap[this.userInfo.user_gender];
@@ -243,8 +245,8 @@ export default class extends Vue {
 
 <style lang='scss'>
 @import "src/base.scss";
-@import "../common.scss";
-.view-userinfo {
+@import "../../common.scss";
+.manage-userinfo {
   @include common;
   padding-top: 100px;
   .card1 {
@@ -272,8 +274,8 @@ export default class extends Vue {
       &:hover {
         box-shadow: 0 0 30px rgb(0 120 231 / 20%);
       }
-    }
-    .title {
+    }                                                         
+    .title {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
       .name {
         font-size: 25px;
         color: $c-main;
