@@ -12,7 +12,7 @@ router.post('/', function(req, response, next) {
     var md5 = crypto.createHash('md5')
     user_password = md5.update(user_password).digest('hex')
     let sql = "SELECT * FROM  user WHERE user_name = '"+user_name+"' AND user_password = '"+user_password+"'"
-    operateData(sql,function(result){
+    operateData(sql,function(result,err){
         if(result.length>0){
             delete result[0].user_password
             response.send({statusCode:200, msg:'登录成功~',userInfo:result[0]}) 
