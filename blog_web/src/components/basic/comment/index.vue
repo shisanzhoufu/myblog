@@ -193,9 +193,6 @@ export default {
             this.cancel();
           }
         });
-        // axiosGet("/api/replyComment", data, (res) => {
-        //
-        // });
       } else {
         Warning(this, "评论不能为空哦");
         return;

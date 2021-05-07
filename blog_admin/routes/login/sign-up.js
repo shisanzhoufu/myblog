@@ -2,7 +2,7 @@ let db = require('../db.js')
 let express = require('express');
 let router = express.Router();
 let { v4: uuidv4 } = require('uuid')
-// let mysql = require("../mysql.config");
+let crypto = require('crypto')
 
 router.get('/', function(req, response, next) {
     /**
@@ -10,8 +10,10 @@ router.get('/', function(req, response, next) {
      */
     let user_name = req.query.userName
     let user_password = req.query.userPassword
+    var md5 = crypto.createHash('md5')
+    user_password = md5.update(user_password).digest('hex')
     let email = req.query.email
-
+    let time = req.query.time
     /**
      * sql语句
      */
@@ -23,7 +25,7 @@ router.get('/', function(req, response, next) {
         }else{
             let sql = 'INSERT INTO user SET  ?'
             let id = uuidv4()
-            let data = {user_id:id,user_name:user_name,user_password:user_password,email:email,user_avater:avater}
+            let data = {user_id:id,user_name:user_name,user_password:user_password,email:email,user_avater:avater,createAt:time}
             insertData(sql,data,function(result){
                 response.send({statusCode:200,msg:'注册成功~'}) 
             })
@@ -31,4 +33,5 @@ router.get('/', function(req, response, next) {
         
     })
 })
+
 module.exports = router;

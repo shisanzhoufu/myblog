@@ -87,7 +87,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { axiosGet } from "../../api/axiosApi";
+import { axiosGet,formatDateTime } from "../../api/axiosApi";
 import { Warning,Success,Error } from "../../api/message";
 
 @Component({
@@ -115,11 +115,13 @@ export default class extends Vue {
       this.confirmEmail();
       this.showPwd2();
       this.showPwd1();
-
+      const time = formatDateTime()
+      console.log(time)
       const data = {
         userName: this.username,
         userPassword: this.password,
         email: this.email,
+        time:time
       };
       try {
         axiosGet("/api/sign-up", data, ((res: any)=>{
@@ -329,8 +331,7 @@ export default class extends Vue {
         width: 200px;
         transition: 0.8s;
         border-radius: 25px;
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 14px;
       }
     }
     .pwd {

@@ -39,7 +39,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message,Error } from "../../api/message";
+import { Warning, Message,Error,Success } from "../../api/message";
 import { axiosPost,logout } from "../../api/axiosApi";
 import {loginInfo} from "../../api/commentApi"
 @Component({
@@ -65,7 +65,9 @@ export default class extends Vue {
               "userInfo",
               JSON.stringify(res.userInfo)
             );
+            Success(this,'登录成功~')
             this.$router.push("/");
+
           } else {
             Error(this, res.msg);
           }
@@ -207,8 +209,7 @@ export default class extends Vue {
         width: 200px;
         transition: 0.8s;
         border-radius: 25px;
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 14px;
       }
     }
   }
