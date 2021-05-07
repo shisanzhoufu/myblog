@@ -44,19 +44,11 @@ export default class extends Vue {
     });
   }
   private delBtn(comment: any) {
-    console.log(comment);
     const data = {
       commentid: comment.comment_id,
     };
     delComment(data, (res: any) => {
       if (res.statusCode === 200) {
-        // this.commentList.forEach((item:any,index:any)=>{
-        //   if(item.comment_id===comment.comment_id){
-        //     item.splice(index, 1);
-        //   }
-
-        // })
-        // console.log(this.commentList,'00998776')
         console.log(res)
         this.commentList = res.commentList;
         Success(this, "删除成功~");

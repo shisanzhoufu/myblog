@@ -37,30 +37,29 @@ export default class extends Vue {
     this.userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
   }
   private publish() {
-    if(this.comment!==''){
-if (this.userInfo) {
-      const time = formatDateTime();
-      const data = {
-        userId: this.userInfo.user_id,
-        userName: this.userInfo.user_name,
-        userAvater: this.userInfo.user_avater,
-        comment: this.comment,
-        time: time,
-      };
-      pubComment(data, (res: any) => {
-        Success(this, res.msg);
-        this.comment = "";
-        const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
-        this.$router.push(NewPage);
-        this.$router.go(-1);
-      });
+    if (this.comment !== "") {
+      if (this.userInfo) {
+        const time = formatDateTime();
+        const data = {
+          userId: this.userInfo.user_id,
+          userName: this.userInfo.user_name,
+          userAvater: this.userInfo.user_avater,
+          comment: this.comment,
+          time: time,
+        };
+        pubComment(data, (res: any) => {
+          Success(this, res.msg);
+          this.comment = "";
+          const NewPage = "_empty" + "?time=" + new Date().getTime() / 500;
+          this.$router.push(NewPage);
+          this.$router.go(-1);
+        });
+      } else {
+        Warning(this, "请先登陆哦");
+      }
     } else {
-      Warning(this, "请先登陆哦");
+      Warning(this, "请输入内容~");
     }
-    }else{
-       Warning(this, "请输入内容~");
-    }
-    
   }
 }
 </script>
