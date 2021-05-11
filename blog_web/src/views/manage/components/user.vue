@@ -16,6 +16,7 @@
           </div>
         </div>
       </div>
+      <div class="more" v-if="userList.length<total" @click="more">查看更多</div>
     </div>
   </div>
 </template>
@@ -27,20 +28,34 @@ import {getUserList } from "../../../api/commentApi"
 @Component
 export default class extends Vue {
   private userList = []
+  private total = 0
+  private page = 1;
   private gender = {
     0: "女",
     1: "男",
   };
   created(){
-    getUserList((res:any)=>{
+    const data = {
+      page:this.page
+    }
+    this.getMore(data)
+  }
+  private getMore(data:any){
+    getUserList(data,(res:any)=>{
       if(res.statusCode===200){
-        this.userList = res.commentList
+        this.userList = res.data.commentList
         this.userList = this.userList.reverse()
+       this.total = res.data.total
       }
     })
   }
+  private more() {
+    const data = {
+      page: this.page + 1,
+    };
+    this.getMore(data)
+  }
   private manageInfo(user:any){
-    console.log(user)
     this.$router.push({ name: "manageInfo", params: { userInfo: user } });
   }
 }
@@ -50,10 +65,23 @@ export default class extends Vue {
 @import "../../common.scss";
 
 .manege-user {
+  .more {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    color: $c-link;
+    box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    background-color: $c-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
   .card1 {
     width: 100%;
     height: 130px;
-    box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
+    // box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
+    border-bottom: 1px solid $c-disabled;
     background-color: $c-white;
     
     display: flex;

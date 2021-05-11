@@ -15,7 +15,6 @@
           <!-- <span class="like-num">{{ like > 0 ? like + "人赞" : "赞" }}</span> -->
         </div>
       </div>
-
       <el-backtop></el-backtop>
     </div>
   </div>
@@ -106,88 +105,93 @@ export default class extends Vue {
 @import "src/base.scss";
 @import "../common.scss";
 .view-blog {
+  // @include common;
+  margin-left: 26%;
   * {
     // font-size: 16px
     line-height: 32px;
     color: rgb(102, 102, 102);
     background-color: $c-white;
   }
-  margin: 0px;
-  @include common;
-  .blog_info {
-    p {
-      img {
-        display: block;
-        margin: 1rem auto;
-        width: auto;
-        height: auto;
-        max-width: 92%;
-        max-height: 600px;
-        border-radius: 0.2rem;
-        box-shadow: 0 2px 0.5rem rgb(0 0 0 / 12%);
-        transition: 0.4s;
+  .container {
+    margin: 0px;
+    
+    .blog_info {
+      p {
+        img {
+          display: block;
+          margin: 1rem auto;
+          width: auto;
+          height: auto;
+          max-width: 92%;
+          max-height: 600px;
+          border-radius: 0.2rem;
+          box-shadow: 0 2px 0.5rem rgb(0 0 0 / 12%);
+          transition: 0.4s;
+        }
       }
     }
-  }
-  .card {
-    min-height: 600px;
-    padding: 10px;
-    padding-top: 100px;
+    .card {
+      min-height: 600px;
+      padding: 0 90px;
+      padding-top: 50px;
 
-    .blog_title {
+      .blog_title {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgb(220, 218, 218);
+        align-items: center;
+        img {
+          width: 100px;
+          height: auto;
+        }
+        span {
+          font-size: 35px;
+          color: $c-medium;
+          font-weight: 300;
+          letter-spacing: 8px;
+          line-height: 43px;
+        }
+      }
+    }
+    .el-backtop {
+      top: 630px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: $c-white;
       display: flex;
       justify-content: center;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgb(220, 218, 218);
       align-items: center;
-      img {
-        width: 100px;
-        height: auto;
-      }
-      span {
-        font-size: 35px;
-        color: $c-medium;
-        font-weight: 300;
-        letter-spacing: 8px;
-        line-height: 43px;
-      }
-    }
-  }
-  .el-backtop {
-    top: 530px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: $c-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $c-light;
-    margin: 0px;
-    padding: 0px;
-  }
-
-  .dianzan {
-    position: fixed;
-    top: 470px;
-    right: 40px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: $c-white;
-    box-shadow: 0 0 6px rgb(0 0 0 / 12%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .iconfont {
       color: $c-light;
-      background-color: unset;
+      margin: 0px;
+      padding: 0px;
+      z-index: 999;
     }
-  }
-  .likes {
-    .iconfont {
-      color: rgb(255, 193, 229);
-      background-color: unset;
+
+    .dianzan {
+      position: fixed;
+      top: 570px;
+      right: 40px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: $c-white;
+      box-shadow: 0 0 6px rgb(0 0 0 / 12%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconfont {
+        color: $c-light;
+        background-color: unset;
+      }
+    }
+    .likes {
+      .iconfont {
+        color: rgb(255, 193, 229);
+        background-color: unset;
+      }
     }
   }
 }

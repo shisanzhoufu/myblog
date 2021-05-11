@@ -2,37 +2,19 @@
   <div class="page-list">
     <div class="container">
       <div class="card" v-for="item in commentList" :key="item.comment_id">
-        <!-- <div class="card_header">
-          <el-avatar
-            class="avater"
-            :size="70"
-            :src="item.user_avater"
-          ></el-avatar>
-          <div class="header_info">
-            <div class="name">{{ item.user_name }}</div>
-            <div class="time">{{ item.comment_time }}</div>
-          </div>
-        </div>
-        <div class="card_content">
-          <el-link :underline="false" @click="replay(item.comment_id)"
-            >回复</el-link
-          >
-          <div class="card_info">
-            {{ item.comment_info }}
-          </div> -->
-          <Comment :comments="item"></Comment>
-<!--           
-        </div> -->
+        <Comment :comments="item"></Comment>
       </div>
+      <div class="more" v-if="commentList.length<total" @click="more">查看更多</div>
+      <el-backtop></el-backtop>
     </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Component,Watch } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 import { Warning } from "../../../api/message";
 import { axiosGet } from "../../../api/axiosApi";
-import { getCommentList } from "../../../api/commentApi";
+import { getCommentList, getMoreComment } from "../../../api/commentApi";
 import Comment from "../../../components/basic/comment/index";
 @Component({
   components: { Comment },
@@ -40,38 +22,50 @@ import Comment from "../../../components/basic/comment/index";
 export default class extends Vue {
   [x: string]: any;
   private replay = "";
+  private page = 1;
+  private total = 0;
   private commentList: any = [];
-//   $store: any;
+  //   $store: any;
   mounted() {
-    getCommentList(((res:any)=>{
-        this.commentList = res.commentList
-        this.commentList = this.commentList.reverse()
-        this.$store.commit('setCommentList',{
-            commentList:this.commentList
-        })
-    }))
+    const data = {
+      page: this.page,
+    };
+    this.getComment(data);
   }
   private get commentLists() {
-          return this.$store.state.commentList
-      }
-      
+    return this.$store.state.commentList;
+  }
+  private getComment(data: any) {
+    getCommentList(data, (res: any) => {
+      this.commentList = res.data.commentList;
+      this.total = res.data.total;
+      this.$store.commit("setCommentList", {
+        commentList: this.commentList,
+      });
+    });
+  }
+  private more() {
+    const data = {
+      page: this.page + 1,
+    };
+    this.getComment(data);
+  }
 }
 </script>
 <style lang="scss">
 @import "src/base.scss";
 @import "../../common.scss";
 .page-list {
-  @include common;
+  // @include common;
   .card {
     width: 100%;
-    margin-top: 30px;
+    padding-top: 30px;
     background-color: $c-white;
     .card_header {
       display: flex;
       .header_info {
         margin: 20px;
         .name {
-          cursor: pointer;
           font-size: 16px;
           line-height: 20px;
           font-weight: 500;
@@ -111,6 +105,31 @@ export default class extends Vue {
         font-weight: 500;
       }
     }
+  }
+  .more {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    color: $c-link;
+    box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    background-color: $c-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+  .el-backtop {
+    top: 530px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: $c-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $c-light;
+    margin: 0px;
+    padding: 0px;
   }
   .replay_card {
     margin-top: 20px;

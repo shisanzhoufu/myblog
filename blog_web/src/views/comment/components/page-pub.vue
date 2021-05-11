@@ -67,24 +67,29 @@ export default class extends Vue {
 @import "src/base.scss";
 @import "../../common.scss";
 .page-pub {
-  @include common;
   .main_card {
-    margin-top: 90px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+     background-color: $c-white;
+      border: 1px solid #ebebee;
+margin-left: 10px;
+margin-right: 10px;
+      border-radius: 10px;
     .iconfont {
       font-size: 25px;
     }
     .comment {
-      width: 100%;
-
+      margin: 10px;
+      width: 97%;
       height: 160px;
-      background-color: $c-white;
-      // border-radius: 10px;
-      box-shadow: 0px 2px 5px rgba(104, 104, 104, 0.076);
+     
+
+      box-shadow: 0 ;
       position: relative;
 
-      &:hover {
-        box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.275);
-      }
+      // &:hover {
+      //   box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.275);
+      // }
       .el-textarea__inner {
         border: 0;
         font-size: 20px;

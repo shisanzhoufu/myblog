@@ -82,21 +82,20 @@ export default class extends Vue {
 @import "src/base.scss";
 @import "../../common.scss";
 .view-article {
-  @include common;
-  margin-top: 20px;
- 
+  background-color: rgba(204, 204, 204, 0);
   .card {
     cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
           auto;
     height: 100px;
-    box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
+    // box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
     background-color: $c-white;
+    border-bottom: 1px solid rgb(238, 238, 238);
     padding: 15px;
     // border-radius: 10px;
     margin-bottom: 20px;
     // border: 1px solid $c-light;
     &:hover {
-      box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
+      // box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
     }
 
     .art_title {

@@ -40,13 +40,13 @@ export default class extends Vue {
 @import "../common.scss";
 .view-manage {
   @include common;
-  height: 700px;
   cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/pointer.cur),
     auto;
   .card {
     .el-tabs {
       // background-color: $c-white;
-      padding-top: 100px;
+      padding-top: 30px;
+      margin-left: 10px;
     }
     .is-active {
       color: $c-main;

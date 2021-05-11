@@ -5,7 +5,7 @@
         <div class="header">关于我</div>
         <div class="info">
           <p>hi，欢迎来到我的博客！(๑•̀ㅁ•́ฅ)</p>
-          <p>这里是Naki，正在努力学习的假程序员。(ฅ´ω`ฅ)</p>
+          <p>这里是jack，正在努力学习的假程序员。(ฅ´ω`ฅ)</p>
           <p>永远年轻，永远奔跑。</p>
           <p>永远浪漫主义，永远理想主义。</p>
           <p>落俗不可避免，但浪漫永存人间。</p>
@@ -52,23 +52,21 @@ import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 @Component
 export default class extends Vue {
-  // private isShow(item:any){
-    
-  // }
+
 }
 </script>
 <style lang="scss" scoped>
 @import "src/base.scss";
 @import "../../common.scss";
-
 .index-intrest {
-  @include common;
   height: 500px;
   background-color: $c-white;
   padding-top: 100px;
   .card {
-    border-left: 5px solid $c-light;
+    border-left: 7px solid $c-light;
+    background-color: rgb(239, 249, 255);
     padding: 10px;
+    margin-left: 30px;
     // background-color: $c-light;
     .header {
       font-size: 28px;
@@ -79,7 +77,10 @@ export default class extends Vue {
       cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
         auto;
       display: flex;
-
+      a{
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+        auto;
+      }
       img {
         width: 20px;
         height: 20px;

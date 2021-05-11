@@ -27,6 +27,9 @@ const getLookRouter = require('./routes/article/setLookStatus')
 const updateBlogRouter = require('./routes/article/updateBlog')
 const getUserListRouter = require('./routes/user/getUserList')
 const delCommentRouter = require('./routes/comment/delComment')
+const getMoreRouter = require('./routes/comment/getMoreComment')
+const deleteBlogRouter = require('./routes/article/deleteBlog')
+
 //session配置
 app.use(session({
     secret: 'billy',
@@ -84,6 +87,10 @@ app.use('/api/updateBlog',updateBlogRouter)
 app.use('/api/getUserList',getUserListRouter)
 //删除留言
 app.use('/api/delComment',delCommentRouter)
+//更多留言
+app.use('/api/getMoreComment',getMoreRouter)
+//删除文章
+app.use('/api/deleteBlog',deleteBlogRouter)
 
 app.listen(3001,function(){
   console.log('app is runing at port 3001')

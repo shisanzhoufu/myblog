@@ -29,8 +29,7 @@ router.get('/', function(req, response, next) {
             insertData(sql,data,function(result){
                 response.send({statusCode:200,msg:'注册成功~'}) 
             })
-        }
-        
+        } 
     })
 })
 

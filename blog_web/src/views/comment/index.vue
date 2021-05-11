@@ -6,8 +6,11 @@
 </div>
 </template>
 <style lang="scss">
-
-
+@import "src/base.scss";
+@import "../common.scss";
+.view-comment{
+  @include common;
+}
 </style>
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */

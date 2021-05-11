@@ -36,8 +36,7 @@ export default class extends Vue {
 @import "src/base.scss";
 @import "../../common.scss";
 .art-top {
-  @include common;
-  margin-top: 60px;
+  // margin-top: 60px;
   .title {
     display: flex;
     justify-content: center;

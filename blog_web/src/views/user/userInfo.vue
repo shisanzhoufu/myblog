@@ -48,7 +48,7 @@
 
           <div class="item">
             <pre>性&nbsp;&nbsp;别</pre>
-            <pre class="info">{{ genderMap[userInfo.user_gender] }}</pre>
+            <pre class="info">{{ genderMap[usergenders] }}</pre>
           </div>
 
           <div class="item">
@@ -154,6 +154,7 @@ export default class extends Vue {
     this.username = this.userInfo.user_name;
     this.email = this.userInfo.email;
     this.usergender = this.genderMap[this.userInfo.user_gender];
+    this.usergenders = this.userInfo.user_gender
     this.userbrief = this.userInfo.user_brief;
     this.avater = this.userInfo.user_avater;
     this.date = timestampToTime(this.userInfo.createAt);
@@ -175,10 +176,10 @@ export default class extends Vue {
       userbrief: this.userbrief,
       useravater: this.avater,
     };
-     console.log(data)
     changeUserInfo(data, (res: any) => {
       if (res.statusCode === 200) {
         Success(this, res.msg);
+        this.usergenders = res.userInfo.user_gender
         localStorage.setItem(
           //储存用户的一些信息到本地
           "userInfo",
@@ -200,7 +201,7 @@ export default class extends Vue {
       (res: any) => {
         this.avater = res;
         const data = {
-           userid: this.userInfo.user_id,
+        userid: this.userInfo.user_id,
         username: this.username,
         email: this.email,
         usergender: this.usergender,
@@ -268,9 +269,17 @@ export default class extends Vue {
         width: 100px;
         height: 100px;
         display: flex;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
+      }
+      .el-upload {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
       }
       &:hover {
         box-shadow: 0 0 30px rgb(0 120 231 / 20%);
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
       }
     }
     .title {
@@ -309,7 +318,8 @@ export default class extends Vue {
       .change {
         padding-left: 20px;
         color: $c-medium;
-        cursor: pointer;
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+              auto;
       }
     }
 

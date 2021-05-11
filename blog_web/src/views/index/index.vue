@@ -7,6 +7,11 @@
 </div>
 </template>
 <style lang="scss">
+@import "src/base.scss";
+@import "../common.scss";
+.view-index{
+@include common;
+}
 
 
 </style>

@@ -48,7 +48,7 @@
 
           <div class="item">
             <pre>性&nbsp;&nbsp;别</pre>
-            <pre class="info">{{ genderMap[userInfo.user_gender] }}</pre>
+            <pre class="info">{{ genderMap[usergenders] }}</pre>
           </div>
 
           <div class="item">
@@ -82,20 +82,15 @@
 
           <div class="item">
             <pre>性&nbsp;&nbsp;别</pre>
-             <el-select v-model="usergender" placeholder="请选择" class="input">
+            <el-select v-model="usergender" placeholder="请选择" class="input">
               <el-option
                 v-for="item in gender"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
+                :value="item.value"
+              >
               </el-option>
             </el-select>
-            <!-- <el-input
-              placeholder="请输入内容"
-              v-model="usergender"
-              class="input"
-            >
-            </el-input> -->
           </div>
 
           <div class="item">
@@ -117,7 +112,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import { Warning, Message, Success,Error } from "../../../api/message";
+import { Warning, Message, Success, Error } from "../../../api/message";
 import {
   axiosPost,
   logout,
@@ -140,10 +135,10 @@ export default class extends Vue {
   private save = false;
   private avater = "";
   private imageUrl = true;
-  private usergenders = ''
+  private usergenders = "";
   private gender = [
-    {value:0,label:"女"} ,
-    {value:1,label:"男"}
+    { value: 0, label: "女" },
+    { value: 1, label: "男" },
   ];
   private genderMap = {
     0: "女",
@@ -152,10 +147,10 @@ export default class extends Vue {
   created() {
     // this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.userInfo = this.$route.params.userInfo;
-    console.log(this.userInfo,'lksfguihghj' )
     this.username = this.userInfo.user_name;
     this.email = this.userInfo.email;
     this.usergender = this.genderMap[this.userInfo.user_gender];
+    this.usergenders = this.userInfo.user_gender;
     this.userbrief = this.userInfo.user_brief;
     this.avater = this.userInfo.user_avater;
     this.date = timestampToTime(this.userInfo.createAt);
@@ -177,15 +172,11 @@ export default class extends Vue {
       userbrief: this.userbrief,
       useravater: this.avater,
     };
-     console.log(data)
     changeUserInfo(data, (res: any) => {
       if (res.statusCode === 200) {
         Success(this, res.msg);
-        localStorage.setItem(
-          //储存用户的一些信息到本地
-          "userInfo",
-          JSON.stringify(res.userInfo)
-        );
+        this.usergenders = res.userInfo.user_gender;
+
         this.change = true;
         this.save = false;
       }
@@ -202,23 +193,23 @@ export default class extends Vue {
       (res: any) => {
         this.avater = res;
         const data = {
-           userid: this.userInfo.user_id,
-        username: this.username,
-        email: this.email,
-        usergender: this.usergender,
-        userbrief: this.userbrief,
-        useravater: this.avater,
+          userid: this.userInfo.user_id,
+          username: this.username,
+          email: this.email,
+          usergender: this.usergender,
+          userbrief: this.userbrief,
+          useravater: this.avater,
         };
         changeUserInfo(data, (res: any) => {
           if (res.statusCode === 200) {
-            Success(this, '上传成功~');
+            Success(this, "上传成功~");
             localStorage.setItem(
               //储存用户的一些信息到本地
               "userInfo",
               JSON.stringify(res.userInfo)
             );
-          }else{
-            Error(this,'上传失败，稍后再试')
+          } else {
+            Error(this, "上传失败，稍后再试");
           }
         });
       },
@@ -266,16 +257,21 @@ export default class extends Vue {
       border-radius: 50%;
       margin: 20px;
       padding: 4px;
+
       .avatar-uploader {
         width: 100px;
         height: 100px;
         display: flex;
       }
+      .el-upload {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
+      }
       &:hover {
         box-shadow: 0 0 30px rgb(0 120 231 / 20%);
       }
-    }                                                         
-    .title {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    }
+    .title {
       .name {
         font-size: 25px;
         color: $c-main;
@@ -309,9 +305,10 @@ export default class extends Vue {
         display: flex;
       }
       .change {
+        cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
+          auto;
         padding-left: 20px;
         color: $c-medium;
-        cursor: pointer;
       }
     }
 

@@ -65,7 +65,7 @@
         ref="md"
         @imgAdd="imgAdd"
         v-model="value"
-        :ishljs="true"
+        :ishljs = "true"
         @change="handle"
       ></mavon-editor>
     </template>
@@ -317,6 +317,7 @@ export default class extends Vue {
       background-color: $c-white;
     }
     .add_tabs {
+      display: flex;
       .el-tag {
         cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
               auto;

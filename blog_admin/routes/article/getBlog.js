@@ -4,8 +4,15 @@ let router = express.Router();
 
 router.get('/', function(req, response, next) {
     let sql = "SELECT * FROM  blog"
+    let page = req.query.page
     operateData(sql,function(result){
-        response.send({statusCode:200,commentList:result}) 
+        const total = result.length
+        result = result.slice(0,page*10)
+        const data = {
+            blogList:result,
+            total:total
+        }
+        response.send({statusCode:200,data:data}) 
     })
 })
 module.exports = router;

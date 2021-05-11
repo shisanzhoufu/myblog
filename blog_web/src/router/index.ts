@@ -45,23 +45,23 @@ const routes: Array<RouteConfig> = [
     component: () =>
     import( "../views/comment/index.vue")
   },
+  // {
+  //   path: "/interest",
+  //   name: "interest",
+  //   component: () =>
+  //     import( "../views/article/interest.vue")
+  // },
+  // {
+  //   path: "/technology",
+  //   name: "technology",
+  //   component: () =>
+  //   import( "../views/article/technology.vue")
+  // },
   {
-    path: "/interest",
-    name: "interest",
+    path: "/article",
+    name: "article",
     component: () =>
-      import( "../views/article/interest.vue")
-  },
-  {
-    path: "/technology",
-    name: "technology",
-    component: () =>
-    import( "../views/article/technology.vue")
-  },
-  {
-    path: "/life",
-    name: "life",
-    component: () =>
-    import( "../views/article/life.vue")
+    import( "../views/article/index.vue")
   },
   {
     path: "/blog",

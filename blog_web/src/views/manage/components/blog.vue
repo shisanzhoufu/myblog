@@ -24,9 +24,13 @@
           </div>
         </div>
         <div class="change">
+          <div class="pro-list delete" @click="toDelete(blog)">删除</div>
           <div class="pro-list editor" @click="toChange(blog)">编辑</div>
           <div class="pro-list look" @click="toBlog(blog)">浏览</div>
         </div>
+      </div>
+      <div class="more" v-if="blogList.length < total&&blogList.length>10" @click="more">
+        查看更多
       </div>
     </div>
   </div>
@@ -34,27 +38,57 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-import { getBlog } from "../../../api/commentApi";
+import { getBlog,deleteBlog } from "../../../api/commentApi";
+import { Success, Error,Confirm } from "../../../api/message";
 @Component
 export default class extends Vue {
   private blogList = [];
   private tagList = [];
+  private total = 0;
+  private page = 1;
   created() {
-    getBlog((res: any) => {
+    const data = {
+      page: this.page,
+    };
+    this.getMore(data);
+  }
+  private getMore(data: any) {
+    getBlog(data, (res: any) => {
       if (res.statusCode === 200) {
-        this.blogList = res.commentList;
-        this.blogList = this.blogList.reverse();
+        this.blogList = res.data.blogList;
+        this.total = res.data.total;
       }
       this.getTag();
     });
   }
+  private more() {
+    const data = {
+      page: this.page + 1,
+    };
+    this.getMore(data);
+  }
   private getTag() {
-    this.blogList.forEach((item: any) => {
-      if (item.blog_tag) {
-        this.tagList = item.blog_tag.split(",");
-        item.tagList = this.tagList;
+    if (this.blogList.length > 0) {
+      this.blogList.forEach((item: any) => {
+        if (item.blog_tag) {
+          this.tagList = item.blog_tag.split(",");
+          item.tagList = this.tagList;
+        }
+      });
+    }
+  }
+  private toDelete(blog:any){
+const data = {
+  blogid:blog.blog_id
+}
+    deleteBlog(data,(res:any)=>{
+      if (res.statusCode === 200) {
+        this.blogList = res.commentList;
+        Success(this, "删除成功~");
+      } else {
+        Error(this, "失败，稍后再试~");
       }
-    });
+    })
   }
   private toBlog(blog: any) {
     this.$router.push({ name: "blog", params: { blog: blog } });
@@ -69,18 +103,32 @@ export default class extends Vue {
 @import "../../common.scss";
 
 .manege-blog {
+  .more {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    color: $c-link;
+    box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    
+    background-color: $c-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
   .card {
     position: relative;
     height: 100px;
-    box-shadow: 0px 5px 30px rgba(179, 179, 179, 0.1);
+    border-bottom: 1px solid $c-disabled;
     background-color: $c-white;
     padding: 15px;
     // border-radius: 10px;
     margin-bottom: 20px;
     // border: 1px solid $c-light;
-    &:hover {
-      box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
-    }
+    // &:hover {
+    //   box-shadow: 0px 5px 10px rgba(106, 106, 106, 0.2);
+    // }
 
     .art_title {
       font-size: 25px;
@@ -128,7 +176,7 @@ export default class extends Vue {
     }
     .change {
       cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-              auto;
+        auto;
       position: absolute;
       bottom: 10px;
       right: 20px;
@@ -139,6 +187,9 @@ export default class extends Vue {
         color: $c-medium;
         line-height: 23px;
         font-size: 18px;
+      }
+      .delete{
+        color: $c-error;
       }
     }
   }

@@ -66,6 +66,7 @@ export default class extends Vue {
               JSON.stringify(res.userInfo)
             );
             Success(this,'登录成功~')
+            console.log('009874345678')
             this.$router.push("/");
 
           } else {

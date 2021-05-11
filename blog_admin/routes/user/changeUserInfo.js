@@ -6,13 +6,9 @@ router.get('/', function(req, response, next) {
     /**
      * 处理数据
      */
-     const gender = {
-         "女":0,
-         "男":1,
-      };
-      let id = req.query.userid
+     let id = req.query.userid
      let user_name = req.query.username
-     let user_gender = gender[req.query.usergender]
+     let user_gender = req.query.usergender
      let email = req.query.email
      let user_brief = req.query.userbrief
      let avater = req.query.useravater

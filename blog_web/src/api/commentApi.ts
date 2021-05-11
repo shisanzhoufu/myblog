@@ -5,8 +5,8 @@ import { throttle ,debounced} from "lodash";
  * 获取留言列表
  * @param that 
  */
-export const getCommentList = ((callback?:any)=>{
-    axiosGet("/api/commentList", {}, (res: any) => {
+export const getCommentList = ((data:any,callback?:any)=>{
+    axiosGet("/api/commentList", data, (res: any) => {
         callback && callback(res);
       });
 })
@@ -34,7 +34,18 @@ export const pubReply = async (data:any,callback?:any) => {
         callback && callback(res);
       });
   }
-
+/**
+ * 留言加载更多
+ * @param data 
+ * @param callback 
+ */
+  export const getMoreComment = (data:any,callback?:any)=>{
+    axiosGet("/api/getMoreComment", data, (res: any) => {
+        if(res.statusCode===200){
+            callback && callback(res);
+        }
+      });
+}
 /**
  * 获取不同类型文章列表
  * @param data 
@@ -50,8 +61,13 @@ export const getBlogList = async (data,callback?:any) => {
    * @param data 
    * @param callback 
    */
-  export const getBlog = async (callback?:any) => {
-    axiosGet('/api/getBlog',{},(res:any)=>{
+  export const getBlog = async (data:any,callback?:any) => {
+    axiosGet('/api/getBlog',data,(res:any)=>{
+        callback && callback(res);
+    })
+  }
+  export const deleteBlog = async (data:any,callback?:any) => {
+    axiosGet('/api/deleteBlog',data,(res:any)=>{
         callback && callback(res);
     })
   }
@@ -132,8 +148,8 @@ export const getSearchList = async (data:any,callback?:any) => {
  * 获取用户信息
  * @param callback 
  */
-  export const getUserList = async (callback?:any) => {
-    axiosGet('/api/getUserList',{},(res:any)=>{
+  export const getUserList = async (data:any,callback?:any) => {
+    axiosGet('/api/getUserList',data,(res:any)=>{
         callback && callback(res);
     })
   }

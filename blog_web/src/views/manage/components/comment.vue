@@ -22,7 +22,9 @@
           </div>
         </div>
         <div class="delete" @click="delBtn(comment)">删除</div>
+       
       </div>
+       <div class="more" v-if="commentList.length<total&&commentList.length>10" @click="more">查看更多</div>
     </div>
   </div>
 </template>
@@ -30,18 +32,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-import { getCommentList, delComment } from "../../../api/commentApi";
+import { getMoreComment, delComment } from "../../../api/commentApi";
 import { Success, Error } from "../../../api/message";
 @Component
 export default class extends Vue {
   private commentList = [];
+  private total = 0;
+  private page = 1;
   created() {
-    getCommentList((res: any) => {
+    const data = {
+      page:this.page
+    }
+    this.getMore(data)
+  }
+  private getMore(data:any){
+    getMoreComment(data,(res: any) => {
       if (res.statusCode === 200) {
-        this.commentList = res.commentList;
-        this.commentList = this.commentList.reverse();
+        this.commentList = res.data.commentList;
+        this.total = res.data.total
       }
     });
+  }
+  private more() {
+    const data = {
+      page: this.page + 1,
+    };
+    this.getMore(data)
   }
   private delBtn(comment: any) {
     const data = {
@@ -49,7 +65,6 @@ export default class extends Vue {
     };
     delComment(data, (res: any) => {
       if (res.statusCode === 200) {
-        console.log(res)
         this.commentList = res.commentList;
         Success(this, "删除成功~");
       } else {
@@ -65,13 +80,27 @@ export default class extends Vue {
 
 .manege-comment {
   position: relative;
+  .more {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    color: $c-link;
+    box-shadow: 0 1px 3px rgb(26 26 26 / 10%);
+    background-color: $c-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
   .card {
     position: relative;
     margin-bottom: 20px;
     background-color: $c-white;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
+    // box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
+    border-bottom: 1px solid $c-disabled;
     .info {
       padding: 20px;
       display: flex;

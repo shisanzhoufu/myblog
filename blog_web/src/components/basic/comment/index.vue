@@ -15,18 +15,7 @@
           <div class="name">{{ comments.user_name }}</div>
           <div class="comment_header">
             <div class="date">{{ comments.comment_time }}</div>
-
             <div class="control">
-              <!-- <span
-          class="like"
-          :class="{ active: comments.isLike }"
-          @click="likeClick(comments)"
-        >
-          <i class="iconfont icon-dianzan"></i>
-          <span class="like-num">{{
-            comments.comment_like > 0 ? comments.comment_like + "人赞" : "赞"
-          }}</span>
-        </span> -->
               <span class="comment-reply" @click="showCommentInput(comments)">
                 <i class="iconfont icon-icon-test"></i>
                 <span>回复</span>
@@ -67,6 +56,7 @@
               <span>{{ reply.content }}</span>
             </div>
           </div>
+          <div class="more" v-if="total>3&&replys.length<total" @click="more">加载更多</div>
         </div>
 
         <!-- <div
@@ -121,6 +111,8 @@ export default {
       replys: [],
       userInfo: {},
       commentInfo: {},
+      page: 1,
+      total:0
     };
   },
   computed: {},
@@ -148,60 +140,62 @@ export default {
     cancel() {
       this.showItemId = "";
     },
-
+    more() {
+      this.page++;
+      this.getReply();
+    },
     /**
      * 提交评论
      */
     commitComment() {
-      if(this.userInfo){
+      if (this.userInfo) {
         const date = formatDateTime();
-      let data;
-      if (this.inputComment.length > 0) {
-        if (this.replys.length === 0) {
-          //回复父评论
-          data = {
-            commentId: this.comments.comment_id, //主键id
-            fromId: this.userInfo.user_id, //评论者id
-            fromName: this.userInfo.user_name, //评论者昵称
-            fromAvatar: this.userInfo.user_avater, //评论者头像
-            toId: this.comments.user_id, //被评论者id
-            toName: this.comments.user_name, //被评论者昵称
-            toAvatar: this.comments.user_avater, //被评论者头像
-            content: this.inputComment, //评论内容
-            time: date, //评论时间
-          };
-        } else {
-          //回复子评论
-          data = {
-            commentId: this.comments.comment_id, //主键id
-            fromId: this.userInfo.user_id, //评论者id
-            fromName: this.userInfo.user_name, //评论者昵称
-            fromAvatar: this.userInfo.user_avater, //评论者头像
-            toId: this.commentInfo.fromId, //被评论者id
-            toName: this.commentInfo.fromName, //被评论者昵称
-            toAvatar: this.commentInfo.fromAvatar, //被评论者头像
-            content: this.inputComment, //评论内容
-            time: date, //评论时间
-          };
-        }
-
-        pubReply(data, (res) => {
-          if (res.statusCode === 200) {
-            Success(this, res.msg);
-            this.getReply();
-            this.inputComment = "";
-            this.cancel();
+        let data;
+        if (this.inputComment.length > 0) {
+          if (this.replys.length === 0) {
+            //回复父评论
+            data = {
+              commentId: this.comments.comment_id, //主键id
+              fromId: this.userInfo.user_id, //评论者id
+              fromName: this.userInfo.user_name, //评论者昵称
+              fromAvatar: this.userInfo.user_avater, //评论者头像
+              toId: this.comments.user_id, //被评论者id
+              toName: this.comments.user_name, //被评论者昵称
+              toAvatar: this.comments.user_avater, //被评论者头像
+              content: this.inputComment, //评论内容
+              time: date, //评论时间
+            };
+          } else {
+            //回复子评论
+            data = {
+              commentId: this.comments.comment_id, //主键id
+              fromId: this.userInfo.user_id, //评论者id
+              fromName: this.userInfo.user_name, //评论者昵称
+              fromAvatar: this.userInfo.user_avater, //评论者头像
+              toId: this.commentInfo.fromId, //被评论者id
+              toName: this.commentInfo.fromName, //被评论者昵称
+              toAvatar: this.commentInfo.fromAvatar, //被评论者头像
+              content: this.inputComment, //评论内容
+              time: date, //评论时间
+            };
           }
-        });
+
+          pubReply(data, (res) => {
+            if (res.statusCode === 200) {
+              Success(this, res.msg);
+              this.getReply();
+              this.inputComment = "";
+              this.cancel();
+            }
+          });
+        } else {
+          Warning(this, "评论不能为空哦");
+          return;
+        }
       } else {
-        Warning(this, "评论不能为空哦");
+        Warning(this, "登录后才能评论哦~");
         return;
       }
-      }else{
-        Warning(this, "登录后才能评论哦~");
-        return
-      }
-      
     },
     /**
      * 点击按钮显示输入框
@@ -226,10 +220,12 @@ export default {
     getReply() {
       const data = {
         commentId: this.comments.comment_id,
+        page: this.page
       };
       axiosGet("/api/getReplyList", data, (res) => {
-        if (res.commentList.length > 0) {
-          this.replys = res.commentList;
+        if (res.data.commentList.length > 0) {
+          this.replys = res.data.commentList;
+          this.total = res.data.total
         } else {
           this.replys = [];
         }
@@ -253,7 +249,6 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 2px 5px rgba(84, 84, 84, 0.076);
     .info {
       padding: 20px;
       display: flex;
@@ -297,6 +292,7 @@ export default {
         }
       }
     }
+    
     .content {
       font-size: 16px;
       line-height: 20px;
@@ -350,6 +346,15 @@ export default {
       margin-left: 80px;
       border-left: 1px dashed #ebebee;
       border-bottom: 1px dashed #ebebee;
+      .more{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $c-link;
+        font-size: 13px;
+         box-shadow:0 0 0;
+         font-weight: normal;
+      }
       .item {
         margin: 0 10px;
         padding: 10px 0;
@@ -401,7 +406,7 @@ export default {
         }
         .reply-bottom {
           cursor: url(https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur),
-              auto;
+            auto;
           display: flex;
           align-items: center;
           // margin-top: 6px;

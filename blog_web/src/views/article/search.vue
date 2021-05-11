@@ -6,16 +6,10 @@
         <img src="../../assets/index/绿植.png" alt="" />
         <div class="search-input">
           搜索结果
-          <!-- <input
-            type="text"
-            placeholder="输入关键词搜索"
-            v-model="searchInfo"
-            @keyup.enter="getList()"
-          /> -->
-          <!-- <i class="el-icon-close icon-close"></i> -->
         </div>
       </div>
-      <BlogList :blogList="searchList" />
+      <BlogList :blogList="searchList" v-if="searchList.length>0"/>
+        <div class="noBlog" v-else>没有相关文章，换个关键词试试叭~</div>
     </div>
   </div>
 </template>
@@ -48,36 +42,19 @@ export default class extends Vue {
       width: 100px;
       height: 100px;
     }
+    
     .search-input {
       font-size: 43px;
          color: $c-medium;
          font-weight: 300;
          letter-spacing: 10px;
-
-    //   input {
-    //     height: 35px;
-    //     margin: 0 15px;
-    //     background-image: none;
-    //     border: none;
-    //     outline: none;
-    //     font-size: 25px;
-    //     line-height: 30;
-    //     width: 80%;
-    //   }
-    // }
-    // .icon-close {
-    //   display: none;
-    // }
-    // &:focus {
-    //   input {
-    //     border: none;
-    //     outline: none;
-    //   }
-
-    //   .icon-close {
-    //     display: block;
-    //   }
     }
   }
+  .noBlog{
+      text-align: center;
+      font-size: 30px;
+      color: $c-medium;
+      margin-top: 50px;
+    }
 }
 </style>

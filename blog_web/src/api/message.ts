@@ -23,3 +23,6 @@ export const Warning = (((that:any,message:any)=>{
 export const Error = (((that:any,message:any)=>{
   that.$message.error(message);
 }))
+
+
+

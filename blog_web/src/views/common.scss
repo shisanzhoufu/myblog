@@ -1,9 +1,15 @@
 @mixin common {
-  .container {
-    width: 900px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 0px;
-    box-sizing: border-box;
-  }
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 26%;
+    width: 74%;
+    background-color: rgb(255, 255, 255);
+    // z-index: 10;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+    box-shadow: 0 0 2px rgb(0 0 0 / 20%);
+  
 }
